@@ -8,8 +8,24 @@
 import SwiftUI
 
 struct GameView: View {
+    @State private var enteredText: String = ""
+       @State private var board: [[String]] = Array(repeating: Array(repeating: "", count: 6), count: 6)
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+       
+            VStack{
+                BoardView(board: $board)
+                    .padding(10)
+                
+                KeyboardView(enteredText: $enteredText, board: $board )
+                
+                
+            }
+            .padding(20)
+            
+            
+            
+        
+        
     }
 }
 
