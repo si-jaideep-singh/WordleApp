@@ -8,27 +8,24 @@
 import SwiftUI
 
 struct GameView: View {
-    @State private var enteredText: String = ""
-       @State private var board: [[String]] = Array(repeating: Array(repeating: "", count: 6), count: 6)
+    @ObservedObject var viewmodel:GameViewModel
+  
     var body: some View {
-       
-            VStack{
-                BoardView(board: $board)
-                    .padding(10)
-                
-                KeyboardView(enteredText: $enteredText, board: $board )
-                
-                
+        ScrollView(.vertical){
+            ViewThatFits{
+                VStack(spacing:30){
+                    BoardView(viewModel:viewmodel)
+                        .padding(10)
+                    KeyboardView(viewModel: viewmodel)
+                    
+                }
+                .padding(.all,10)
+                Spacer()
             }
-            .padding(20)
-            
-            
-            
-        
-        
+        }
     }
 }
 
 #Preview {
-    GameView()
+    GameView(viewmodel: GameViewModel())
 }

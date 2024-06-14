@@ -10,113 +10,77 @@ import SwiftUI
 struct KeyboardView: View {
     let rows: [String] = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"]
     let specialKeys: [String] = ["Delete", "Enter"]
-
-    @Binding var enteredText: String
-    @Binding var board: [[String]]
-   // @ObservedObject var viewModel : GameViewModel
-
+    @ObservedObject var viewModel: GameViewModel
+    
     var body: some View {
-        VStack(spacing: 10) {
-            ForEach(rows, id: \.self) { row in
-                HStack(spacing: 2) {
-                    if row == "ZXCVBNM" {
-                        OtherKeys(specialLetter: specialKeys[0], enteredText: $enteredText, board: $board)
+        GeometryReader { geometry in
+            VStack(spacing: 10) {
+                ForEach(rows, id: \.self) { row in
+                    HStack(spacing: 2) {
+                        if row == "ZXCVBNM" {
+                            OtherKeys(specialLetter: specialKeys[0], viewModel: self.viewModel, keyWidth: self.calculateKeyWidth(geometry: geometry, totalKeys: row.count + 2))
+                        }
+                        ForEach(Array(row), id: \.self) { letter in
+                            SingleKey(letter: String(letter), viewModel: self.viewModel, keyWidth: self.calculateKeyWidth(geometry: geometry, totalKeys: row.count + 2))
+                        }
+                        if row == "ZXCVBNM" {
+                            OtherKeys(specialLetter: specialKeys[1], viewModel: self.viewModel, keyWidth: self.calculateKeyWidth(geometry: geometry, totalKeys: row.count + 2))
+                        }
                     }
-                    ForEach(Array(row), id: \.self) { letter in
-                        SingleKey(letter: String(letter), enteredText: $enteredText, board: $board, viewModel: GameViewModel())
-                    }
-                    if row == "ZXCVBNM" {
-                        OtherKeys(specialLetter: specialKeys[1], enteredText: $enteredText, board: $board)
-                    }
-                       
                 }
-                
             }
+            .padding(.zero)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding(.zero)
-
+    }
+    
+    private func calculateKeyWidth(geometry: GeometryProxy, totalKeys: Int) -> CGFloat {
+        let totalSpacing: CGFloat = CGFloat(totalKeys - 1) * 2
+        let keyWidth: CGFloat = (geometry.size.width - totalSpacing) / CGFloat(totalKeys)
+        return keyWidth
     }
 }
 
 struct SingleKey: View {
     let letter: String
-    @Binding var enteredText: String
-    @Binding var board: [[String]]
-    @ObservedObject var viewModel : GameViewModel
-
+    @ObservedObject var viewModel: GameViewModel
+    var keyWidth: CGFloat
+    
     var body: some View {
         Button(action: {
-         //   viewModel.addLetter(self.letter)
-           
-            self.enteredText.append(self.letter)
-             self.updateBoard(letter: self.letter)
+            self.viewModel.addLetter(self.letter)
         }) {
             Text(letter)
-                .font(.system(size: 20))
-                .frame(width: 30, height: 50)
-                .background(Color.BorderColor)
+                .font(.system(size: 12))
+                .frame(width: keyWidth, height: 50)
+                .background(Color.gray)
                 .foregroundColor(.white)
-                .cornerRadius(5)
-        }
-        .frame(maxWidth:.infinity)
-    }
-
-    private func updateBoard(letter: String) {
-        for row in 0..<board.count {
-            for col in 0..<board[row].count {
-                if board[row][col].isEmpty {
-                    board[row][col] = letter
-                    return
-                }
-            }
+                .cornerRadius(10)
         }
     }
 }
 
 struct OtherKeys: View {
     let specialLetter: String
-    @Binding var enteredText: String
-    @Binding var board: [[String]]
-
+    @ObservedObject var viewModel: GameViewModel
+    var keyWidth: CGFloat
+    
     var body: some View {
         Button(action: {
-            self.handleSpecialKey()
+            self.viewModel.handleSpecialKey(self.specialLetter)
         }) {
             Text(specialLetter)
-                .font(.system(size: 20))
-                .frame(width: specialLetter == "Delete" ? 100 : 80, height: 50)
-                .background(Color.BorderColor)
+                .font(.system(size: 12))
+                .frame(width: keyWidth, height: 50)
+                .background(Color.gray)
                 .foregroundColor(.white)
-                .cornerRadius(5)
-        }
-    }
-
-    private func handleSpecialKey() {
-        switch specialLetter {
-        case "Delete":
-          enteredText.removeLast()
-           for row in (0..<board.count).reversed() {
-                for col in (0..<board[row].count).reversed() {
-                    if !board[row][col].isEmpty {
-                        board[row][col] = ""
-                        return
-                    }
-                }
-            }
-        case "Enter":
-          
-            print("Entered text: \(enteredText)")
-        default:
-            break
+                .cornerRadius(10)
         }
     }
 }
 
 struct KeyboardView_Previews: PreviewProvider {
-    @State static var previewEnteredText: String = ""
-    @State static var previewBoard: [[String]] = Array(repeating: Array(repeating: "", count: 6), count: 6)
-
-    static var previews: some View {
-        KeyboardView(enteredText: $previewEnteredText, board: $previewBoard)
+   static var previews: some View {
+        KeyboardView(viewModel: GameViewModel())
     }
 }
