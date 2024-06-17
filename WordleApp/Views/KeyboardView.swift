@@ -4,7 +4,6 @@
 //
 //  Created by Jaideep Singh on 13/06/24.
 //
-
 import SwiftUI
 
 struct KeyboardView: View {
@@ -45,7 +44,7 @@ struct SingleKey: View {
     let letter: String
     @ObservedObject var viewModel: GameViewModel
     var keyWidth: CGFloat
-    
+
     var body: some View {
         Button(action: {
             self.viewModel.addLetter(self.letter)
@@ -58,8 +57,8 @@ struct SingleKey: View {
                 .cornerRadius(10)
         }
     }
-}
 
+}
 struct OtherKeys: View {
     let specialLetter: String
     @ObservedObject var viewModel: GameViewModel
@@ -80,7 +79,7 @@ struct OtherKeys: View {
 }
 
 struct KeyboardView_Previews: PreviewProvider {
-   static var previews: some View {
+    static var previews: some View {
         KeyboardView(viewModel: GameViewModel())
     }
 }

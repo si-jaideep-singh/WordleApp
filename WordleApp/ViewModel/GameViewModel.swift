@@ -9,94 +9,89 @@ import Combine
 
 class GameViewModel: ObservableObject {
     @Published var board: [[String]] = Array(repeating: Array(repeating: "", count: 5), count: 6)
-    @Published var enteredText: String = ""
     @Published var rowCompleted: [Bool] = Array(repeating: false, count: 6)
+    @Published var rowColors: [[Color]] = Array(repeating: Array(repeating: .gray, count: 5), count: 6)
+    @Published var keyColors: [Color] = Array(repeating: .gray, count: 26)
+    public let letters = "QWERTYUIOPASDFGHJKLZXCVBNM"
+    let targetWord = "APPLE"
+    var currentRow = 0
+    var currentGuess = ""
     
-    
-      let targetWord = "APPLE"
-      var currentRow = 0
-      var currentGuess = ""
-
     func addLetter(_ letter: String) {
-        guard !isCurrentRowCompleted() else { return }
-        enteredText.append(letter)
+        guard currentGuess.count < board[currentRow].count else { return }
+        currentGuess.append(letter)
         updateBoard(letter)
-        checkRowCompletion()
+        // updateKeyColor(letter)
     }
     
-    func handleSpecialKey(_ specialLetter: String) {
-        switch specialLetter {
+    func handleSpecialKey(_ specialKey: String) {
+        switch specialKey {
         case "Delete":
-            guard !isCurrentRowCompleted() else { return }
             deleteLastLetter()
             clearLastNonEmptyCell()
         case "Enter":
-            checkRowCompletion()
+            checkGuess()
         default:
             break
         }
     }
     
     private func deleteLastLetter() {
-        if !enteredText.isEmpty {
-            enteredText.removeLast()
-        }
+        guard !currentGuess.isEmpty else { return }
+        currentGuess.removeLast()
     }
     
     private func clearLastNonEmptyCell() {
-        for row in (0..<board.count).reversed() {
-            if rowCompleted[row] {
-                continue
-            }
-            for col in (0..<board[row].count).reversed() {
-                if !board[row][col].isEmpty {
-                    board[row][col] = ""
-                    return
-                }
+        for col in (0..<board[currentRow].count).reversed() {
+            if !board[currentRow][col].isEmpty {
+                board[currentRow][col] = ""
+                return
             }
         }
     }
     
     private func updateBoard(_ letter: String) {
-        for row in 0..<board.count {
-            if rowCompleted[row] {
-                continue
-            }
-            for col in 0..<board[row].count {
-                if board[row][col].isEmpty {
-                    board[row][col] = letter
-                    return
-                }
-            }
-        }
-    }
-
-    private func checkRowCompletion() {
-        for row in 0..<board.count {
-            var rowCompleted = true
-            for col in 0..<board[row].count {
-                if board[row][col].isEmpty {
-                    rowCompleted = false
-                    break
-                }
-            }
-            if rowCompleted {
-                markRowCompleted(row: row)
+        for col in 0..<board[currentRow].count {
+            if board[currentRow][col].isEmpty {
+                board[currentRow][col] = letter
+                return
             }
         }
     }
     
-    
-    private func markRowCompleted(row: Int) {
-        rowCompleted[row] = true
+    private func checkGuess() {
+        guard currentGuess.count == board[currentRow].count else { return }
+        let guessResult = evaluateGuess(guess: currentGuess)
+        rowColors[currentRow] = guessResult.colors
+        
+        //        if guessResult.correctPosition == board[currentRow].count {
+        //            rowCompleted[currentRow] = true
+        //        }
+        rowCompleted[currentRow] = true
+     
+        
+        currentRow += 1
+        currentGuess = ""
     }
-
-    private func isCurrentRowCompleted() -> Bool {
-        for row in 0..<board.count {
-            if !rowCompleted[row] {
-                return false
+    
+    private func evaluateGuess(guess: String) -> (correctPosition: Int, colors: [Color]) {
+        var correctPosition = 0
+        var colors: [Color] = Array(repeating: .gray, count: board[currentRow].count)
+        let guessArray = Array(guess)
+        let targetArray = Array(targetWord)
+        
+        for i in 0..<board[currentRow].count {
+            if guessArray[i] == targetArray[i] {
+                correctPosition += 1
+                colors[i] = .green
+            } else if targetArray.contains(guessArray[i]) {
+                colors[i] = .yellow
+            } else {
+                colors[i] = .gray
             }
         }
-        return true
+        
+        return (correctPosition, colors)
     }
+    
 }

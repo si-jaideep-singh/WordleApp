@@ -12,7 +12,7 @@ struct GameView: View {
   
     var body: some View {
         ScrollView(.vertical){
-            ViewThatFits{
+           
                 VStack(spacing:30){
                     BoardView(viewModel:viewmodel)
                         .padding(10)
@@ -21,7 +21,8 @@ struct GameView: View {
                 }
                 .padding(.all,10)
                 Spacer()
-            }
+                
+            
         }
     }
 }
