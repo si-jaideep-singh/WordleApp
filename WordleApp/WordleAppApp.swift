@@ -11,8 +11,9 @@ import SwiftUI
 struct WordleAppApp: App {
     var body: some Scene {
         WindowGroup {
-            let gameViewModel = GameViewModel()
-            GameView(viewmodel: gameViewModel)
+//            let gameViewModel = GameViewModel()
+//            GameView(viewModel: gameViewModel)
+            SplashView()
 
         }
     }
