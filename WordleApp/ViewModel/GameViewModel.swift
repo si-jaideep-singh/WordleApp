@@ -156,8 +156,7 @@ class GameViewModel: ObservableObject {
         self.message = message
         self.showMessage = true
         
-        // Hide the message after a delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+       DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             withAnimation {
                 self.showMessage = false
             }

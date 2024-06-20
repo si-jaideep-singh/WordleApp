@@ -23,11 +23,9 @@ struct SplashView: View {
             }
         }
         .fullScreenCover(isPresented: $moveToGameView) {
-         GameView(viewModel: GameViewModel())
+            GameView(viewModel: GameViewModel())
          }
-        
-        
-    }
+        }
 }
 
 #Preview {
