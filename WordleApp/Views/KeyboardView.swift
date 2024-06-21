@@ -21,75 +21,56 @@ struct KeyboardView: View {
                 ForEach(rows.indices, id: \.self) { rowIndex in
                     HStack(spacing: 2) {
                         ForEach(rows[rowIndex], id: \.self) { key in
-                            KeyView(key: key, viewModel: self.viewModel, keyWidth: self.calculateKeyWidth(geometry: geometry, totalKeys: rows[rowIndex].count))
+                            KeyView(key: key, viewModel: self.viewModel, keyWidth: calculateKeyWidth(geometry: geometry, totalKeys: rows[rowIndex].count))
                         }
                     }
                 }
             }
-            .padding(.zero)
+           
+            }
         }
+      
     }
     
     private func calculateKeyWidth(geometry: GeometryProxy, totalKeys: Int) -> CGFloat {
         let totalSpacing: CGFloat = CGFloat(totalKeys - 1) * 2
-        let keyWidth: CGFloat = (geometry.size.width - totalSpacing) / CGFloat(totalKeys)
-        return keyWidth
+        let availableWidth = geometry.size.width - totalSpacing
+        return availableWidth / CGFloat(totalKeys)
+    }
+
+
+struct KeyView: View {
+    let key: String
+    @ObservedObject var viewModel: GameViewModel
+    let keyWidth: CGFloat
+    
+    var body: some View {
+        Button(action: {
+            if key == "Delete" {
+                viewModel.handleSpecialKey(key)
+            } else if key == "Enter" {
+                viewModel.handleSpecialKey(key)
+            } else {
+                viewModel.addLetter(key)
+            }
+        }) {
+            Text(key)
+                .frame(width: keyWidth, height: 50)
+                .background(keyBackgroundColor(for: key))
+                .foregroundColor(.white)
+                .cornerRadius(5)
+        }
     }
     
-    //        private func calculateKeyHeight(geometry: GeometryProxy) -> CGFloat {
-    //            if UIDevice.current.userInterfaceIdiom == .pad {
-    //                if orientation.isLandscape {
-    //                    return geometry.size.height / 10 // Adjust for iPad landscape
-    //                } else {
-    //                    return geometry.size.height / 10 // Adjust for iPad portrait
-    //                }
-    //            } else {
-    //                if orientation.isLandscape {
-    //                    return geometry.size.height / 8 // Adjust for iPhone landscape
-    //                } else {
-    //                    return geometry.size.height / 10 // Adjust for iPhone portrait
-    //                }
-    //            }
-    //        }
-    //    }
-    
-    
-    
-    struct KeyView: View {
-        let key: String
-        @ObservedObject var viewModel: GameViewModel
-        let keyWidth: CGFloat
-        // let keyHeight: CGFloat
-        
-        var body: some View {
-            Button(action: {
-                if key == "Delete" {
-                    viewModel.handleSpecialKey(key)
-                } else if key == "Enter" {
-                    viewModel.handleSpecialKey(key)
-                    
-                } else {
-                    viewModel.addLetter(key)
-                }
-            }) {
-                Text(key)
-                    .frame(width: keyWidth, height: 50)
-                    .background(keyBackgroundColor(for: key))
-                    .foregroundColor(.white)
-                    .cornerRadius(5)
+    private func keyBackgroundColor(for key: String) -> Color {
+        if key == "Delete" || key == "Enter" {
+            return .EmpyCellColor
+        } else {
+            guard let letter = key.first, let index = viewModel.letters.firstIndex(of: letter) else {
+                return .gray
             }
-        }
-        
-        private func keyBackgroundColor(for key: String) -> Color {
-            if key == "Delete" || key == "Enter" {
-                return .EmpyCellColor 
-            } else {
-                guard let letter = key.first, let index = viewModel.letters.firstIndex(of: letter) else {
-                    return .gray
-                }
-                let colorIndex = viewModel.letters.distance(from: viewModel.letters.startIndex, to: index)
-                return viewModel.keyColors[colorIndex]
-            }
+            let colorIndex = viewModel.letters.distance(from: viewModel.letters.startIndex, to: index)
+            return viewModel.keyColors[colorIndex]
         }
     }
 }
@@ -99,4 +80,3 @@ struct KeyboardView_Previews: PreviewProvider {
         KeyboardView(viewModel: GameViewModel())
     }
 }
-
