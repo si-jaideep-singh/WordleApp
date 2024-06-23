@@ -1,8 +1,8 @@
-//
-//  KeyboardView.swift
-//  WordleApp
-//
-//  Created by Jaideep Singh on 13/06/24.
+////
+////  KeyboardView.swift
+////  WordleApp
+////
+////  Created by Jaideep Singh on 13/06/24.
 
 import SwiftUI
 
@@ -35,7 +35,7 @@ struct KeyboardView: View {
     private func calculateKeyWidth(geometry: GeometryProxy, totalKeys: Int) -> CGFloat {
         let totalSpacing: CGFloat = CGFloat(totalKeys - 1) * 2
         let availableWidth = geometry.size.width - totalSpacing
-        return availableWidth / CGFloat(totalKeys)
+        return (availableWidth) / CGFloat(totalKeys)
     }
 
 
@@ -80,3 +80,4 @@ struct KeyboardView_Previews: PreviewProvider {
         KeyboardView(viewModel: GameViewModel())
     }
 }
+
