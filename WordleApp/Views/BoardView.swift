@@ -8,7 +8,7 @@ struct BoardView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            ScrollView(.vertical) {
+            ScrollView(.vertical,showsIndicators: false) {
                 VStack(spacing: 5) {
                     ForEach(0..<viewModel.maxAttempts, id: \.self) { row in
                         HStack(spacing: 4) {
@@ -24,12 +24,15 @@ struct BoardView: View {
                                 )
                                 .frame(width: cellSize, height: cellSize) // Ensure each LetterView has fixed size
                                 .padding(2)
+                                
                             }
                         }
                     }
                 }
+                
                 .frame(maxWidth: .infinity, alignment: .center)
             }
+//            .padding(.top,30)
         }
     }
     
@@ -40,7 +43,7 @@ struct BoardView: View {
         if UIDevice.current.userInterfaceIdiom == .phone {
             if isCompactMode {
                 // Portrait mode on iPhone
-                let totalHorizontalPadding: CGFloat = CGFloat(cols - 1) * 10 // Adjust spacing for iPhone SE portrait mode
+                let totalHorizontalPadding: CGFloat = CGFloat(cols - 1) * 8 // Adjust spacing for iPhone SE portrait mode
                 let availableWidth = maxWidth - totalHorizontalPadding
                 let cellWidth = availableWidth / CGFloat(cols)
                 return min(cellWidth, maxHeight / CGFloat(viewModel.maxAttempts)) // Ensure cell fits within available height

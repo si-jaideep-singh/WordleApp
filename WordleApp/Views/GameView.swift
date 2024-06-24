@@ -6,46 +6,29 @@
 ////  Created by Jaideep Singh on 13/06/24.
 
 import SwiftUI
-
 struct GameView: View {
     @ObservedObject var viewModel: GameViewModel
-    @State private var isLandscape: Bool = false
+    @State private var dynamicWidth: CGFloat = UIScreen.main.bounds.width - 20
     @State private var orientation = UIDeviceOrientation.unknown
     
-  
-    
     var body: some View {
-        let dynamicWidth: CGFloat = {
-                  
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                return orientation.isLandscape ? UIScreen.main.bounds.width
-                   :UIScreen.main.bounds.width - 40
-} else {
-                return UIScreen.main.bounds.width - 20
-            }
-        }()
         ZStack {
-            VStack(spacing: 10) {
+            VStack(spacing: 20) {
                 Text("Word Guess Game")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .padding(.bottom,50)
-               BoardView(viewModel: viewModel)
-                // .background(Color.green)
-                 .padding(.horizontal,20)
-            
+                    .padding(.bottom, 30)
                 
-              KeyboardView(viewModel: viewModel)
-               // .background(Color.green)
-                .frame( width: dynamicWidth,height:200)
- 
+                BoardView(viewModel: viewModel)
+                    .padding(.horizontal, 20)
+                   
                 
-                
-                
+                KeyboardView(viewModel: viewModel)
+                   
+                    .frame(width: dynamicWidth, height: 200)
             }
-            .padding(.zero)
             
-            
+            .padding(.horizontal,10)
             
             if viewModel.showMessage {
                 VStack {
@@ -57,14 +40,22 @@ struct GameView: View {
                         .background(Color.black)
                         .cornerRadius(10)
                 }
-                
-                
                 .transition(.opacity)
                 .animation(.easeInOut)
             }
         }
+        .onAppear {
+            updateDynamicWidth()
+        }
     }
     
+    private func updateDynamicWidth() {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            dynamicWidth = UIScreen.main.bounds.width - (orientation.isLandscape ? 0 : 40)
+        } else {
+            dynamicWidth = UIScreen.main.bounds.width - 20
+        }
+    }
 }
 
 struct GameView_Previews: PreviewProvider {
@@ -72,6 +63,3 @@ struct GameView_Previews: PreviewProvider {
         GameView(viewModel: GameViewModel())
     }
 }
-
-
-

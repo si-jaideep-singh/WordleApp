@@ -19,8 +19,8 @@ class GameViewModel: ObservableObject {
     
     let letters = "QWERTYUIOPASDFGHJKLZXCVBNM"
     
-    let targetWord = "Jaideep"
-    let maxAttempts = 7
+    let targetWord = "APPLEAPLLE"
+    let maxAttempts = 6
     let wordlength: Int
     var currentRow = 0
     var currentGuess = ""

@@ -55,7 +55,7 @@ struct KeyView: View {
             }
         }) {
             Text(key)
-                .frame(width: keyWidth, height: 50)
+                .frame(width: keyWidth, height:50)
                 .background(keyBackgroundColor(for: key))
                 .foregroundColor(.white)
                 .cornerRadius(5)
