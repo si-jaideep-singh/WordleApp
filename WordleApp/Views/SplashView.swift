@@ -8,26 +8,14 @@
 import SwiftUI
 
 struct SplashView: View {
-    @State private var moveToGameView = false
-    
+
     var body: some View {
+        
         ZStack {
+            Color.backgroundColor.ignoresSafeArea()
             Image("Splash")
                 .resizable()
-                .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea(.all)
-        }
-        .onAppear {
-            Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
-                moveToGameView = true
-            }
-        }
-        .fullScreenCover(isPresented: $moveToGameView) {
-            GameView(viewModelWordle: WordleGameViewModel())
+                .frame(width: 150,height: 150)
         }
     }
-}
-
-#Preview {
-    SplashView()
 }

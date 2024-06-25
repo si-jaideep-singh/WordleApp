@@ -91,13 +91,13 @@ struct KeyView: View {
             
             Text(key == "Delete" ? "X" : key)
             
-                .frame(width: keyWidth, height: 50)
+                .frame(width: keyWidth, height: 43)
                 
                 .background(keyBackgroundColor(for: key))
                 .foregroundColor(.white)
                 .font(Font.headline.weight(.bold))
                 .cornerRadius(12)
-                .CFSDKborder(radius: 12, color:  keyBackgroundColor(for: key) != .clear ? .clear : .whiteFFFF.opacity(0.5), width: 0.3)
+                .CFSDKborder(radius: 12, color:  keyBackgroundColor(for: key) != .clear ? .clear : .whiteFFFF.opacity(0.5), width: 1)
                 
         }
         .padding(.all,1.5)
