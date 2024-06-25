@@ -16,9 +16,11 @@ struct WordleState {
     var cellFlipped: [[Bool]] = []
     var borderColors: [[Color]] = []
     var gameEnded: Bool = false
+    
+   
     var message: String = ""
     var showMessage: Bool = false
-    
+     
     let letters = "QWERTYUIOPASDFGHJKLZXCVBNM"
     
     let targetWord = "Apple".uppercased()
@@ -27,7 +29,7 @@ struct WordleState {
     var currentRow = 0
     var currentGuess = ""
     var correctPosition = 0
-    
+    var isGuessCorrect: Bool = false
     var attemptsLeft: Int {
         return maxAttempts - currentRow
     }

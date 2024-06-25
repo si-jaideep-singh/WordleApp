@@ -12,11 +12,12 @@ struct GameView: View {
     @State private var dynamicWidth: CGFloat = UIScreen.main.bounds.width - 20
     @State private var orientation = UIDeviceOrientation.unknown
     
+    
     var body: some View {
         ZStack {
             Color.background
                 .ignoresSafeArea()
-            VStack {
+           VStack {
                 Text("Word Guess Game")
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -40,6 +41,7 @@ struct GameView: View {
                 }.frame(alignment: .bottom)
                 
             }
+           
             .padding(.horizontal,10)
             
             if viewModelWordle.state.showMessage {
@@ -55,14 +57,20 @@ struct GameView: View {
                 .transition(.opacity)
                 .animation(.easeInOut)
             }
+
         }
-        .onAppear {
+        
+        
+        
+        
+     .onAppear {
             updateDynamicWidth()
             self.viewModelWordle.initCall()
         }
         .environmentObject(viewModelWordle)
     }
         
+    
     private func updateDynamicWidth() {
         if UIDevice.current.userInterfaceIdiom == .pad {
             dynamicWidth = UIScreen.main.bounds.width - (orientation.isLandscape ? 0 : 40)

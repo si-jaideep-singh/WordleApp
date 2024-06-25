@@ -12,22 +12,29 @@ struct SplashView: View {
     
     var body: some View {
         ZStack {
-            Image("Splash")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea(.all)
-        }
-        .onAppear {
-            Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
-                moveToGameView = true
+            VStack{
+                Text("Splash")
+                    .foregroundColor(.white)
+                Image("howtoplay")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(10)
+                    .ignoresSafeArea(.all)
+            }
+            .onAppear {
+                Timer.scheduledTimer(withTimeInterval: 4, repeats: false) { _ in
+                    moveToGameView = true
+                }
+            }
+            .fullScreenCover(isPresented: $moveToGameView) {
+                GameView(viewModelWordle: WordleGameViewModel())
             }
         }
-        .fullScreenCover(isPresented: $moveToGameView) {
-            GameView(viewModelWordle: WordleGameViewModel())
-        }
+        
     }
 }
 
 #Preview {
     SplashView()
 }
+
