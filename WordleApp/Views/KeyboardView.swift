@@ -71,15 +71,14 @@ struct KeyboardView: View {
                             Text("Submit")
                                 .foregroundColor(Color.black)
                                 .font(Font.headline.weight(.medium))
-                                .padding(.vertical, 14.5)
-//                                .background(Color.primarybtn)
-                                //.background(viewModelWordle.isCurrentWordComplete ? Color.primarybtn : Color.primarybtn.opacity(0.3))
+                                .padding(.vertical, 20)
+                             
                         })
                         .frame(width: geometry.size.width/2)
                             .disabled(!viewModelWordle.isCurrentWordComplete)
 
                     }
-//                        .background(Color.primarybtn)
+
                     .background(viewModelWordle.isCurrentWordComplete ? Color.primarybtn : Color.primarybtn.opacity(0.5))
                         .CFSDKcornerRadius(13, corners: .allCorners)
                 }
@@ -109,33 +108,33 @@ struct KeyView: View {
             if key == "Delete" {
                 if viewModelWordle.state.isGuessCorrect {
                     
-                              } else {
-                               viewModelWordle.handleSpecialKey(key)
-                           }
-                       } else {
-                           viewModelWordle.addLetter(key)
-                       }        }) {
-               if key == "Delete" {
-                           Image(systemName: "delete.left.fill")
-                               .frame(width: keyWidth, height: 55)
-                               .background(keyBackgroundColor(for: key))
-                               .foregroundColor(.white.opacity(0.6))
-                               .font(.system(size: 30))
-                               .font(Font.headline.weight(.bold))
-                               .cornerRadius(12)
-                               .CFSDKborder(radius: 12, color: keyBackgroundColor(for: key) != .clear ? .clear : .whiteFFFF.opacity(0.8), width: 0.3)
-                       } else {
-                           Text(key)
-                               .frame(width: keyWidth, height: 55)
-                               .background(keyBackgroundColor(for: key))
-                               .foregroundColor(.white)
-                               .font(.system(size: 30))
-                               .font(Font.headline.weight(.bold))
-                               .cornerRadius(12)
-                               .CFSDKborder(radius: 12, color: keyBackgroundColor(for: key) != .clear ? .clear : .whiteFFFF.opacity(0.8), width: 0.3)
-                       }
-                   }
-                   .padding(.all, 1.5)
+                } else {
+                    viewModelWordle.handleSpecialKey(key)
+                }
+            } else {
+                viewModelWordle.addLetter(key)
+            }        }) {
+                if key == "Delete" {
+                    Image(systemName: "delete.left.fill")
+                        .frame(width: keyWidth, height: 50)
+                        .background(keyBackgroundColor(for: key))
+                        .foregroundColor(.white.opacity(0.6))
+                        .font(.system(size: 14))
+                        .font(Font.headline.weight(.bold))
+                        .cornerRadius(12)
+                        .CFSDKborder(radius: 12, color: keyBackgroundColor(for: key) != .clear ? .clear : .whiteFFFF.opacity(0.8), width: 1)
+                } else {
+                    Text(key)
+                        .frame(width: keyWidth, height: 50)
+                        .background(keyBackgroundColor(for: key))
+                        .foregroundColor(.white)
+                        .font(.system(size: 14))
+                        .font(Font.headline.weight(.bold))
+                        .cornerRadius(12)
+                        .CFSDKborder(radius: 12, color: keyBackgroundColor(for: key) != .clear ? .clear : .whiteFFFF.opacity(0.8), width: 1)
+                }
+            }
+            .padding(.all, 1.5)
     }
     
     private func keyBackgroundColor(for key: String) -> Color {

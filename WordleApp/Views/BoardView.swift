@@ -86,7 +86,7 @@ struct LetterView: View {
     
     var body: some View {
            Text(letter)
-            .font(.system(size: cellSize * 0.7))
+            .font(.system(size: cellSize * 0.6))
                .frame(width: cellSize, height: cellSize)
                .foregroundColor(.white)
                .background(RoundedRectangle(cornerRadius: cellSize * 0.25)

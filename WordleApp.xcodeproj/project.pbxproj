@@ -23,6 +23,9 @@
 		81FF8C132C1B28100051774E /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF8C122C1B28100051774E /* UIScreen.swift */; };
 		81FF8C152C1C13BE0051774E /* BorderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF8C142C1C13BE0051774E /* BorderExtension.swift */; };
 		81FF8C1F2C21B66A0051774E /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF8C1E2C21B66A0051774E /* SplashView.swift */; };
+		C9C923732C2ACFDF000413E9 /* AdsPresentedbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C923722C2ACFDF000413E9 /* AdsPresentedbyView.swift */; };
+		C9C923752C2AD58F000413E9 /* HomeViewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C923742C2AD58F000413E9 /* HomeViewList.swift */; };
+		C9C923772C2AE33F000413E9 /* StarterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C923762C2AE33F000413E9 /* StarterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +46,9 @@
 		81FF8C122C1B28100051774E /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
 		81FF8C142C1C13BE0051774E /* BorderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderExtension.swift; sourceTree = "<group>"; };
 		81FF8C1E2C21B66A0051774E /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		C9C923722C2ACFDF000413E9 /* AdsPresentedbyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdsPresentedbyView.swift; sourceTree = "<group>"; };
+		C9C923742C2AD58F000413E9 /* HomeViewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewList.swift; sourceTree = "<group>"; };
+		C9C923762C2AE33F000413E9 /* StarterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +116,11 @@
 				81FF8C082C1ACF2F0051774E /* BoardView.swift */,
 				81FF8C0A2C1AD6CE0051774E /* KeyboardView.swift */,
 				81FF8C1E2C21B66A0051774E /* SplashView.swift */,
+				C9C923762C2AE33F000413E9 /* StarterView.swift */,
 				81B3005C2C22BB1600131621 /* OrientationSensitiveView.swift */,
+				8148BD5D2C2942B5003AA393 /* HelpView.swift */,
+				C9C923722C2ACFDF000413E9 /* AdsPresentedbyView.swift */,
+				C9C923742C2AD58F000413E9 /* HomeViewList.swift */,
 				8148BD5D2C2942B5003AA393 /* HowToPlay.swift */,
 				814F56532C2AF83900395385 /* CompletionView.swift */,
 			);
@@ -215,15 +225,22 @@
 			files = (
 				814F56542C2AF83900395385 /* CompletionView.swift in Sources */,
 				81FF8C152C1C13BE0051774E /* BorderExtension.swift in Sources */,
+
+				C9C923732C2ACFDF000413E9 /* AdsPresentedbyView.swift in Sources */,
+				8148BD5E2C2942B5003AA393 /* HelpView.swift in Sources */,
+
 				8148BD5E2C2942B5003AA393 /* HowToPlay.swift in Sources */,
+
 				81FF8C072C1ACDE60051774E /* ColorsExt.swift in Sources */,
 				81FF8C092C1ACF2F0051774E /* BoardView.swift in Sources */,
+				C9C923752C2AD58F000413E9 /* HomeViewList.swift in Sources */,
 				81B3005D2C22BB1600131621 /* OrientationSensitiveView.swift in Sources */,
 				81FF8C0B2C1AD6CE0051774E /* KeyboardView.swift in Sources */,
 				81FF8C1F2C21B66A0051774E /* SplashView.swift in Sources */,
 				81FF8C042C1AC7040051774E /* GameView.swift in Sources */,
 				8148BD612C299092003AA393 /* WordleState.swift in Sources */,
 				81FF8BF52C19D3240051774E /* WordleAppApp.swift in Sources */,
+				C9C923772C2AE33F000413E9 /* StarterView.swift in Sources */,
 				81FF8C112C1B13230051774E /* WordleGameViewModel.swift in Sources */,
 				81FF8C132C1B28100051774E /* UIScreen.swift in Sources */,
 				8148BD5C2C2935BE003AA393 /* GameModel.swift in Sources */,
