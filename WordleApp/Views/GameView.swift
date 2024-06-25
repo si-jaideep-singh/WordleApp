@@ -65,7 +65,12 @@ struct GameView: View {
                 .animation(.easeInOut)
             }
             
+            if viewModelWordle.state.gameEnded {
+                CompletionView()
+                    .environmentObject(viewModelWordle)
+            }
         }
+        
         .navigationTitle("Wordle")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {

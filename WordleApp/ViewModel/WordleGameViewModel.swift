@@ -7,7 +7,6 @@ import SwiftUI
 
 final class WordleGameViewModel: ObservableObject {
     @Published private(set) var state : WordleState = WordleState()
-    @Published var gameCompleted: Bool = false
     var isCurrentWordComplete: Bool {
            return state.currentGuess.count == state.wordlength
        }
@@ -129,37 +128,22 @@ final class WordleGameViewModel: ObservableObject {
         }
     
     private func showCompletionToast() {
-          if evaluateGuess(guess: state.currentGuess).correctPosition == state.targetWord.count {
-              state.gameEnded = true
-              gameCompleted = true
-          } else {
-              state.currentRow += 1
-              if state.currentRow >= state.maxAttempts {
-                  state.gameEnded = true
-                  gameCompleted = true 
-              }
-          }
-          state.currentGuess = ""
-      }
-    
-//        private func showCompletionToast() {
-//            if evaluateGuess(guess: state.currentGuess).correctPosition == state.targetWord.count {
-//              // Player wins
-//                showToast(message: "Congratulations! You've guessed the word!")
-//                state.gameEnded = true 
-//                state.rowCompleted[state.currentRow] = true
-//                    state.isGuessCorrect = true
-//            } else {
-//                state.currentRow += 1
-//                if state.currentRow >= state.maxAttempts {
-//                    state.gameEnded = true
-//                    showToast(message: "Game Over! The correct word was \(state.targetWord).")
-//                } else {
-//                    showToast(message: "Attempts left: \(state.attemptsLeft)")
-//                }
-//            }
-//            state.currentGuess = ""
-//        }
+           if evaluateGuess(guess: state.currentGuess).correctPosition == state.targetWord.count {
+               // Player wins
+               state.gameEnded = true
+               state.gameWon = true 
+               state.gameCompleted = true
+           } else {
+               state.currentRow += 1
+               if state.currentRow >= state.maxAttempts {
+                   // Player loses
+                   state.gameEnded = true
+                   state.gameWon = false
+                   state.gameCompleted = true
+               }
+           }
+           state.currentGuess = ""
+       }
     private func updateKeyColors(guess: String, colors: [Color]) {
         for (index, letter) in guess.enumerated() {
             if let letterIndex = state.letters.firstIndex(of: letter) {
@@ -184,7 +168,7 @@ final class WordleGameViewModel: ObservableObject {
     
     func resetGame() {
             state = WordleState()
-            gameCompleted = false
+        state.gameCompleted = false
             initCall()
        }
     }

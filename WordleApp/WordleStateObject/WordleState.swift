@@ -16,8 +16,9 @@ struct WordleState {
     var cellFlipped: [[Bool]] = []
     var borderColors: [[Color]] = []
     var gameEnded: Bool = false
-    
-   
+    var gameWon:Bool = false
+    var gameCompleted: Bool = false
+
     var message: String = ""
     var showMessage: Bool = false
      

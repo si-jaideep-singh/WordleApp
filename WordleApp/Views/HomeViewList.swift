@@ -12,7 +12,7 @@ struct HomeViewList: View {
     @State var card2:Bool =  false
     var body: some View {
         ZStack{
-            Color.backgroundColor.ignoresSafeArea()
+            Color.background.ignoresSafeArea()
             ScrollView{
                 AdsPresentedbyView()
                 VStack(spacing:10){

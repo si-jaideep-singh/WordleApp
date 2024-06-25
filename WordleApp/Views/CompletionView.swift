@@ -9,16 +9,17 @@ import SwiftUI
 
 struct CompletionView: View {
     @EnvironmentObject var viewModelWordle: WordleGameViewModel
+    @State private var navigateToHome = false
     
     var body: some View {
         VStack {
-            Text(viewModelWordle.state.gameEnded ? "Congratulations! You've guessed the word!" : "Game Over! The correct word was \(viewModelWordle.state.targetWord).")
+            Text(viewModelWordle.state.gameWon ? "Congratulations! You've guessed the word!" : "Game Over! The correct word was \(viewModelWordle.state.targetWord).")
                 .font(.title)
                 .padding()
             
             HStack {
                 Button(action: {
-                    // Implement your back action here
+                    navigateToHome = true
                 }) {
                     Text("Back")
                         .font(.title3)
@@ -49,6 +50,11 @@ struct CompletionView: View {
         .shadow(radius: 10)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.opacity(0.4).edgesIgnoringSafeArea(.all))
+        .background(
+            NavigationLink(destination: HomeViewList(), isActive: $navigateToHome) {
+                EmptyView()
+            }
+        )
     }
 }
 
