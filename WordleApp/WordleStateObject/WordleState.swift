@@ -17,10 +17,10 @@ struct WordleState {
     var borderColors: [[Color]] = []
     var gameEnded: Bool = false
     var gameWon:Bool = false
-    var gameCompleted: Bool = false
+     var gameCompleted: Bool = false
 
-    var message: String = ""
-    var showMessage: Bool = false
+      var showToast: Bool = false
+      var toastMessage: String = ""
      
     let letters = "QWERTYUIOPASDFGHJKLZXCVBNM"
     

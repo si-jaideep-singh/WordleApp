@@ -4,50 +4,79 @@
 //
 //  Created by Jaideep Singh on 24/06/24.
 //
+//import SwiftUI
+//
+//struct HowToplay: View {
+//    @Binding var isPresented: Bool
+//    
+//    var body: some View {
+//        ZStack {
+//            VStack {
+//                Text("How to Play")
+//                    .foregroundColor(Color.white)
+//                    .font(Font.headline.weight(.bold))
+//                    .font(.title3)
+//                    
+//                Image("howtoplay")
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+//                    //.padding(20)
+//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                    .frame(width: UIScreen.main.bounds.width * 0.9)
+//                    .background(Color.white)
+//                    .cornerRadius(20)
+//                   // .shadow(radius: 10)
+//                
+//               
+//            }
+//        
+//        }
+//        .onTapGesture {
+//            isPresented = false
+//        }
+//        .transition(.opacity)
+//        .animation(.easeInOut)
+//    }
+//}
+
 import SwiftUI
 
 struct HowToplay: View {
-    @State private var moveToGameView = false
+    @Binding var isPresented: Bool
     
     var body: some View {
-            
-        VStack(alignment: .center) {
-                
-                 ZStack(alignment:.topTrailing) {
-                    Image("howtoplay")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .padding(10)
-                        .CFSDKcornerRadius(10, corners: .allCorners)
-                    
-
-                    Button(action: {
-                        moveToGameView = false
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(.white)
-                            .padding(20)
+        GeometryReader { geometry in
+            ZStack {
+                Color.black.opacity(0.4)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        isPresented = false
                     }
+                
+                VStack {
+                    Text("How to Play")
+                        .foregroundColor(.white)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .padding()
                     
-                    //.frame(alignment: .topTrailing)
-
-                    /*.opacity(moveToGameView ? 0 : 1)*/ // Hide when moveToGameView is true
-                    
+                    Image("howtoplay")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: min(geometry.size.width * 0.9, 600))
+                        .background(Color.white)
+                        .cornerRadius(20)
+                        .padding()
                 }
-               // .frame(height: UIScreen.main.bounds.height/2)
-               
-                .fullScreenCover(isPresented: $moveToGameView) {
-                    GameView(viewModelWordle: WordleGameViewModel())
+                .frame(width: min(geometry.size.width * 0.9, 600))
+                .background(Color.clear)
+                .cornerRadius(20)
+                .shadow(radius: 10)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .animation(.easeInOut)
             }
-            
-            }
-        
-        
-        
+            .transition(.opacity)
+            .animation(.easeInOut)
+        }
     }
-}
-#Preview {
-    HowToplay()
 }

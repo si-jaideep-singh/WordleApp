@@ -24,7 +24,7 @@ extension Color{
     static var BorderColor: Color{
         Color(UIColor(named : "BorderColor")!)
     }
-    static var EmpyCellColor: Color{
-        Color(UIColor(named : "EmpyCellColor")!)
+    static var EmptyCellColor: Color{
+        Color(UIColor(named : "EmptyCellColor")!)
     }
 }

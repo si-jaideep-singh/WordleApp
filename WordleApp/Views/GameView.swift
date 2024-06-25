@@ -11,19 +11,14 @@ struct GameView: View {
     @StateObject var viewModelWordle = WordleGameViewModel()
     @State private var dynamicWidth: CGFloat = UIScreen.main.bounds.width - 20
     @State private var orientation = UIDeviceOrientation.unknown
-    
-    
+    @State private var showHowToPlay = true
     var body: some View {
-        
-        
         ZStack {
             Color.background
                 .ignoresSafeArea()
             VStack{
                 AdsPresentedbyView()
                 VStack {
-                    
-                    
                     Text("Word Guess Game")
                         .font(.title2)
                         .fontWeight(.bold)
@@ -50,11 +45,11 @@ struct GameView: View {
                 
                 .padding(.horizontal,10)
             }
-            
-            if viewModelWordle.state.showMessage {
+            .blur(radius: showHowToPlay ? 5 : 0)
+            if viewModelWordle.state.showToast {
                 VStack {
                     Spacer()
-                    Text(viewModelWordle.state.message)
+                    Text(viewModelWordle.state.toastMessage)
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
@@ -69,19 +64,30 @@ struct GameView: View {
                 CompletionView()
                     .environmentObject(viewModelWordle)
             }
+            if showHowToPlay {
+                HowToplay(isPresented: $showHowToPlay)
+                    .transition(.opacity)
+                    .animation(.easeInOut)
+            }
+            
         }
         
         .navigationTitle("Wordle")
-            .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-          
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            updateOrientation()
             updateDynamicWidth()
             self.viewModelWordle.initCall()
         }
         .environmentObject(viewModelWordle)
+        .onTapGesture {
+            showHowToPlay = false
+        }
     }
-        
     
+    private func updateOrientation() {
+        orientation = UIDevice.current.orientation
+    }
     private func updateDynamicWidth() {
         if UIDevice.current.userInterfaceIdiom == .pad {
             dynamicWidth = UIScreen.main.bounds.width - (orientation.isLandscape ? 0 : 40)
@@ -89,7 +95,9 @@ struct GameView: View {
             dynamicWidth = UIScreen.main.bounds.width - 20
         }
     }
+    
 }
+
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
