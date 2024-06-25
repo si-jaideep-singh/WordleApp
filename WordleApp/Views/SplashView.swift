@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SplashView: View {
     @State private var moveToGameView = false
-
+    
     var body: some View {
         ZStack {
             Image("Splash")
@@ -23,9 +23,9 @@ struct SplashView: View {
             }
         }
         .fullScreenCover(isPresented: $moveToGameView) {
-            GameView(viewModel: WordleGameViewModel())
-         }
+            GameView(viewModelWordle: WordleGameViewModel())
         }
+    }
 }
 
 #Preview {

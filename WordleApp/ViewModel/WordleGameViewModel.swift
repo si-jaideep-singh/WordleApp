@@ -8,16 +8,18 @@ import SwiftUI
 final class WordleGameViewModel: ObservableObject {
     @Published private(set) var state : WordleState = WordleState()
     
-//    init() {
-//        self.state.wordlength = state.targetWord.count
-//        self.state.board = Array(repeating: Array(repeating: "", count: state.wordlength), count: state.maxAttempts)
-//        self.state.rowCompleted = Array(repeating: false, count: state.maxAttempts)
-//        self.state.rowColors = Array(repeating: Array(repeating: .EmpyCellColor, count: state.wordlength), count: state.maxAttempts)
-//        self.state.keyColors = Array(repeating: .clear, count: 26)
-//        self.state.cellFlipped = Array(repeating: Array(repeating: false, count: state.wordlength), count: state.maxAttempts)
-//        self.state.borderColors = Array(repeating: Array(repeating: .gray, count: state.wordlength), count: state.maxAttempts)
-//    }
-//    
+
+    func initCall(){
+        self.state.wordlength = state.targetWord.count
+        self.state.board = Array(repeating: Array(repeating: "", count: state.wordlength), count: state.maxAttempts)
+        self.state.rowCompleted = Array(repeating: false, count: state.maxAttempts)
+        self.state.rowColors = Array(repeating: Array(repeating: .EmpyCellColor, count: state.wordlength), count: state.maxAttempts)
+        self.state.keyColors = Array(repeating: .clear, count: 26)
+        self.state.cellFlipped = Array(repeating: Array(repeating: false, count: state.wordlength), count: state.maxAttempts)
+        self.state.borderColors = Array(repeating: Array(repeating: .clear, count: state.wordlength), count: state.maxAttempts)
+                
+    }
+    
     func addLetter(_ letter: String) {
         guard state.currentGuess.count < state.board[state.currentRow].count else { return }
         state.currentGuess.append(letter)
@@ -45,7 +47,7 @@ final class WordleGameViewModel: ObservableObject {
         for col in (0..<state.board[state.currentRow].count).reversed() {
             if !state.board[state.currentRow][col].isEmpty {
                 state.board[state.currentRow][col] = ""
-                state.borderColors[state.currentRow][col] = .gray
+                state.borderColors[state.currentRow][col] = .clear
                 return
             }
         }
@@ -55,7 +57,7 @@ final class WordleGameViewModel: ObservableObject {
         for col in 0..<state.board[state.currentRow].count {
             if state.board[state.currentRow][col].isEmpty {
                 state.board[state.currentRow][col] = letter
-                state.borderColors[state.currentRow][col] = .red
+                state.borderColors[state.currentRow][col] = .BorderColor
                 return
             }
         }
