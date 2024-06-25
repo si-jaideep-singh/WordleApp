@@ -7,13 +7,16 @@ import SwiftUI
 
 final class WordleGameViewModel: ObservableObject {
     @Published private(set) var state : WordleState = WordleState()
-    
+    @Published var gameCompleted: Bool = false
+    var isCurrentWordComplete: Bool {
+           return state.currentGuess.count == state.wordlength
+       }
 
     func initCall(){
         self.state.wordlength = state.targetWord.count
         self.state.board = Array(repeating: Array(repeating: "", count: state.wordlength), count: state.maxAttempts)
         self.state.rowCompleted = Array(repeating: false, count: state.maxAttempts)
-        self.state.rowColors = Array(repeating: Array(repeating: .EmpyCellColor, count: state.wordlength), count: state.maxAttempts)
+        self.state.rowColors = Array(repeating: Array(repeating: .empyCell, count: state.wordlength), count: state.maxAttempts)
         self.state.keyColors = Array(repeating: .clear, count: 26)
         self.state.cellFlipped = Array(repeating: Array(repeating: false, count: state.wordlength), count: state.maxAttempts)
         self.state.borderColors = Array(repeating: Array(repeating: .clear, count: state.wordlength), count: state.maxAttempts)
@@ -29,8 +32,8 @@ final class WordleGameViewModel: ObservableObject {
     func handleSpecialKey(_ specialKey: String) {
         switch specialKey {
         case "Delete":
-            deleteLastLetter()
-            clearLastNonEmptyCell()
+         deleteLastLetter()
+        clearLastNonEmptyCell()
         case "Enter":
             checkGuess()
         default:
@@ -40,9 +43,13 @@ final class WordleGameViewModel: ObservableObject {
     
     private func deleteLastLetter() {
         guard !state.currentGuess.isEmpty else { return }
-        state.currentGuess.removeLast()
+        
+        if state.rowCompleted[state.currentRow] || state.isGuessCorrect {
+            return
+        }
+         state.currentGuess.removeLast()
     }
-    
+   
     private func clearLastNonEmptyCell() {
         for col in (0..<state.board[state.currentRow].count).reversed() {
             if !state.board[state.currentRow][col].isEmpty {
@@ -57,7 +64,7 @@ final class WordleGameViewModel: ObservableObject {
         for col in 0..<state.board[state.currentRow].count {
             if state.board[state.currentRow][col].isEmpty {
                 state.board[state.currentRow][col] = letter
-                state.borderColors[state.currentRow][col] = .BorderColor
+                state.borderColors[state.currentRow][col] = .border
                 return
             }
         }
@@ -72,7 +79,7 @@ final class WordleGameViewModel: ObservableObject {
     
     private func evaluateGuess(guess: String) -> (correctPosition: Int, colors: [Color], guessedLetters: [Character]) {
         var correctPosition = 0
-        var colors: [Color] = Array(repeating: .EmpyCellColor, count: state.board[state.currentRow].count)
+        var colors: [Color] = Array(repeating: .empyCell, count: state.board[state.currentRow].count)
         let guessArray = Array(guess)
         let targetArray = Array(state.targetWord)
         var guessedLetters = [Character]()
@@ -121,32 +128,50 @@ final class WordleGameViewModel: ObservableObject {
             }
         }
     
-        private func showCompletionToast() {
-            if evaluateGuess(guess: state.currentGuess).correctPosition == state.targetWord.count {
-                state.gameEnded = true // Player wins
-                showToast(message: "Congratulations! You've guessed the word!")
-            } else {
-                state.currentRow += 1
-                if state.currentRow >= state.maxAttempts {
-                    state.gameEnded = true
-                    showToast(message: "Game Over! The correct word was \(state.targetWord).")
-                } else {
-                    showToast(message: "Attempts left: \(state.attemptsLeft)")
-                }
-            }
-            state.currentGuess = ""
-        }
+    private func showCompletionToast() {
+          if evaluateGuess(guess: state.currentGuess).correctPosition == state.targetWord.count {
+              state.gameEnded = true
+              gameCompleted = true
+          } else {
+              state.currentRow += 1
+              if state.currentRow >= state.maxAttempts {
+                  state.gameEnded = true
+                  gameCompleted = true 
+              }
+          }
+          state.currentGuess = ""
+      }
     
-        private func updateKeyColors(guess: String, colors: [Color]) {
-            for (index, letter) in guess.enumerated() {
-                if let letterIndex = state.letters.firstIndex(of: letter) {
-                    let colorIndex = state.letters.distance(from: state.letters.startIndex, to: letterIndex)
+//        private func showCompletionToast() {
+//            if evaluateGuess(guess: state.currentGuess).correctPosition == state.targetWord.count {
+//              // Player wins
+//                showToast(message: "Congratulations! You've guessed the word!")
+//                state.gameEnded = true 
+//                state.rowCompleted[state.currentRow] = true
+//                    state.isGuessCorrect = true
+//            } else {
+//                state.currentRow += 1
+//                if state.currentRow >= state.maxAttempts {
+//                    state.gameEnded = true
+//                    showToast(message: "Game Over! The correct word was \(state.targetWord).")
+//                } else {
+//                    showToast(message: "Attempts left: \(state.attemptsLeft)")
+//                }
+//            }
+//            state.currentGuess = ""
+//        }
+    private func updateKeyColors(guess: String, colors: [Color]) {
+        for (index, letter) in guess.enumerated() {
+            if let letterIndex = state.letters.firstIndex(of: letter) {
+                let colorIndex = state.letters.distance(from: state.letters.startIndex, to: letterIndex)
+                
+                 if state.keyColors[colorIndex] != .correct {
                     state.keyColors[colorIndex] = colors[index]
                 }
             }
         }
-    
-        private func showToast(message: String) {
+    }
+         private func showToast(message: String) {
             self.state.message = message
             self.state.showMessage = true
     
@@ -156,5 +181,11 @@ final class WordleGameViewModel: ObservableObject {
                 }
             }
         }
+    
+    func resetGame() {
+            state = WordleState()
+            gameCompleted = false
+            initCall()
+       }
     }
    

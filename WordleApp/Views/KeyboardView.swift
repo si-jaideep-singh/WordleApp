@@ -28,36 +28,59 @@ struct KeyboardView: View {
                 
                 HStack {
                     HStack(spacing:10){
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                            Text("Booster")
-                                .padding(.vertical,14.5)
-                                .padding(.horizontal,12)
+                        VStack{
+                            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                VStack {
+                                    Image(systemName: "bolt.fill")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .foregroundColor(.white)
+                                        .frame(width: 10, height: 10)
+                                    Text("Booster")
+                                        .foregroundColor(Color.white)
+                                }
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 10)
                                 .lineLimit(1)
-                                .background(Color.yellow)
-                                .CFSDKcornerRadius(10, corners: .allCorners)
-                            
-                        })
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                            Text("Booster")
-                                .padding(.vertical,14.5)
-                                .padding(.horizontal,12)
+                                .CFSDKborder(radius: 12, color: Color.white.opacity(0.6), width: 2)
+                            })
+                        }
+                        VStack {
+                            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                VStack {
+                                    Image(systemName: "bolt.fill")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .foregroundColor(.white)
+                                        .frame(width: 10, height: 10)
+                                        
+                                    Text("Booster")
+                                        .foregroundColor(Color.white)
+                                }
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 10)
                                 .lineLimit(1)
-                                .background(Color.yellow)
-                                .CFSDKcornerRadius(10, corners: .allCorners)
-                            
-                        })
+                                .CFSDKborder(radius: 12, color: Color.white.opacity(0.6), width: 2)
+                            })
+                        }
                     }
                     HStack {
                         Button(action: {
                             viewModelWordle.handleSpecialKey("Enter")
                         }, label: {
                             Text("Submit")
-                                .padding(.vertical, 14.5)
-                                .foregroundColor(.backgroundColor)
-                        }).frame(width: geometry.size.width/2)
+                                .foregroundColor(Color.black)
+                                .font(Font.headline.weight(.medium))
+                                .padding(.vertical, 20)
+                             
+                        })
+                        .frame(width: geometry.size.width/2)
+                            .disabled(!viewModelWordle.isCurrentWordComplete)
+
                     }
-                        .background(Color.primarybtn)
-                        .CFSDKcornerRadius(10, corners: .allCorners)
+
+                    .background(viewModelWordle.isCurrentWordComplete ? Color.primarybtn : Color.primarybtn.opacity(0.5))
+                        .CFSDKcornerRadius(13, corners: .allCorners)
                 }
                 
             }
@@ -83,29 +106,40 @@ struct KeyView: View {
     var body: some View {
         Button(action: {
             if key == "Delete" {
-                viewModelWordle.handleSpecialKey(key)
+                if viewModelWordle.state.isGuessCorrect {
+                    
+                } else {
+                    viewModelWordle.handleSpecialKey(key)
+                }
             } else {
                 viewModelWordle.addLetter(key)
+            }        }) {
+                if key == "Delete" {
+                    Image(systemName: "delete.left.fill")
+                        .frame(width: keyWidth, height: 50)
+                        .background(keyBackgroundColor(for: key))
+                        .foregroundColor(.white.opacity(0.6))
+                        .font(.system(size: 14))
+                        .font(Font.headline.weight(.bold))
+                        .cornerRadius(12)
+                        .CFSDKborder(radius: 12, color: keyBackgroundColor(for: key) != .clear ? .clear : .whiteFFFF.opacity(0.8), width: 1)
+                } else {
+                    Text(key)
+                        .frame(width: keyWidth, height: 50)
+                        .background(keyBackgroundColor(for: key))
+                        .foregroundColor(.white)
+                        .font(.system(size: 14))
+                        .font(Font.headline.weight(.bold))
+                        .cornerRadius(12)
+                        .CFSDKborder(radius: 12, color: keyBackgroundColor(for: key) != .clear ? .clear : .whiteFFFF.opacity(0.8), width: 1)
+                }
             }
-        }) {
-            
-            Text(key == "Delete" ? "X" : key)
-            
-                .frame(width: keyWidth, height: 43)
-                
-                .background(keyBackgroundColor(for: key))
-                .foregroundColor(.white)
-                .font(Font.headline.weight(.bold))
-                .cornerRadius(12)
-                .CFSDKborder(radius: 12, color:  keyBackgroundColor(for: key) != .clear ? .clear : .whiteFFFF.opacity(0.5), width: 1)
-                
-        }
-        .padding(.all,1.5)
+            .padding(.all, 1.5)
     }
     
     private func keyBackgroundColor(for key: String) -> Color {
         if key == "Delete"  {
-            return .red
+            return .clear
         } else {
             guard let letter = key.first, let index = viewModelWordle.state.letters.firstIndex(of: letter) else {
                 return .gray

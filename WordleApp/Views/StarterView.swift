@@ -30,7 +30,10 @@ struct StarterView: View {
                 }else{
                     SplashView()
                 }
-            }.onAppear {
+                    
+            }
+           
+            .onAppear {
                 Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
                     moveToGameView = true
                 }

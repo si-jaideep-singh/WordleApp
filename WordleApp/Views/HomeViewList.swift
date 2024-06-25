@@ -41,7 +41,7 @@ struct HomeViewList: View {
         VStack{
             Image("card1 image")
                 .resizable()
-                .frame(height: 180)
+                .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 300 : 180)
                 .cornerRadius(10)
                 .padding(.horizontal,15)
                 
