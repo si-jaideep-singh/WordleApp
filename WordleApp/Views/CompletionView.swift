@@ -16,19 +16,18 @@ struct CompletionView: View {
                 .font(.title)
                 .padding()
             
-            
-            
             HStack {
-                Button(action: {} , label: {
+                Button(action: {
+                    // Implement your back action here
+                }) {
                     Text("Back")
                         .font(.title3)
-                    .frame(width: 120)
-                    .padding(.all,10)
-                    .background(Color.background)
-                    .foregroundColor(.white)
-                    .cornerRadius(5)
-                    
-                })
+                        .frame(width: 120)
+                        .padding(.all, 10)
+                        .background(Color.background)
+                        .foregroundColor(.white)
+                        .cornerRadius(5)
+                }
                 
                 Button(action: {
                     viewModelWordle.resetGame()
@@ -36,12 +35,11 @@ struct CompletionView: View {
                     Text("Play Again")
                         .font(.title3)
                         .frame(width: 120)
-                        .padding(.all,10)
+                        .padding(.all, 10)
                         .background(Color.background)
                         .foregroundColor(.white)
                         .cornerRadius(5)
-                        
-            }
+                }
             }
             .frame(height: 50)
         }
