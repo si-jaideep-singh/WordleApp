@@ -53,12 +53,12 @@ struct HowToplay: View {
                         isPresented = false
                     }
                 
-                VStack {
+                VStack(spacing:0) {
                     Text("How to Play")
                         .foregroundColor(.white)
                         .font(.title)
                         .fontWeight(.bold)
-                        .padding()
+                       
                     
                     Image("howtoplay")
                         .resizable()

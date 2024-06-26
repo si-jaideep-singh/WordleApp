@@ -9,7 +9,8 @@ import SwiftUI
 
 struct GameView: View {
     @StateObject var viewModelWordle = WordleGameViewModel()
-   // @State private var dynamicWidth: CGFloat = 0
+    @State private var dynamicWidth: CGFloat = 0
+    @State private var StaticHeight: CGFloat = 0
     @State private var orientation = UIDeviceOrientation.unknown
     @State private var showHowToPlay = true
     var body: some View {
@@ -18,15 +19,10 @@ struct GameView: View {
                 .ignoresSafeArea()
             VStack{
                 AdsPresentedbyView()
+                    .padding(.bottom,10)
                 VStack {
-                    Text("Word Guess Game")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .padding(.bottom, 5)
-                        .foregroundColor(.whiteFFFF)
-                    
-                    BoardView()
-                        .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 20 : 40)
+                       BoardView()
+                        .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20)
                        
                     ZStack{
                          VStack{
@@ -34,11 +30,12 @@ struct GameView: View {
                                 .frame(height: 1)
                                 .background(Color.whiteFFFF.opacity(0.1))
                                 .padding(.bottom,10)
-                            
-                            KeyboardView()
-                                // .frame(width:dynamicWidth)
-                        }
-                      }
+                                 KeyboardView()
+//                                 .frame(maxWidth: .infinity)
+                                 .frame(height: UIDevice.current.userInterfaceIdiom == .phone || orientation.isPortrait ? 250 : 250 )
+//
+                              }
+                       }
                  }
                 .padding(.horizontal,20)
                
@@ -82,13 +79,21 @@ struct GameView: View {
             showHowToPlay = false
         }
     }
-//    private func updateDynamicWidth() {
-//        if UIDevice.current.userInterfaceIdiom == .pad {
-//            dynamicWidth = UIScreen.main.bounds.width - (orientation.isLandscape ? 0 : 40)
-//        } else {
-//            dynamicWidth = UIScreen.main.bounds.width - 20
-//        }
-//    }
+     private func updateDynamicWidth() {
+         if UIDevice.current.userInterfaceIdiom == .pad {
+            dynamicWidth = UIScreen.main.bounds.width - (orientation.isLandscape ? 0 : 40)
+        } else {
+            dynamicWidth = UIScreen.main.bounds.width - 20
+        }
+    }
+    
+    private func staticHeight() {
+        if UIDevice.current.userInterfaceIdiom == .phone{
+           StaticHeight = 200
+       }
+   }
+
+    
     private func Onrotation(){
         orientation = UIDevice.current.orientation
     }

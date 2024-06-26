@@ -23,7 +23,7 @@ struct WordleState {
     
     let letters = "QWERTYUIOPASDFGHJKLZXCVBNM"
     
-    let targetWord = "Sunny".uppercased()
+    let targetWord = "Applee".uppercased()
     let maxAttempts = 5
     var wordlength: Int = 0
     var currentRow = 0
