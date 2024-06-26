@@ -18,9 +18,9 @@ struct HomeViewList: View {
                 VStack(spacing:10){
                     ForEach(0..<2, id: \.self) { index in
                         Button {
-                            if index ==  0{
+                            if index ==  0 {
                                 card1 = true
-                            }else if index ==  0 {
+                            } else if index ==  0 {
                                 card2 = true
                             }
                         } label: {

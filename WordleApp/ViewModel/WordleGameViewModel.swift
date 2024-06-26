@@ -13,7 +13,7 @@ final class WordleGameViewModel: ObservableObject {
         self.state.wordlength = state.targetWord.count
         self.state.board = Array(repeating: Array(repeating: "", count: state.wordlength), count: state.maxAttempts)
         self.state.rowCompleted = Array(repeating: false, count: state.maxAttempts)
-        self.state.rowColors = Array(repeating: Array(repeating: .EmptyCellColor, count: state.wordlength), count: state.maxAttempts)
+        self.state.rowColors = Array(repeating: Array(repeating: .emptyCell, count: state.wordlength), count: state.maxAttempts)
         self.state.keyColors = Array(repeating: .clear, count: 26)
         self.state.cellFlipped = Array(repeating: Array(repeating: false, count: state.wordlength), count: state.maxAttempts)
         self.state.borderColors = Array(repeating: Array(repeating: .clear, count: state.wordlength), count: state.maxAttempts)
@@ -26,9 +26,11 @@ final class WordleGameViewModel: ObservableObject {
        }
     func handleSpecialKey(_ specialKey: String) {
         switch specialKey {
-        case "Delete":
-            deleteLastLetter()
-            clearLastNonEmptyCell()
+           case "Delete":
+                    if !state.rowCompleted[state.currentRow] {
+                        deleteLastLetter()
+                        clearLastNonEmptyCell()
+                    }
         case "Enter":
             checkGuess()
         default:
@@ -40,7 +42,7 @@ final class WordleGameViewModel: ObservableObject {
         guard !state.currentGuess.isEmpty else { return }
         
         if state.rowCompleted[state.currentRow] || state.isGuessCorrect {
-            return
+           
         }
         state.currentGuess.removeLast()
     }
@@ -68,6 +70,7 @@ final class WordleGameViewModel: ObservableObject {
     private func checkGuess() {
         guard state.currentGuess.count == state.board[state.currentRow].count else { return }
         let guessResult = evaluateGuess(guess: state.currentGuess)
+        
         flipCellsInRowSequentially(state.currentRow, colors: guessResult.colors)
        
     }
@@ -110,6 +113,7 @@ private func flipCellInRow(_ row: Int, at index: Int, colors: [Color], completio
         
         withAnimation(.easeInOut(duration: 0.8)) {
             self.state.cellFlipped[row][index] = true
+            self.state.rowCompleted[state.currentRow] = true
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

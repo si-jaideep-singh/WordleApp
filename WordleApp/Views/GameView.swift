@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameView: View {
     @StateObject var viewModelWordle = WordleGameViewModel()
-    @State private var dynamicWidth: CGFloat = UIScreen.main.bounds.width - 20
+   // @State private var dynamicWidth: CGFloat = 0
     @State private var orientation = UIDeviceOrientation.unknown
     @State private var showHowToPlay = true
     var body: some View {
@@ -27,23 +27,21 @@ struct GameView: View {
                     
                     BoardView()
                         .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 20 : 40)
+                       
                     ZStack{
-                        VStack{
-                            Divider()
+                         VStack{
+                             Divider()
                                 .frame(height: 1)
                                 .background(Color.whiteFFFF.opacity(0.1))
                                 .padding(.bottom,10)
                             
                             KeyboardView()
-                                .frame(width: dynamicWidth)
-                            
-                            
+                                // .frame(width:dynamicWidth)
                         }
-                    }.frame(alignment: .bottom)
-                    
-                }
-                
-                .padding(.horizontal,10)
+                      }
+                 }
+                .padding(.horizontal,20)
+               
             }
             .blur(radius: showHowToPlay ? 5 : 0)
             if viewModelWordle.state.showToast {
@@ -74,9 +72,9 @@ struct GameView: View {
         
         .navigationTitle("Wordle")
         .navigationBarTitleDisplayMode(.inline)
+        
         .onAppear {
-            updateOrientation()
-            updateDynamicWidth()
+           // updateDynamicWidth()
             self.viewModelWordle.initCall()
         }
         .environmentObject(viewModelWordle)
@@ -84,24 +82,22 @@ struct GameView: View {
             showHowToPlay = false
         }
     }
-    
-    private func updateOrientation() {
+//    private func updateDynamicWidth() {
+//        if UIDevice.current.userInterfaceIdiom == .pad {
+//            dynamicWidth = UIScreen.main.bounds.width - (orientation.isLandscape ? 0 : 40)
+//        } else {
+//            dynamicWidth = UIScreen.main.bounds.width - 20
+//        }
+//    }
+    private func Onrotation(){
         orientation = UIDevice.current.orientation
-    }
-    private func updateDynamicWidth() {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            dynamicWidth = UIScreen.main.bounds.width - (orientation.isLandscape ? 0 : 40)
-        } else {
-            dynamicWidth = UIScreen.main.bounds.width - 20
-        }
     }
     
 }
-
-
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView(viewModelWordle: WordleGameViewModel())
+            .environmentObject(WordleGameViewModel())
     }
 }
 

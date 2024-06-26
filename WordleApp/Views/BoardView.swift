@@ -90,7 +90,7 @@ struct LetterView: View {
                .frame(width: cellSize, height: cellSize)
                .foregroundColor(.white)
                .background(RoundedRectangle(cornerRadius: cellSize * 0.25)
-                               .fill(color))
+                .fill(color))
                .overlay(
                    RoundedRectangle(cornerRadius: cellSize * 0.25)
                        .stroke(borderColor, lineWidth: 2)
@@ -108,5 +108,6 @@ struct LetterView: View {
 struct BoardView_Previews: PreviewProvider {
     static var previews: some View {
         BoardView()
+            .environmentObject(WordleGameViewModel())
     }
 }

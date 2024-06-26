@@ -17,14 +17,13 @@ struct WordleState {
     var borderColors: [[Color]] = []
     var gameEnded: Bool = false
     var gameWon:Bool = false
-     var gameCompleted: Bool = false
-
-      var showToast: Bool = false
-      var toastMessage: String = ""
-     
+    var gameCompleted: Bool = false
+    var showToast: Bool = false
+    var toastMessage: String = ""
+    
     let letters = "QWERTYUIOPASDFGHJKLZXCVBNM"
     
-    let targetWord = "Apple".uppercased()
+    let targetWord = "Sunny".uppercased()
     let maxAttempts = 5
     var wordlength: Int = 0
     var currentRow = 0
