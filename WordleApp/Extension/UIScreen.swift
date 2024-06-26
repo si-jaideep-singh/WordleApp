@@ -14,6 +14,11 @@ extension UIScreen{
     static let screenSize = UIScreen.main.bounds.size
 }
 
+func isiPhoneSE() -> Bool {
+    let isiPhoneSE1 = UIScreen.screenWidth == 320.0 && UIScreen.screenHeight == 568.0
+    let isiPhoneSE2 = UIScreen.screenWidth == 375.0 && UIScreen.screenHeight == 667.0
+    return isiPhoneSE1 || isiPhoneSE2 }
+
 struct CFSDKRoundedCorner:Shape {
 
     var radius: CGFloat = .infinity

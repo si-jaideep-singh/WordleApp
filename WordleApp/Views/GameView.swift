@@ -19,23 +19,34 @@ struct GameView: View {
                 .ignoresSafeArea()
             VStack{
                 AdsPresentedbyView()
-                    .padding(.bottom,10)
+                   
                 VStack {
+                     Text("Word Guess Game")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .padding(.bottom, 5)
+                                .foregroundColor(.whiteFFFF)
+                      
                        BoardView()
-                        .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20)
+                        .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 20 : isiPhoneSE() ? 50 :  40)
+                    
                        
-                    ZStack{
+                    ZStack {
                          VStack{
                              Divider()
                                 .frame(height: 1)
                                 .background(Color.whiteFFFF.opacity(0.1))
                                 .padding(.bottom,10)
                                  KeyboardView()
-//                                 .frame(maxWidth: .infinity)
-                                 .frame(height: UIDevice.current.userInterfaceIdiom == .phone || orientation.isPortrait ? 250 : 250 )
+                              
+                            
+                                 
+//                               .frame(maxWidth: .infinity)
+//                                 .frame(height: UIDevice.current.userInterfaceIdiom == .phone || orientation.isPortrait ? 250 : 250 )
 //
                               }
                        }
+                    .frame(alignment: .bottom)
                  }
                 .padding(.horizontal,20)
                
@@ -71,7 +82,7 @@ struct GameView: View {
         .navigationBarTitleDisplayMode(.inline)
         
         .onAppear {
-           // updateDynamicWidth()
+            updateDynamicWidth()
             self.viewModelWordle.initCall()
         }
         .environmentObject(viewModelWordle)
