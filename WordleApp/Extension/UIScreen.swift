@@ -14,6 +14,22 @@ extension UIScreen{
     static let screenSize = UIScreen.main.bounds.size
 }
 
+
+func iPadMiniLandscape() -> Bool {
+    let iPadMiniGenerations = [
+        (UIScreen.screenWidth == 1024.0 && UIScreen.screenHeight == 768.0) ||
+        (UIScreen.screenWidth == 768.0 && UIScreen.screenHeight == 1024.0),
+        
+        (UIScreen.screenWidth == 1112.0 && UIScreen.screenHeight == 834.0) ||
+        (UIScreen.screenWidth == 834.0 && UIScreen.screenHeight == 1112.0),
+        
+        (UIScreen.screenWidth == 1133.0 && UIScreen.screenHeight == 744.0) ||
+        (UIScreen.screenWidth == 744.0 && UIScreen.screenHeight == 1133.0)
+    ]
+    
+    return iPadMiniGenerations.contains(true)
+}
+
 func isiPhoneSE() -> Bool {
     let isiPhoneSE1 = UIScreen.screenWidth == 320.0 && UIScreen.screenHeight == 568.0
     let isiPhoneSE2 = UIScreen.screenWidth == 375.0 && UIScreen.screenHeight == 667.0

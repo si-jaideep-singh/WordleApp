@@ -18,41 +18,46 @@ struct GameView: View {
                 .ignoresSafeArea()
             VStack{
                 AdsPresentedbyView()
-               
+                VStack{
+                    Text("Word Guess Game")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .padding(.bottom, 5)
+                        .foregroundColor(.whiteFFFF)
+                    VStack {
+                        TeamSelectionView()
+                        BoardView()
+                            .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 20 : isiPhoneSE() ? 50 : 40)
+                        
+                   }
+                   
+                        ZStack {
                             VStack{
-                            Text("Word Guess Game")
-                                .font(.title2)
-                                .fontWeight(.bold)
-                                .padding(.bottom, 5)
-                                .foregroundColor(.whiteFFFF)
-                            VStack {
-                                TeamSelectionView()
-                                BoardView()
-                                    .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 20 : isiPhoneSE() ? 50 : 40)
-                                
-                            }
-                            
-                            ZStack {
-                                VStack{
-                                    Divider()
-                                        .frame(height: 1)
-                                        .background(Color.whiteFFFF.opacity(0.1))
-                                        .padding(.bottom,10)
+                                Divider()
+                                    .frame(height: 1)
+                                    .background(Color.whiteFFFF.opacity(0.1))
+                                    .padding(.bottom, UIDevice.current.userInterfaceIdiom == .pad ? 10 : 0)
+                                VStack {
                                     KeyboardView()
+                                    Spacer(minLength: 20)
                                     SponsorView()
                                 }
-                                Spacer()
+                                
                             }
-                            .frame(alignment: .bottom)
-                            
-                            
-                            
+                            Spacer()
                         }
-                        .padding(.horizontal,20)
+                       // .frame(alignment: .bottom)
+                   
+                 }
+                .padding(.horizontal,20)
+             }
+            .onAppear {
+                self.viewModelWordle.initCall()
                     
-                
             }
-            
+            .onRotate{_ in
+                orientation
+            }
             .blur(radius: showHowToPlay ? 5 : 0)
             if viewModelWordle.state.showToast {
                 VStack {
@@ -77,21 +82,18 @@ struct GameView: View {
                     .transition(.opacity)
                     .animation(.easeInOut)
             }
-            
         }
-        
         .navigationTitle("Wordle")
         .navigationBarTitleDisplayMode(.inline)
         
-        .onAppear {
-          self.viewModelWordle.initCall()
-        }
+        
         .environmentObject(viewModelWordle)
         .onTapGesture {
             showHowToPlay = false
         }
     }
 }
+
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView(viewModelWordle: WordleGameViewModel())

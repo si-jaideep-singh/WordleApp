@@ -11,7 +11,7 @@ struct BoardView: View {
             ScrollView(.vertical,showsIndicators: false) {
                 VStack(spacing: 5) {
                     ForEach(0..<viewModelWordle.state.maxAttempts, id: \.self) { row in
-                        HStack(spacing: 4) {
+                        HStack(spacing: 2) {
                             ForEach(0..<viewModelWordle.state.wordlength, id: \.self) { col in
                                 let cellSize = calculateCellSize(geometry: geometry.size, cols: viewModelWordle.state.wordlength, maxWidth: geometry.size.width, maxHeight: geometry.size.height)
                                 
@@ -31,10 +31,16 @@ struct BoardView: View {
                     }
                 }
                 
+                
+                
                 .frame(maxWidth: .infinity, alignment: .center)
+                
             }
-            .padding(.top,10)
-            .background(Color.clear)
+             
+            
+          
+          //  .padding(.top,20)
+            
 
         }
     }

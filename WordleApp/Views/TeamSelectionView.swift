@@ -26,7 +26,7 @@ struct TeamButton: View {
             Image(systemName: imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 30, height: 30)
+                .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20, height: UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20)
                 .foregroundColor(.white)
                 .padding(15)
                 .background(Color.blue)

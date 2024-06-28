@@ -3,42 +3,6 @@
 //  WordleApp
 //
 //  Created by Jaideep Singh on 24/06/24.
-//
-//import SwiftUI
-//
-//struct HowToplay: View {
-//    @Binding var isPresented: Bool
-//    
-//    var body: some View {
-//        ZStack {
-//            VStack {
-//                Text("How to Play")
-//                    .foregroundColor(Color.white)
-//                    .font(Font.headline.weight(.bold))
-//                    .font(.title3)
-//                    
-//                Image("howtoplay")
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fit)
-//                    //.padding(20)
-//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                    .frame(width: UIScreen.main.bounds.width * 0.9)
-//                    .background(Color.white)
-//                    .cornerRadius(20)
-//                   // .shadow(radius: 10)
-//                
-//               
-//            }
-//        
-//        }
-//        .onTapGesture {
-//            isPresented = false
-//        }
-//        .transition(.opacity)
-//        .animation(.easeInOut)
-//    }
-//}
-
 import SwiftUI
 
 struct HowToplay: View {
