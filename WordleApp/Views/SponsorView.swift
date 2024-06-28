@@ -11,8 +11,8 @@ struct SponsorView: View {
     var body: some View {
         VStack {
             Text("Sponsor")
-                .frame(width:  240,height:isiPhoneSE() ? 25 : 42)
-            .background(Color.red)
+                .frame(width:240,height: 42)
+               .background(Color.red)
         }
        
             

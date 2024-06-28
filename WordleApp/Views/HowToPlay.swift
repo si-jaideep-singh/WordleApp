@@ -17,13 +17,12 @@ struct HowToplay: View {
                         isPresented = false
                     }
                 
-                VStack(spacing:0) {
+                VStack(spacing: 0) {
                     Text("How to Play")
                         .foregroundColor(.white)
                         .font(.title)
                         .fontWeight(.bold)
-                       
-                    
+                        .padding()
                     Image("howtoplay")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -32,12 +31,11 @@ struct HowToplay: View {
                         .cornerRadius(20)
                         .padding()
                 }
-                .frame(width: min(geometry.size.width * 0.9, 600))
-                .background(Color.clear)
+              
                 .cornerRadius(20)
                 .shadow(radius: 10)
+                .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .animation(.easeInOut)
             }
             .transition(.opacity)
             .animation(.easeInOut)

@@ -5,10 +5,9 @@ import SwiftUI
 
 struct BoardView: View {
     @EnvironmentObject var viewModelWordle: WordleGameViewModel
-    
+    var geometry : GeometryProxy
     var body: some View {
-        GeometryReader { geometry in
-            ScrollView(.vertical,showsIndicators: false) {
+
                 VStack(spacing: 5) {
                     ForEach(0..<viewModelWordle.state.maxAttempts, id: \.self) { row in
                         HStack(spacing: 2) {
@@ -28,24 +27,16 @@ struct BoardView: View {
                                 
                             }
                         }
-                    }
+                    
                 }
                 
                 
                 
-                .frame(maxWidth: .infinity, alignment: .center)
+                    .frame(alignment: .center)
                 
             }
-             
-            
-          
-          //  .padding(.top,20)
-            
-
-        }
-    }
-    
-    private func calculateCellSize(geometry: CGSize, cols: Int, maxWidth: CGFloat, maxHeight: CGFloat) -> CGFloat {
+       }
+   private func calculateCellSize(geometry: CGSize, cols: Int, maxWidth: CGFloat, maxHeight: CGFloat) -> CGFloat {
         let isCompactMode = geometry.width < geometry.height
         
        if UIDevice.current.userInterfaceIdiom == .phone {
@@ -63,16 +54,16 @@ struct BoardView: View {
         } else if UIDevice.current.userInterfaceIdiom == .pad {
             if isCompactMode {
                
-                let totalHorizontalPadding: CGFloat = CGFloat(cols - 1) * 8 
-                let totalVerticalPadding: CGFloat = CGFloat(viewModelWordle.state.maxAttempts - 1) * 8
+                let totalHorizontalPadding: CGFloat = CGFloat(cols - 1) * 50
+                let totalVerticalPadding: CGFloat = CGFloat(viewModelWordle.state.maxAttempts - 1) * 50
                 let availableWidth = maxWidth - totalHorizontalPadding
                 let availableHeight = maxHeight - totalVerticalPadding
                 let cellSize = min(availableWidth / CGFloat(cols), availableHeight / CGFloat(viewModelWordle.state.maxAttempts))
                 return cellSize
             } else {
               
-                let totalHorizontalPadding: CGFloat = CGFloat(cols - 1) * 6
-                let totalVerticalPadding: CGFloat = CGFloat(viewModelWordle.state.maxAttempts - 1) * 10
+                let totalHorizontalPadding: CGFloat = CGFloat(cols - 1) * 50
+                let totalVerticalPadding: CGFloat = CGFloat(viewModelWordle.state.maxAttempts - 1) * 50
                 let availableWidth = maxWidth - totalHorizontalPadding
                 let availableHeight = maxHeight - totalVerticalPadding
                 let cellSize = min(availableWidth / CGFloat(cols), availableHeight / CGFloat(viewModelWordle.state.maxAttempts))
@@ -112,9 +103,9 @@ struct LetterView: View {
 
 }
 
-struct BoardView_Previews: PreviewProvider {
-    static var previews: some View {
-        BoardView()
-            .environmentObject(WordleGameViewModel())
-    }
-}
+//struct BoardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//      //  BoardView()
+//            .environmentObject(WordleGameViewModel())
+//    }
+//}

@@ -34,14 +34,14 @@ struct KeyboardView: View {
                                          .resizable()
                                          .aspectRatio(contentMode: .fill)
                                          .foregroundColor(.white)
-                                         .frame(width: isiPhoneSE() ? 4 : 6, height: isiPhoneSE() ? 4 : 6)
+                                         .frame(width: 6, height: 6)
                                          .padding(.top, 3)
                                      Text("Booster")
                                          .foregroundColor(Color.white)
                                          .font(.system(size: 16))
                                  }
-                                 .padding(.vertical, isiPhoneSE() ? 1 : 4)
-                                 .padding(.horizontal, isiPhoneSE() ? 1 : 4)
+                                 .padding(.vertical, 4)
+                                 .padding(.horizontal, 4)
                                  .lineLimit(1)
                                  .CFSDKborder(radius: 8, color: Color.white.opacity(0.6), width: 1.5)
                              })
@@ -54,14 +54,14 @@ struct KeyboardView: View {
                                          .resizable()
                                          .aspectRatio(contentMode: .fill)
                                          .foregroundColor(.white)
-                                         .frame(width: isiPhoneSE() ? 4 : 6, height: isiPhoneSE() ? 4 : 6)
+                                         .frame(width:6, height:6)
                                          .padding(.top, 3)
                                      Text("Booster")
                                          .foregroundColor(Color.white)
                                          .font(.system(size: 16))
                                  }
-                                 .padding(.vertical, isiPhoneSE() ? 1 : 4)
-                                 .padding(.horizontal, isiPhoneSE() ? 1 : 4)
+                                 .padding(.vertical, 4)
+                                 .padding(.horizontal, 4)
                                  .lineLimit(1)
                                  .CFSDKborder(radius: 8, color: Color.white.opacity(0.6), width: 1.5)
                              })
@@ -80,7 +80,7 @@ struct KeyboardView: View {
                              
                         })
                         
-                        .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? geometry.size.width/4 : geometry.size.width/2)
+                        .frame(width: geometry.size.width/2)
                         
                         .disabled(!viewModelWordle.isCurrentWordComplete)
 
@@ -89,7 +89,7 @@ struct KeyboardView: View {
                         .CFSDKcornerRadius(13, corners: .allCorners)
                 }
                 
-                
+                SponsorView()
             }
 //            .padding(.bottom,20)
             .frame(maxWidth: geometry.size.width ,alignment: .center)
