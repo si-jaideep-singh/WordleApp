@@ -12,6 +12,7 @@ struct WordleAppApp: App {
     var body: some Scene {
         WindowGroup {
             StarterView().navigationViewStyle(StackNavigationViewStyle())
-   }
+
+        }
     }
 }

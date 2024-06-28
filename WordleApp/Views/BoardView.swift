@@ -33,6 +33,7 @@ struct BoardView: View {
                 
                 .frame(maxWidth: .infinity, alignment: .center)
             }
+            .padding(.top,10)
             .background(Color.clear)
 
         }
@@ -64,7 +65,7 @@ struct BoardView: View {
                 return cellSize
             } else {
               
-                let totalHorizontalPadding: CGFloat = CGFloat(cols - 1) * 10
+                let totalHorizontalPadding: CGFloat = CGFloat(cols - 1) * 6
                 let totalVerticalPadding: CGFloat = CGFloat(viewModelWordle.state.maxAttempts - 1) * 10
                 let availableWidth = maxWidth - totalHorizontalPadding
                 let availableHeight = maxHeight - totalVerticalPadding

@@ -11,6 +11,8 @@
 		8148BD5E2C2942B5003AA393 /* HowToPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8148BD5D2C2942B5003AA393 /* HowToPlay.swift */; };
 		8148BD612C299092003AA393 /* WordleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8148BD602C299092003AA393 /* WordleState.swift */; };
 		814F56542C2AF83900395385 /* CompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F56532C2AF83900395385 /* CompletionView.swift */; };
+		814F56562C2D86C700395385 /* TeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F56552C2D86C700395385 /* TeamSelectionView.swift */; };
+		814F56582C2D895500395385 /* SponsorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F56572C2D895500395385 /* SponsorView.swift */; };
 		81B3005D2C22BB1600131621 /* OrientationSensitiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B3005C2C22BB1600131621 /* OrientationSensitiveView.swift */; };
 		81FF8BF52C19D3240051774E /* WordleAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF8BF42C19D3240051774E /* WordleAppApp.swift */; };
 		81FF8BF92C19D3260051774E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81FF8BF82C19D3260051774E /* Assets.xcassets */; };
@@ -33,6 +35,8 @@
 		8148BD5D2C2942B5003AA393 /* HowToPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlay.swift; sourceTree = "<group>"; };
 		8148BD602C299092003AA393 /* WordleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordleState.swift; sourceTree = "<group>"; };
 		814F56532C2AF83900395385 /* CompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionView.swift; sourceTree = "<group>"; };
+		814F56552C2D86C700395385 /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
+		814F56572C2D895500395385 /* SponsorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SponsorView.swift; sourceTree = "<group>"; };
 		81B3005C2C22BB1600131621 /* OrientationSensitiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationSensitiveView.swift; sourceTree = "<group>"; };
 		81FF8BF12C19D3240051774E /* WordleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81FF8BF42C19D3240051774E /* WordleAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordleAppApp.swift; sourceTree = "<group>"; };
@@ -118,11 +122,12 @@
 				81FF8C1E2C21B66A0051774E /* SplashView.swift */,
 				C9C923762C2AE33F000413E9 /* StarterView.swift */,
 				81B3005C2C22BB1600131621 /* OrientationSensitiveView.swift */,
-				8148BD5D2C2942B5003AA393 /* HelpView.swift */,
 				C9C923722C2ACFDF000413E9 /* AdsPresentedbyView.swift */,
 				C9C923742C2AD58F000413E9 /* HomeViewList.swift */,
 				8148BD5D2C2942B5003AA393 /* HowToPlay.swift */,
 				814F56532C2AF83900395385 /* CompletionView.swift */,
+				814F56552C2D86C700395385 /* TeamSelectionView.swift */,
+				814F56572C2D895500395385 /* SponsorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -223,14 +228,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				814F56562C2D86C700395385 /* TeamSelectionView.swift in Sources */,
 				814F56542C2AF83900395385 /* CompletionView.swift in Sources */,
 				81FF8C152C1C13BE0051774E /* BorderExtension.swift in Sources */,
-
+				814F56582C2D895500395385 /* SponsorView.swift in Sources */,
 				C9C923732C2ACFDF000413E9 /* AdsPresentedbyView.swift in Sources */,
-				8148BD5E2C2942B5003AA393 /* HelpView.swift in Sources */,
-
 				8148BD5E2C2942B5003AA393 /* HowToPlay.swift in Sources */,
-
+				8148BD5E2C2942B5003AA393 /* HowToPlay.swift in Sources */,
 				81FF8C072C1ACDE60051774E /* ColorsExt.swift in Sources */,
 				81FF8C092C1ACF2F0051774E /* BoardView.swift in Sources */,
 				C9C923752C2AD58F000413E9 /* HomeViewList.swift in Sources */,

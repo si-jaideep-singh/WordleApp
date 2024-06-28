@@ -1,7 +1,9 @@
 //
 //  GameViewModel.swift
 //  WordleApp
+
 import SwiftUI
+
 final class WordleGameViewModel: ObservableObject {
     @Published private(set) var state: WordleState = WordleState()
     
@@ -17,20 +19,21 @@ final class WordleGameViewModel: ObservableObject {
         self.state.keyColors = Array(repeating: .clear, count: 26)
         self.state.cellFlipped = Array(repeating: Array(repeating: false, count: state.wordlength), count: state.maxAttempts)
         self.state.borderColors = Array(repeating: Array(repeating: .clear, count: state.wordlength), count: state.maxAttempts)
+        self.state.borderColors[state.currentRow][0] = .border 
     }
     
     func addLetter(_ letter: String) {
-           guard state.currentGuess.count < state.board[state.currentRow].count else { return }
-           state.currentGuess.append(letter)
-           updateBoard(letter)
-       }
+        guard state.currentGuess.count < state.board[state.currentRow].count else { return }
+        state.currentGuess.append(letter)
+        updateBoard(letter)
+    }
+    
     func handleSpecialKey(_ specialKey: String) {
         switch specialKey {
-           case "Delete":
-                    if !state.rowCompleted[state.currentRow] {
-                        deleteLastLetter()
-                        clearLastNonEmptyCell()
-                    }
+        case "Delete":
+            if !state.rowCompleted[state.currentRow] {
+                deleteLastLetter()
+            }
         case "Enter":
             checkGuess()
         default:
@@ -40,39 +43,47 @@ final class WordleGameViewModel: ObservableObject {
     
     private func deleteLastLetter() {
         guard !state.currentGuess.isEmpty else { return }
-        
-        if state.rowCompleted[state.currentRow] || state.isGuessCorrect {
-           
-        }
         state.currentGuess.removeLast()
-    }
-    
-    private func clearLastNonEmptyCell() {
-        for col in (0..<state.board[state.currentRow].count).reversed() {
-            if !state.board[state.currentRow][col].isEmpty {
-                state.board[state.currentRow][col] = ""
-                state.borderColors[state.currentRow][col] = .clear
-                return
-            }
-        }
+        updateBoardAfterDeletion()
     }
     
     private func updateBoard(_ letter: String) {
         for col in 0..<state.board[state.currentRow].count {
             if state.board[state.currentRow][col].isEmpty {
                 state.board[state.currentRow][col] = letter
-                state.borderColors[state.currentRow][col] = .border
+                state.borderColors[state.currentRow][col] = .clear
+                
+                if col + 1 < state.board[state.currentRow].count {
+                    state.borderColors[state.currentRow][col + 1] = .border
+                }
                 return
             }
         }
+    }
+    
+    private func updateBoardAfterDeletion() {
+        for col in (0..<state.board[state.currentRow].count).reversed() {
+            if !state.board[state.currentRow][col].isEmpty {
+                state.board[state.currentRow][col] = ""
+                state.borderColors[state.currentRow][col] = .border
+               
+                if col + 1 < state.board[state.currentRow].count {
+                    state.borderColors[state.currentRow][col + 1] = .clear
+                }
+                return
+            }
+        }
+        state.borderColors[state.currentRow][0] = .border
     }
     
     private func checkGuess() {
         guard state.currentGuess.count == state.board[state.currentRow].count else { return }
         let guessResult = evaluateGuess(guess: state.currentGuess)
         
-        flipCellsInRowSequentially(state.currentRow, colors: guessResult.colors)
-       
+        flipCellsInRowSequentially(state.currentRow, colors: guessResult.colors) {
+            self.updateKeyColors(guess: self.state.currentGuess, colors: guessResult.colors)
+            self.showCompletionToast()
+        }
     }
     
     private func evaluateGuess(guess: String) -> (correctPosition: Int, colors: [Color], guessedLetters: [Character]) {
@@ -97,15 +108,12 @@ final class WordleGameViewModel: ObservableObject {
         return (correctPosition, colors, guessedLetters)
     }
     
-    private func flipCellsInRowSequentially(_ row: Int, colors: [Color]) {
+    private func flipCellsInRowSequentially(_ row: Int, colors: [Color], completion: @escaping () -> Void) {
         guard row < state.board.count else { return }
-        flipCellInRow(row, at: 0, colors: colors) {
-            self.updateKeyColors(guess: self.state.currentGuess, colors: colors)
-            self.showCompletionToast()
-        }
+        flipCellInRow(row, at: 0, colors: colors, completion: completion)
     }
     
-private func flipCellInRow(_ row: Int, at index: Int, colors: [Color], completion: @escaping () -> Void) {
+    private func flipCellInRow(_ row: Int, at index: Int, colors: [Color], completion: @escaping () -> Void) {
         guard row < state.board.count && index < state.board[row].count else {
             completion()
             return
@@ -113,7 +121,7 @@ private func flipCellInRow(_ row: Int, at index: Int, colors: [Color], completio
         
         withAnimation(.easeInOut(duration: 0.8)) {
             self.state.cellFlipped[row][index] = true
-            self.state.rowCompleted[state.currentRow] = true
+            self.state.rowCompleted[self.state.currentRow] = true
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -123,11 +131,11 @@ private func flipCellInRow(_ row: Int, at index: Int, colors: [Color], completio
             if index + 1 < self.state.board[row].count {
                 self.flipCellInRow(row, at: index + 1, colors: colors, completion: completion)
             } else {
-               self.updateKeyColors(guess: self.state.currentGuess, colors: colors)
                 completion()
             }
         }
     }
+    
     private func showCompletionToast() {
         let correctPosition = evaluateGuess(guess: state.currentGuess).correctPosition
         
@@ -143,10 +151,9 @@ private func flipCellInRow(_ row: Int, at index: Int, colors: [Color], completio
                 state.gameWon = false
                 state.gameCompleted = true
             } else {
+               state.borderColors[state.currentRow][0] = .border
                 
                 let attemptsLeft = state.maxAttempts - state.currentRow
-                
-                
                 showToast(message: "\(attemptsLeft) attempts left")
             }
         }
@@ -157,11 +164,10 @@ private func flipCellInRow(_ row: Int, at index: Int, colors: [Color], completio
     private func showToast(message: String) {
         state.showToast = true
         state.toastMessage = message
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.state.showToast = false
-            }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.state.showToast = false
         }
-
+    }
     
     private func updateKeyColors(guess: String, colors: [Color]) {
         for (index, letter) in guess.enumerated() {
