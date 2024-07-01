@@ -22,11 +22,11 @@ struct HowToplay: View {
                         .foregroundColor(.white)
                         .font(.title)
                         .fontWeight(.bold)
-                        .padding()
+                       
                     Image("howtoplay")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: min(geometry.size.width * 0.9, 600))
+                        .frame(width: min(geometry.size.width * 0.8, 600))
                         .background(Color.white)
                         .cornerRadius(20)
                         .padding()
@@ -34,8 +34,8 @@ struct HowToplay: View {
               
                 .cornerRadius(20)
                 .shadow(radius: 10)
-                .padding()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+               
+               // .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .transition(.opacity)
             .animation(.easeInOut)

@@ -111,12 +111,11 @@ struct KeyboardView: View {
     var body: some View {
        
         let adjustedWidth: CGFloat
-            
             if UIDevice.current.userInterfaceIdiom == .pad {
-                if UIDevice.current.orientation.isPortrait {
-                    adjustedWidth = keyWidth - 10
+                if UIDevice.current.orientation.isLandscape {
+                    adjustedWidth = keyWidth - 40
                 } else {
-                    adjustedWidth = keyWidth - 60
+                    adjustedWidth = keyWidth - 10
                 }
             } else {
                 adjustedWidth = keyWidth - (isiPhoneSE() ? 2 : 0)
@@ -135,10 +134,7 @@ struct KeyboardView: View {
          {
             if key == "Delete" {
                 Image(systemName: "delete.left.fill")
-                    .frame(width:  keyWidth - (isiPhoneSE() ?  2 : (UIDevice().userInterfaceIdiom == .pad ? (orientation.isLandscape ? 50 : 20) : 0)),height: isiPhoneSE() ? 42 :  50)
-                  // .frame(width: adjustedWidth,
-                        // height:  (isiPhoneSE() ? 42 : 50))
-//                    .frame(width:  keyWidth - (isiPhoneSE() ?  2 : (UIDevice().userInterfaceIdiom == .pad) ? 40 : 0),height: isiPhoneSE() ? 42 :  50)
+                    .frame(width: adjustedWidth,height: isiPhoneSE() ? 42 :  50)
                     .background(keyBackgroundColor(for: key))
                     .foregroundColor(.white.opacity(0.6))
                     .font(.system(size: 14))
@@ -147,14 +143,7 @@ struct KeyboardView: View {
                     .CFSDKborder(radius: 12, color: keyBackgroundColor(for: key) != .clear ? .clear : .whiteFFFF.opacity(0.8), width: 1)
             } else {
                 Text(key)
-                   // .frame(width: adjustedWidth,
-                      //  height: (isiPhoneSE() ? 42 : 50))
-                    .frame(
-                      width: keyWidth - (isiPhoneSE() ? 2 : (UIDevice().userInterfaceIdiom == .pad ? (orientation.isLandscape ? 50 : 20) : 0)),
-                      height: isiPhoneSE() ? 42 : 50
-                    )
-
-          //  .frame(width:  keyWidth - (isiPhoneSE() ?  2 : 0),height: isiPhoneSE() ? 42 :  50)
+                    .frame(width:adjustedWidth,height: isiPhoneSE() ? 42 :  50)
                     .background(keyBackgroundColor(for: key))
                     .foregroundColor(.white)
                     .font(.system(size: 14))
