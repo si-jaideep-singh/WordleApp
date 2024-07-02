@@ -32,7 +32,6 @@ struct StarterView: View {
                 }
                     
             }
-           
             .onAppear {
                 Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
                     moveToGameView = true
@@ -40,7 +39,6 @@ struct StarterView: View {
             }
         }
     }
-    
 }
 
 #Preview {

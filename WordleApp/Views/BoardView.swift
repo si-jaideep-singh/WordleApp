@@ -53,7 +53,7 @@ struct BoardView: View {
         } else if UIDevice.current.userInterfaceIdiom == .pad {
             if isCompactMode {
                
-                let totalHorizontalPadding: CGFloat = CGFloat(cols - 1) * 100
+                let totalHorizontalPadding: CGFloat = CGFloat(cols - 1) * 50
                 let totalVerticalPadding: CGFloat = CGFloat(viewModelWordle.state.maxAttempts - 1) * 10
                 let availableWidth = maxWidth - totalHorizontalPadding
                 let availableHeight = maxHeight - totalVerticalPadding
@@ -62,7 +62,7 @@ struct BoardView: View {
             } else {
               
                 let totalHorizontalPadding: CGFloat = CGFloat(cols - 1) * 10
-                let totalVerticalPadding: CGFloat = CGFloat(viewModelWordle.state.maxAttempts - 1) * 100
+                let totalVerticalPadding: CGFloat = CGFloat(viewModelWordle.state.maxAttempts - 1) * 30
                 let availableWidth = maxWidth - totalHorizontalPadding
                 let availableHeight = maxHeight - totalVerticalPadding
                 let cellSize = min(availableWidth / CGFloat(cols), availableHeight / CGFloat(viewModelWordle.state.maxAttempts))
