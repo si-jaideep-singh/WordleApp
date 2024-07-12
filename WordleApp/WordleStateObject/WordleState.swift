@@ -23,8 +23,8 @@ struct WordleState : Equatable {
     
     let letters = "QWERTYUIOPASDFGHJKLZXCVBNM"
     
-    let targetWord = "Jaideepsingh".uppercased()
-    let maxAttempts = 10
+    let targetWord = "Jaideep".uppercased()
+    let maxAttempts = 6
     var wordlength: Int = 0
     var currentRow = 0
     var currentGuess = ""
@@ -33,4 +33,7 @@ struct WordleState : Equatable {
     var attemptsLeft: Int {
         return maxAttempts - currentRow
     }
+    
+     var hint: String = ""
+     var showHint: Bool = false
 }

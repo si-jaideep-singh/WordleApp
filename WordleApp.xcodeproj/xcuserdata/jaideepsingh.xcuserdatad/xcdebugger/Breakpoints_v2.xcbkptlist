@@ -3,4 +3,124 @@
    uuid = "879DCC74-3391-4EDC-9C09-FA1CB5CAAEE3"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EA60716D-1924-4013-B0A7-470F38F53F76"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WordleApp/ViewModel/WordleGameViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
+            landmarkName = "submitWord(tourGamedayId:langCode:platformId:attemptNo:userWord:userHint:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EA60716D-1924-4013-B0A7-470F38F53F76 - 9e5d643668a9483f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for WordleApp.WordleGameViewModel.submitWord(tourGamedayId: Swift.Int, langCode: Swift.Optional&lt;Swift.String&gt;, platformId: Swift.Int, attemptNo: Swift.Int, userWord: Swift.Optional&lt;Swift.String&gt;, userHint: Swift.Int) async -&gt; ()"
+                  moduleName = "WordleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jaideepsingh/Desktop/WordleApp/WordleApp/ViewModel/WordleGameViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "216"
+                  endingLineNumber = "216">
+               </Location>
+               <Location
+                  uuid = "EA60716D-1924-4013-B0A7-470F38F53F76 - 2c0f9cda4adb708"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for WordleApp.WordleGameViewModel.submitWord(tourGamedayId: Swift.Int, langCode: Swift.Optional&lt;Swift.String&gt;, platformId: Swift.Int, attemptNo: Swift.Int, userWord: Swift.Optional&lt;Swift.String&gt;, userHint: Swift.Int) async -&gt; ()"
+                  moduleName = "WordleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jaideepsingh/Desktop/WordleApp/WordleApp/ViewModel/WordleGameViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "216"
+                  endingLineNumber = "216">
+               </Location>
+               <Location
+                  uuid = "EA60716D-1924-4013-B0A7-470F38F53F76 - f1805b3efb60b07"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for WordleApp.WordleGameViewModel.submitWord(tourGamedayId: Swift.Int, langCode: Swift.Optional&lt;Swift.String&gt;, platformId: Swift.Int, attemptNo: Swift.Int, userWord: Swift.Optional&lt;Swift.String&gt;, userHint: Swift.Int) async -&gt; ()"
+                  moduleName = "WordleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jaideepsingh/Desktop/WordleApp/WordleApp/ViewModel/WordleGameViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "210"
+                  endingLineNumber = "210">
+               </Location>
+               <Location
+                  uuid = "EA60716D-1924-4013-B0A7-470F38F53F76 - f1805b3efb60a3d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for WordleApp.WordleGameViewModel.submitWord(tourGamedayId: Swift.Int, langCode: Swift.Optional&lt;Swift.String&gt;, platformId: Swift.Int, attemptNo: Swift.Int, userWord: Swift.Optional&lt;Swift.String&gt;, userHint: Swift.Int) async -&gt; ()"
+                  moduleName = "WordleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jaideepsingh/Desktop/WordleApp/WordleApp/ViewModel/WordleGameViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "216"
+                  endingLineNumber = "216">
+               </Location>
+               <Location
+                  uuid = "EA60716D-1924-4013-B0A7-470F38F53F76 - 3475b572af44aa06"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for WordleApp.WordleGameViewModel.submitWord(tourGamedayId: Swift.Int, langCode: Swift.Optional&lt;Swift.String&gt;, platformId: Swift.Int, attemptNo: Swift.Int, userWord: Swift.Optional&lt;Swift.String&gt;, userHint: Swift.Int) async -&gt; ()"
+                  moduleName = "WordleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jaideepsingh/Desktop/WordleApp/WordleApp/ViewModel/WordleGameViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "210"
+                  endingLineNumber = "210">
+               </Location>
+               <Location
+                  uuid = "EA60716D-1924-4013-B0A7-470F38F53F76 - 3475b572af44ab3c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for WordleApp.WordleGameViewModel.submitWord(tourGamedayId: Swift.Int, langCode: Swift.Optional&lt;Swift.String&gt;, platformId: Swift.Int, attemptNo: Swift.Int, userWord: Swift.Optional&lt;Swift.String&gt;, userHint: Swift.Int) async -&gt; ()"
+                  moduleName = "WordleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jaideepsingh/Desktop/WordleApp/WordleApp/ViewModel/WordleGameViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "216"
+                  endingLineNumber = "216">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E9430DEF-C3B5-40D1-8DDF-000538CAA724"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WordleApp/POCNetworkManager/Service Manager/ServiceManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "execute(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

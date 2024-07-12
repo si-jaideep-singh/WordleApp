@@ -11,6 +11,10 @@ import Foundation
 enum ServiceHeaderType: String {
     case NONE
     case DEFAULT
+    case Hint
+    case submitWord
+    case submittedWord
+    
     
     func getServiceHeader(url: String) -> [String: String] {
         switch self {
@@ -18,7 +22,40 @@ enum ServiceHeaderType: String {
             return [:]
         case .DEFAULT:
             if url.contains("/services") { return [:] }
-            return ["Accept":"application/json"]
+            return ["Accept":"application/json, text/plain, */*",
+                    "content-type":"application/json"]
+        case .Hint:
+            return getHintHeaders()
+        case .submitWord:
+            return SubmitWordHeaders()
+        case .submittedWord:
+            return SubmittedWordHeaders()
         }
+        
     }
+    
+    private func getHintHeaders() -> [String:String] {
+        return [
+            "Accept":"application/json, text/plain, */*",
+            "content-type": "application/json",
+            "entity": "$@nt0rYu"
+        ]
+    }
+        private func SubmitWordHeaders() -> [String:String] {
+            return [
+                "Accept":"application/json, text/plain, */*",
+                "content-type": "application/json",
+                "entity": "$@nt0rYu"
+
+             ]
+    }
+    private func SubmittedWordHeaders() -> [String:String] {
+        return [
+            "Accept":"application/json, text/plain, */*",
+            "content-type": "application/json",
+            "entity": "$@nt0rYu"
+
+         ]
+}
+
 }

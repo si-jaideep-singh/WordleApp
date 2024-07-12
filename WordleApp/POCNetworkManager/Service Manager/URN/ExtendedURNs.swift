@@ -8,6 +8,8 @@
 import Foundation
 
 struct ConfigURN: CommonGetURN {
+    var headers: ServiceHeaderType?
+    
     typealias Derived = String
     
     var baseURLType: BaseURLType {
@@ -20,6 +22,8 @@ struct ConfigURN: CommonGetURN {
 }
 
 struct TranslationURN: CommonGetURN {
+    var headers: ServiceHeaderType?
+    
     typealias Derived = [String:String]
     
     var baseURLType: BaseURLType {
@@ -31,29 +35,85 @@ struct TranslationURN: CommonGetURN {
     }
 }
 struct Employees : CommonGetURN {
+    var headers: ServiceHeaderType?
+    
     typealias Derived = Employee
     
-    var baseURLType: BaseURLType{
+    var baseURLType: BaseURLType {
         return .base
     }
-    var pathType: PathType{
+    var pathType: PathType {
         return .employees
     }
      
 }
-
-// MARK: - POST URN
-struct AddEmployeeURN: CommonPostURN {
-    typealias Derived =  AddEmployeeResponse
+struct Hint : CommonGetURN{
+//    var headers: ServiceHeaderType?
+    
+    typealias Derived = Hints
+    
+    
     
     var baseURLType: BaseURLType{
         return .base
     }
     
-    var pathType: PathType{
+    var pathType: PathType
+    var headers: ServiceHeaderType?{
+        .Hint
+    }
+ }
+
+struct SubmittedWord: CommonGetURN{
+//    var headers: ServiceHeaderType?
+    
+    typealias Derived = GetSubmittedWordResponse
+    
+    
+    
+    var baseURLType: BaseURLType{
+        return .base
+    }
+    
+    var pathType: PathType
+    var headers: ServiceHeaderType?{
+        .submittedWord
+    }
+ }
+
+// MARK: - POST URN
+struct AddEmployeeURN: CommonPostURN {
+    var headers: ServiceHeaderType?
+    
+    typealias Derived = AddEmployeeResponse
+    
+    var baseURLType: BaseURLType {
+        return .base
+    }
+    
+    var pathType: PathType {
         return .createEmployess
     }
     
     var body: Data?
     
     }
+
+struct SubmitWordURN: CommonPostURN {
+    var headers: ServiceHeaderType?
+    
+  
+    
+    typealias Derived = SubmitWordResponse
+    
+    var baseURLType: BaseURLType {
+        return .base
+    }
+    
+    var pathType: PathType 
+     
+    
+    var body: Data?
+    
+   }
+

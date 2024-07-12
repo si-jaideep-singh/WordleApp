@@ -44,9 +44,9 @@ extension CommonURN {
         urlRequest.httpBody = body
         return urlRequest
     }
-    var headers: ServiceHeaderType? {
-        .DEFAULT
-    }
+//    var headers: ServiceHeaderType? {
+//        .DEFAULT
+//    }
 }
 
 protocol CommonPostURN: CommonURN {}

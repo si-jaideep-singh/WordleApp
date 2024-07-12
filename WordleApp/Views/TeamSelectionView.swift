@@ -12,6 +12,7 @@ struct TeamSelectionView: View {
         HStack(spacing: 10) {
             TeamButton(imageName: "star.fill")
             TeamButton(imageName: "heart.fill")
+//            TeamButton(imageName: "bolt.filled")
          }
        
     }

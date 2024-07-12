@@ -7,6 +7,8 @@ import SwiftUI
 final class WordleGameViewModel: ObservableObject {
     @Published private(set) var state: WordleState = WordleState()
     
+    
+    private let apiService = ServiceManager()
     var isCurrentWordComplete: Bool {
         return state.currentGuess.count == state.wordlength
     }
@@ -19,7 +21,7 @@ final class WordleGameViewModel: ObservableObject {
         self.state.keyColors = Array(repeating: .clear, count: 26)
         self.state.cellFlipped = Array(repeating: Array(repeating: false, count: state.wordlength), count: state.maxAttempts)
         self.state.borderColors = Array(repeating: Array(repeating: .clear, count: state.wordlength), count: state.maxAttempts)
-        self.state.borderColors[state.currentRow][0] = .border 
+        self.state.borderColors[state.currentRow][0] = .border
     }
     
     func addLetter(_ letter: String) {
@@ -36,6 +38,7 @@ final class WordleGameViewModel: ObservableObject {
             }
         case "Enter":
             checkGuess()
+           
         default:
             break
         }
@@ -66,7 +69,7 @@ final class WordleGameViewModel: ObservableObject {
             if !state.board[state.currentRow][col].isEmpty {
                 state.board[state.currentRow][col] = ""
                 state.borderColors[state.currentRow][col] = .border
-               
+                
                 if col + 1 < state.board[state.currentRow].count {
                     state.borderColors[state.currentRow][col + 1] = .clear
                 }
@@ -83,9 +86,22 @@ final class WordleGameViewModel: ObservableObject {
         flipCellsInRowSequentially(state.currentRow, colors: guessResult.colors) {
             self.updateKeyColors(guess: self.state.currentGuess, colors: guessResult.colors)
             self.showCompletionToast()
+            
+            Task {
+                await self.submitWord(
+                    tourGamedayId: 463,
+                    langCode: "en",
+                    platformId: 3,
+                    attemptNo: self.state.currentRow + 1,
+                    userWord: self.state.currentGuess,
+                    userHint: 1
+                )
+                
+                await self.getSubmittedWord(userguid: "a-c59f-11ee-9dd4-0a2e0486673f")
+            }
         }
     }
-    
+
     private func evaluateGuess(guess: String) -> (correctPosition: Int, colors: [Color], guessedLetters: [Character]) {
         var correctPosition = 0
         var colors: [Color] = Array(repeating: .EmptyCellColor, count: state.board[state.currentRow].count)
@@ -151,7 +167,7 @@ final class WordleGameViewModel: ObservableObject {
                 state.gameWon = false
                 state.gameCompleted = true
             } else {
-               state.borderColors[state.currentRow][0] = .border
+                state.borderColors[state.currentRow][0] = .border
                 
                 let attemptsLeft = state.maxAttempts - state.currentRow
                 showToast(message: "\(attemptsLeft) attempts left")
@@ -185,4 +201,42 @@ final class WordleGameViewModel: ObservableObject {
         state.gameCompleted = false
         initCall()
     }
-}
+    
+    
+    
+    func submitWord(tourGamedayId: Int, langCode: String?, platformId: Int, attemptNo: Int, userWord: String?, userHint: Int) async {
+        
+        do {
+            let pathType: PathType = .submitWord(userguid: "42dba320-c59f-11ee-9dd4-0a2e0486673f")
+            let requestBody = SubmitWordPayload(tourGamedayId: tourGamedayId,langCode: langCode, platformId: platformId, attemptNo: attemptNo, userWord: state.currentGuess, userHint: userHint)
+            
+            let jsonData = try requestBody.encodeJSON()
+            
+            let submitWordURN = SubmitWordURN(pathType: pathType, body: jsonData)
+            let submitWordResponse = try await apiService.execute(with: submitWordURN)
+            
+            print("Submit Word Response:", submitWordResponse)
+        } catch {
+            print("Error submitting word:", error)
+            
+        }
+    }
+    
+    
+    func getSubmittedWord(userguid: String) async {
+        do {
+                let pathType: PathType = .getSummitttedWord(userguid: userguid)
+                let submittedURN = SubmittedWord(pathType: pathType)
+                let SubmittedWordData = try await apiService.execute(with: submittedURN)
+                let userWord =  state.currentGuess
+                 
+                print("User's submitted word:",userWord)
+            } catch {
+                print("Error fetching Hints:", error)
+            }
+        }
+    }
+    
+
+
+

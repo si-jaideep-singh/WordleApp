@@ -11,7 +11,7 @@ import SwiftUI
 struct WordleAppApp: App {
     var body: some Scene {
         WindowGroup {
-           ContentView().navigationViewStyle(StackNavigationViewStyle())
+           StarterView().navigationViewStyle(StackNavigationViewStyle())
 
         }
     }

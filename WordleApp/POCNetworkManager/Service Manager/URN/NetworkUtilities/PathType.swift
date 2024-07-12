@@ -12,6 +12,10 @@ enum PathType {
     case translation
     case employees
     case createEmployess
+    case gethints(tourGameDayId: Int)
+    case submitWord(userguid: String)
+    case getSummitttedWord(userguid: String)
+    
     
     private var endPoint: String {
         switch self {
@@ -23,6 +27,15 @@ enum PathType {
             return "employees"
         case .createEmployess:
             return "create"
+        case .gethints(let tourGameDayId):
+            let getHintsURL = "wordle/services/api/feeds/gethints?tourGamedayId={{TOURGAMEDAY_ID}}"
+                .replacingOccurrences(of: CFSDKURLParamKeys.tourGamedayID,
+                                      with: tourGameDayId.description)
+            return getHintsURL
+        case .submitWord(let userguid):
+                    return "services/api/gameplay/user/\(userguid)/submitword"
+        case .getSummitttedWord(userguid: let userguid):
+            return "services/api/gameplay/user/{userguid}/getsubmittedword"
         }
     }
     
@@ -33,6 +46,13 @@ enum PathType {
             url = url.replacingOccurrences(of: URLParamKeys.buster, with: BusterHelper.shared.getBusterFor(type: getBusterType ?? .particularCase))
             return url
         case .translation,.employees,.createEmployess:
+            return url
+        case .gethints(tourGameDayId: _):
+            return url
+        
+        case .submitWord(userguid: _):
+            return url
+        case .getSummitttedWord(userguid: let userguid):
             return url
         }
     }

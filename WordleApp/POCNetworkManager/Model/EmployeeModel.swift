@@ -30,13 +30,18 @@ struct Datum: Codable {
         case profileImage = "profile_image"
     }
 }
-
-struct AddEmployeeResponse: Decodable {
+struct AddEmployeeResponse: Codable {
     let status: String
     let data: EmployeeData
     let message: String
 }
 
-struct EmployeeData: Decodable {
+struct EmployeeData: Codable {
     let id: Int
 }
+struct PostEmployee: Codable {
+    let name: String
+    let age: Int
+    let salary: Double
+}
+

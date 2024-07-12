@@ -8,7 +8,8 @@
 import Foundation
 
 public enum Environments: String, Codable {
-    case staging = "https://dummy.restapiexample.com/api/v1/"
+    case staging = "https://stg-gujarat-titans.sportz.io/"
+    
     case production = "https://prod.io"
 }
 
@@ -36,3 +37,8 @@ enum QueryItems: String {
 struct URLParamKeys {
     static let buster = "{{BUSTER}}"
 }
+
+struct CFSDKURLParamKeys {
+    static let tourGamedayID = "{{TOURGAMEDAY_ID}}"
+    
+ }

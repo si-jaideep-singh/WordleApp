@@ -28,6 +28,13 @@
 		81C87C942C37FB43003F61D0 /* NetworkServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C862C37FB43003F61D0 /* NetworkServiceProvider.swift */; };
 		81C87C952C37FB43003F61D0 /* BusterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C772C37FB43003F61D0 /* BusterHelper.swift */; };
 		81C87C962C37FB43003F61D0 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C792C37FB43003F61D0 /* ServiceManager.swift */; };
+		81C87C982C3FAD2F003F61D0 /* Encodable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C972C3FAD2F003F61D0 /* Encodable+Ext.swift */; };
+		81C87C9A2C3FD8D8003F61D0 /* WordSumbittedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C992C3FD8D8003F61D0 /* WordSumbittedModel.swift */; };
+		81C87C9C2C3FF623003F61D0 /* HintsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C9B2C3FF623003F61D0 /* HintsModel.swift */; };
+		81C87C9E2C3FFC58003F61D0 /* Hintsview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C9D2C3FFC58003F61D0 /* Hintsview.swift */; };
+		81C87CA02C4013AA003F61D0 /* CFSDKUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C9F2C4013AA003F61D0 /* CFSDKUtils.swift */; };
+		81C87CA22C412B59003F61D0 /* SubmitWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CA12C412B59003F61D0 /* SubmitWordModel.swift */; };
+		81C87CA42C4141DF003F61D0 /* SubmittedWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CA32C4141DF003F61D0 /* SubmittedWordModel.swift */; };
 		81FF8BF52C19D3240051774E /* WordleAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF8BF42C19D3240051774E /* WordleAppApp.swift */; };
 		81FF8BF92C19D3260051774E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81FF8BF82C19D3260051774E /* Assets.xcassets */; };
 		81FF8BFC2C19D3260051774E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81FF8BFB2C19D3260051774E /* Preview Assets.xcassets */; };
@@ -68,6 +75,13 @@
 		81C87C852C37FB43003F61D0 /* HTTPMethodType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethodType.swift; sourceTree = "<group>"; };
 		81C87C862C37FB43003F61D0 /* NetworkServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProvider.swift; sourceTree = "<group>"; };
 		81C87C872C37FB43003F61D0 /* BasrURLType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasrURLType.swift; sourceTree = "<group>"; };
+		81C87C972C3FAD2F003F61D0 /* Encodable+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Ext.swift"; sourceTree = "<group>"; };
+		81C87C992C3FD8D8003F61D0 /* WordSumbittedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSumbittedModel.swift; sourceTree = "<group>"; };
+		81C87C9B2C3FF623003F61D0 /* HintsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsModel.swift; sourceTree = "<group>"; };
+		81C87C9D2C3FFC58003F61D0 /* Hintsview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hintsview.swift; sourceTree = "<group>"; };
+		81C87C9F2C4013AA003F61D0 /* CFSDKUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFSDKUtils.swift; sourceTree = "<group>"; };
+		81C87CA12C412B59003F61D0 /* SubmitWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitWordModel.swift; sourceTree = "<group>"; };
+		81C87CA32C4141DF003F61D0 /* SubmittedWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmittedWordModel.swift; sourceTree = "<group>"; };
 		81FF8BF12C19D3240051774E /* WordleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81FF8BF42C19D3240051774E /* WordleAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordleAppApp.swift; sourceTree = "<group>"; };
 		81FF8BF82C19D3260051774E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -178,6 +192,7 @@
 		81FF8BE82C19D3240051774E = {
 			isa = PBXGroup;
 			children = (
+				81C87C9F2C4013AA003F61D0 /* CFSDKUtils.swift */,
 				81FF8BF32C19D3240051774E /* WordleApp */,
 				81FF8BF22C19D3240051774E /* Products */,
 			);
@@ -230,6 +245,7 @@
 				814F56532C2AF83900395385 /* CompletionView.swift */,
 				814F56552C2D86C700395385 /* TeamSelectionView.swift */,
 				814F56572C2D895500395385 /* SponsorView.swift */,
+				81C87C9D2C3FFC58003F61D0 /* Hintsview.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -240,6 +256,7 @@
 				81FF8C062C1ACDE60051774E /* ColorsExt.swift */,
 				81FF8C122C1B28100051774E /* UIScreen.swift */,
 				81FF8C142C1C13BE0051774E /* BorderExtension.swift */,
+				81C87C972C3FAD2F003F61D0 /* Encodable+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -256,6 +273,10 @@
 			isa = PBXGroup;
 			children = (
 				8148BD5B2C2935BE003AA393 /* GameModel.swift */,
+				81C87C992C3FD8D8003F61D0 /* WordSumbittedModel.swift */,
+				81C87C9B2C3FF623003F61D0 /* HintsModel.swift */,
+				81C87CA12C412B59003F61D0 /* SubmitWordModel.swift */,
+				81C87CA32C4141DF003F61D0 /* SubmittedWordModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -334,10 +355,12 @@
 				814F56542C2AF83900395385 /* CompletionView.swift in Sources */,
 				81C87C8D2C37FB43003F61D0 /* URN.swift in Sources */,
 				81FF8C152C1C13BE0051774E /* BorderExtension.swift in Sources */,
+				81C87C9C2C3FF623003F61D0 /* HintsModel.swift in Sources */,
 				814F56582C2D895500395385 /* SponsorView.swift in Sources */,
 				81C87C8A2C37FB43003F61D0 /* EmployeeModel.swift in Sources */,
 				81C87C8F2C37FB43003F61D0 /* EmployeeViewModel.swift in Sources */,
 				81C87C922C37FB43003F61D0 /* ServiceHeaderType.swift in Sources */,
+				81C87CA22C412B59003F61D0 /* SubmitWordModel.swift in Sources */,
 				81C87C8C2C37FB43003F61D0 /* BasrURLType.swift in Sources */,
 				81C87C912C37FB43003F61D0 /* HTTPMethodType.swift in Sources */,
 				C9C923732C2ACFDF000413E9 /* AdsPresentedbyView.swift in Sources */,
@@ -352,6 +375,8 @@
 				81FF8C0B2C1AD6CE0051774E /* KeyboardView.swift in Sources */,
 				81C87C942C37FB43003F61D0 /* NetworkServiceProvider.swift in Sources */,
 				81C87C8B2C37FB43003F61D0 /* PathType.swift in Sources */,
+				81C87C982C3FAD2F003F61D0 /* Encodable+Ext.swift in Sources */,
+				81C87CA42C4141DF003F61D0 /* SubmittedWordModel.swift in Sources */,
 				81FF8C1F2C21B66A0051774E /* SplashView.swift in Sources */,
 				81C87C952C37FB43003F61D0 /* BusterHelper.swift in Sources */,
 				81C87C8E2C37FB43003F61D0 /* ServiceConstants.swift in Sources */,
@@ -359,9 +384,12 @@
 				81C87C962C37FB43003F61D0 /* ServiceManager.swift in Sources */,
 				81C87C902C37FB43003F61D0 /* ContentView.swift in Sources */,
 				8148BD612C299092003AA393 /* WordleState.swift in Sources */,
+				81C87C9E2C3FFC58003F61D0 /* Hintsview.swift in Sources */,
+				81C87CA02C4013AA003F61D0 /* CFSDKUtils.swift in Sources */,
 				81FF8BF52C19D3240051774E /* WordleAppApp.swift in Sources */,
 				C9C923772C2AE33F000413E9 /* StarterView.swift in Sources */,
 				81FF8C112C1B13230051774E /* WordleGameViewModel.swift in Sources */,
+				81C87C9A2C3FD8D8003F61D0 /* WordSumbittedModel.swift in Sources */,
 				81FF8C132C1B28100051774E /* UIScreen.swift in Sources */,
 				8148BD5C2C2935BE003AA393 /* GameModel.swift in Sources */,
 			);

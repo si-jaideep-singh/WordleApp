@@ -27,8 +27,13 @@ struct GameView: View {
                                     .padding(.bottom, 5)
                                     .foregroundColor(.whiteFFFF)
                                     
-
-                                TeamSelectionView()
+                                HStack{
+                                    TeamSelectionView()
+                                     HintsView()
+                                        
+                                }
+                                
+                                
                                 BoardView(geometry: geometry)
                                 VStack {
                                     Divider()
