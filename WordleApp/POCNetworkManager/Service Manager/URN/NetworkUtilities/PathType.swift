@@ -15,6 +15,7 @@ enum PathType {
     case gethints(tourGameDayId: Int)
     case submitWord(userguid: String)
     case getSummitttedWord(userguid: String)
+    case login(waf_guid : String?)
     
     
     private var endPoint: String {
@@ -33,9 +34,11 @@ enum PathType {
                                       with: tourGameDayId.description)
             return getHintsURL
         case .submitWord(let userguid):
-                    return "services/api/gameplay/user/\(userguid)/submitword"
+                    return "wordle/services/api/gameplay/user/\(userguid)/submitword"
         case .getSummitttedWord(userguid: let userguid):
-            return "services/api/gameplay/user/{userguid}/getsubmittedword"
+            return "wordle/services/api/gameplay/user/{userguid}/getsubmittedword"
+        case .login(waf_guid: let waf_guid):
+            return "wordle/services/api/session/user/login"
         }
     }
     
@@ -53,6 +56,8 @@ enum PathType {
         case .submitWord(userguid: _):
             return url
         case .getSummitttedWord(userguid: let userguid):
+            return url
+        case .login(waf_guid: let waf_guid):
             return url
         }
     }

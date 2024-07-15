@@ -100,11 +100,10 @@ struct AddEmployeeURN: CommonPostURN {
     }
 
 struct SubmitWordURN: CommonPostURN {
-    var headers: ServiceHeaderType?
-    
-  
-    
-    typealias Derived = SubmitWordResponse
+    var headers: ServiceHeaderType?{
+        .submitWord
+    }
+     typealias Derived = SubmitWordResponse
     
     var baseURLType: BaseURLType {
         return .base
@@ -116,4 +115,21 @@ struct SubmitWordURN: CommonPostURN {
     var body: Data?
     
    }
+
+struct LoginURN: CommonPostURN {
+    var headers: ServiceHeaderType?{
+        .login
+    }
+     typealias Derived = Login
+    var baseURLType: BaseURLType {
+        return .base
+    }
+    
+    var pathType: PathType
+     
+    
+    var body: Data?
+    
+   }
+
 

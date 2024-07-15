@@ -10,8 +10,8 @@ import Foundation
 
 // MARK: - SubmitWordResponse
 struct SubmitWordResponse: Codable {
-    let data: SubmitWordData
-    let meta: SubmitWordMeta
+    let data: CFSDKBaseResponseData
+    let meta: CFSDKSDKBaseResponseMeta
 }
 
 // MARK: - SubmitWordData
@@ -21,21 +21,21 @@ struct SubmitWordData: Codable {
 }
 
 // MARK: - SubmitWordValue
-struct SubmitWordValue: Codable {
-    let attemptNo, gdId, userPoint, userAttemptNo: Int
-    let userSubmitflag: [Int]
-    let wordLength, isHintuse: Int
-    let userWord: String?
-    let mastWord: String?
-    let gtFlag: Int
+struct SubmitWordValue:Codable {
+    let attemptNo, gdID, userPoint, userAttemptNo: Int?
+    let userSubmitflag: [Int]?
+    let wordLength, isHintuse: Int?
+    let userWord, mastWord: String?
+    let gtFlag: Int?
 
     enum CodingKeys: String, CodingKey {
-        case attemptNo, gdId, userPoint
+        case attemptNo
+        case gdID = "gdId"
+        case userPoint
         case userAttemptNo = "UserAttemptNo"
         case userSubmitflag, wordLength, isHintuse, userWord, mastWord, gtFlag
     }
 }
-
 // MARK: - FeedTime
 struct FeedTime: Codable {
     let utcTime, istTime, cestTime: String
@@ -64,10 +64,16 @@ struct SubmitWordMeta: Codable {
 
 // MARK: - SubmitWordPayload
 struct SubmitWordPayload: Codable {
+    let userdId :Int
+    let tourId : Int
     let tourGamedayId: Int
     let langCode: String?
     let platformId: Int
     let attemptNo: Int
     let userWord: String?
     let userHint: Int
+    
 }
+
+
+

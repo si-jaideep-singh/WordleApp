@@ -6,8 +6,8 @@
 //
 import Foundation
 struct GetSubmittedWordResponse: Codable {
-    let data: DataClass?
-    let meta: Meta?
+    let data: CFSDKBaseResponseData
+    let meta: CFSDKSDKBaseResponseMeta
     
     struct DataClass: Codable {
         let value: Value?

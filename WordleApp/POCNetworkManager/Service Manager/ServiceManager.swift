@@ -23,13 +23,24 @@ class ServiceManager: NetworkServiceProvider {
         do {
             let request = try urnType.getURLRequest()
             let (data, response) = try await session.data(for: request)
-            printData(data: data)
+           printData(data: data)
+            switch urnType.pathType {
+            case .submitWord :
+                let response1 = try JSONDecoder().decode(CFSDKBaseResponse.self, from: data) as CFSDKBaseResponse
+                if response1.meta?.retVal != 1 {
+                     throw ServiceErrors.message(response1.meta?.message ?? "")
+                 }
+            default:
+                break
+            }
             try validateResponse(for: response, data: data)
             let decodedData = try decodeResponse(for: urnType, from: data)
             if request.httpMethod == HTTPMethodType.post.rawValue {
                 BusterHelper.shared.updateBuster(type: urnType.pathType.getBusterType)
             }
-            return decodedData
+            
+            
+          return decodedData
         } catch let error as ServiceErrors {
             throw ServiceErrors.message(error.localizedDescription)
         }

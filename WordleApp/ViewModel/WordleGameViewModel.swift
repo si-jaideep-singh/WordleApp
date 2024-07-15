@@ -22,6 +22,11 @@ final class WordleGameViewModel: ObservableObject {
         self.state.cellFlipped = Array(repeating: Array(repeating: false, count: state.wordlength), count: state.maxAttempts)
         self.state.borderColors = Array(repeating: Array(repeating: .clear, count: state.wordlength), count: state.maxAttempts)
         self.state.borderColors[state.currentRow][0] = .border
+        
+        Task {
+            await self.login()
+            await self.getSubmittedWord(userguid: "")
+             }
     }
     
     func addLetter(_ letter: String) {
@@ -85,10 +90,10 @@ final class WordleGameViewModel: ObservableObject {
         
         flipCellsInRowSequentially(state.currentRow, colors: guessResult.colors) {
             self.updateKeyColors(guess: self.state.currentGuess, colors: guessResult.colors)
-            self.showCompletionToast()
-            
             Task {
                 await self.submitWord(
+                    userID: 0,
+                    tourID:1,
                     tourGamedayId: 463,
                     langCode: "en",
                     platformId: 3,
@@ -97,8 +102,11 @@ final class WordleGameViewModel: ObservableObject {
                     userHint: 1
                 )
                 
-                await self.getSubmittedWord(userguid: "a-c59f-11ee-9dd4-0a2e0486673f")
+               
             }
+            self.showCompletionToast()
+            
+           
         }
     }
 
@@ -200,15 +208,16 @@ final class WordleGameViewModel: ObservableObject {
         state = WordleState()
         state.gameCompleted = false
         initCall()
+        
+        
+        
     }
     
-    
-    
-    func submitWord(tourGamedayId: Int, langCode: String?, platformId: Int, attemptNo: Int, userWord: String?, userHint: Int) async {
+    func submitWord(userID:Int,tourID :Int,tourGamedayId: Int, langCode: String?, platformId: Int, attemptNo: Int, userWord: String?, userHint: Int) async {
         
         do {
             let pathType: PathType = .submitWord(userguid: "42dba320-c59f-11ee-9dd4-0a2e0486673f")
-            let requestBody = SubmitWordPayload(tourGamedayId: tourGamedayId,langCode: langCode, platformId: platformId, attemptNo: attemptNo, userWord: state.currentGuess, userHint: userHint)
+            let requestBody = SubmitWordPayload(userdId: userID, tourId: tourID, tourGamedayId: tourGamedayId,langCode: langCode, platformId: platformId, attemptNo: attemptNo, userWord: state.currentGuess, userHint: userHint)
             
             let jsonData = try requestBody.encodeJSON()
             
@@ -216,11 +225,29 @@ final class WordleGameViewModel: ObservableObject {
             let submitWordResponse = try await apiService.execute(with: submitWordURN)
             
             print("Submit Word Response:", submitWordResponse)
-        } catch {
-            print("Error submitting word:", error)
-            
-        }
+        } catch 
+            {
+             print("Error submitting word:", error)
+            }
     }
+    
+    func  login() async {
+        
+        do {
+            let pathType: PathType = .login(waf_guid: "")
+            let requestBody = ""
+            
+            let jsonData = try requestBody.encodeJSON()
+            let loginURN = LoginURN(pathType: pathType,body: jsonData)
+            let loginResponse = try await apiService.execute(with: loginURN)
+           // print("Submit Word Response:", loginResponse)
+        } catch
+            {
+             print("Error login:", error)
+            }
+    }
+    
+    
     
     
     func getSubmittedWord(userguid: String) async {
@@ -229,10 +256,13 @@ final class WordleGameViewModel: ObservableObject {
                 let submittedURN = SubmittedWord(pathType: pathType)
                 let SubmittedWordData = try await apiService.execute(with: submittedURN)
                 let userWord =  state.currentGuess
+               // let gdID = SubmittedWordData.data?.value?.gdId
                  
                 print("User's submitted word:",userWord)
-            } catch {
-                print("Error fetching Hints:", error)
+            } 
+             catch
+            {
+                print("Error fetching Word:", error)
             }
         }
     }
