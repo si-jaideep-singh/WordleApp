@@ -6,7 +6,7 @@
 //
 import Foundation
 struct GetSubmittedWordResponse: Codable {
-    let data: CFSDKBaseResponseData
+    let data: DataClass?
     let meta: CFSDKSDKBaseResponseMeta
     
     struct DataClass: Codable {
@@ -19,7 +19,7 @@ struct GetSubmittedWordResponse: Codable {
             let userPoint: Int?
             let isHintuse: Bool?
             let userSubmitflag: Bool?
-            let wordLength: Int
+            let wordLength: Int?
             let mastWord: String?
             let userWord: String?
             

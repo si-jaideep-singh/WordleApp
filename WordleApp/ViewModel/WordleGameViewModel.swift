@@ -1,6 +1,6 @@
-//
-//  GameViewModel.swift
-//  WordleApp
+////
+////  GameViewModel.swift
+////  WordleApp
 
 import SwiftUI
 
@@ -14,6 +14,7 @@ final class WordleGameViewModel: ObservableObject {
     }
     
     func initCall() {
+        
         self.state.wordlength = state.targetWord.count
         self.state.board = Array(repeating: Array(repeating: "", count: state.wordlength), count: state.maxAttempts)
         self.state.rowCompleted = Array(repeating: false, count: state.maxAttempts)
@@ -26,6 +27,7 @@ final class WordleGameViewModel: ObservableObject {
         Task {
             await self.login()
             await self.getSubmittedWord(userguid: "")
+           
              }
     }
     
@@ -94,16 +96,14 @@ final class WordleGameViewModel: ObservableObject {
                 await self.submitWord(
                     userID: 0,
                     tourID:1,
-                    tourGamedayId: 463,
+                    tourGamedayId: self.state.gdId ?? -1,
                     langCode: "en",
                     platformId: 3,
                     attemptNo: self.state.currentRow + 1,
                     userWord: self.state.currentGuess,
                     userHint: 1
                 )
-                
-               
-            }
+             }
             self.showCompletionToast()
             
            
@@ -213,11 +213,10 @@ final class WordleGameViewModel: ObservableObject {
         
     }
     
-    func submitWord(userID:Int,tourID :Int,tourGamedayId: Int, langCode: String?, platformId: Int, attemptNo: Int, userWord: String?, userHint: Int) async {
-        
+    func submitWord(userID: Int, tourID: Int, tourGamedayId: Int, langCode: String?, platformId: Int, attemptNo: Int, userWord: String?, userHint: Int) async {
         do {
             let pathType: PathType = .submitWord(userguid: "42dba320-c59f-11ee-9dd4-0a2e0486673f")
-            let requestBody = SubmitWordPayload(userdId: userID, tourId: tourID, tourGamedayId: tourGamedayId,langCode: langCode, platformId: platformId, attemptNo: attemptNo, userWord: state.currentGuess, userHint: userHint)
+            let requestBody = SubmitWordPayload(userId: userID, tourId: tourID, tourGamedayId: tourGamedayId, langCode: langCode, platformId: platformId, attemptNo: attemptNo, userWord: userWord, userHint: userHint)
             
             let jsonData = try requestBody.encodeJSON()
             
@@ -248,15 +247,24 @@ final class WordleGameViewModel: ObservableObject {
     }
     
     
-    
-    
-    func getSubmittedWord(userguid: String) async {
+     func getSubmittedWord(userguid: String) async {
         do {
                 let pathType: PathType = .getSummitttedWord(userguid: userguid)
                 let submittedURN = SubmittedWord(pathType: pathType)
                 let SubmittedWordData = try await apiService.execute(with: submittedURN)
-                let userWord =  state.currentGuess
-               // let gdID = SubmittedWordData.data?.value?.gdId
+            
+                 if let gdId = SubmittedWordData.data?.value?.gdId {
+                          self.state.gdId = gdId
+                    }
+            
+                if let wordLength = SubmittedWordData.data?.value?.wordLength {
+                           self.state.wordlength = wordLength
+                   }
+                if let userFlags = SubmittedWordData.data?.value?.userSubmitflag {
+//                        self.state.usersubmitflag = userFlags
+                    }
+                 let userWord =  state.currentGuess
+            //   let gdID = SubmittedWordData.data?.value?.gdId
                  
                 print("User's submitted word:",userWord)
             } 
@@ -265,8 +273,11 @@ final class WordleGameViewModel: ObservableObject {
                 print("Error fetching Word:", error)
             }
         }
+    
+    
     }
     
+
 
 
 

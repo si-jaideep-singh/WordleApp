@@ -5,6 +5,7 @@
 //  Created by Jaideep Singh on 11/07/24.
 import SwiftUI
 struct HintsView: View {
+    @EnvironmentObject var viewModel: WordleGameViewModel
     @State private var hint: String = ""
     @State private var showHint: Bool = false
     private let apiService = ServiceManager()
@@ -14,7 +15,7 @@ struct HintsView: View {
             VStack {
                 Button(action: {
                     Task {
-                        await getHint(tourGameDayId: 10)
+                        await getHint(tourGameDayId: viewModel.state.gdId ?? -1)
                     }
                 }, label: {
                     if showHint {
@@ -55,9 +56,11 @@ struct HintsView: View {
                 let pathType: PathType = .gethints(tourGameDayId: tourGameDayId)
                 let hintURN = Hint(pathType: pathType)
                 let hintData = try await apiService.execute(with: hintURN)
+                let targetword = hintData.data.first?.word
                 DispatchQueue.main.async {
                     if let firstHint = hintData.data.first {
                         hint = firstHint.finalHint
+                        
                         self.showHint = true
                     }
                 }

@@ -31,7 +31,7 @@ struct CompletionView: View {
                 }
                 
                 Button(action: {
-                    viewModelWordle.resetGame()
+                 //   viewModelWordle.resetGame()
                 }) {
                     Text("Play Again")
                         .font(.title3)

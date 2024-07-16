@@ -20,20 +20,22 @@ struct WordleState : Equatable {
     var gameCompleted: Bool = false
     var showToast: Bool = false
     var toastMessage: String = ""
-    
+    var hint: String = ""
     let letters = "QWERTYUIOPASDFGHJKLZXCVBNM"
     
-    let targetWord = "Jaideep".uppercased()
+    let targetWord = "Boundary".uppercased()
     let maxAttempts = 6
     var wordlength: Int = 0
     var currentRow = 0
     var currentGuess = ""
     var correctPosition = 0
     var isGuessCorrect: Bool = false
+    var gdId: Int? 
+    var usersubmitflag: [Int] = []
     var attemptsLeft: Int {
         return maxAttempts - currentRow
     }
     
-     var hint: String = ""
+     
      var showHint: Bool = false
 }

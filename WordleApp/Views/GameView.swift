@@ -67,6 +67,17 @@ struct GameView: View {
                 }
                
             }
+             .overlay(
+                    VStack {
+                                if viewModelWordle.state.showToast {
+                                    ToastView(message: viewModelWordle.state.toastMessage)
+                                        .transition(.move(edge: .top))
+                                        .animation(.easeInOut)
+                                }
+                                Spacer()
+                            }
+                        )
+            
             //.frame(alignment: .top)
             .navigationTitle("Wordle")
             .navigationBarTitleDisplayMode(.inline)
@@ -94,4 +105,4 @@ struct GameView: View {
     
     
    
-    
+   

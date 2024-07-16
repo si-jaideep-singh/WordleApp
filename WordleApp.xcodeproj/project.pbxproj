@@ -36,6 +36,7 @@
 		81C87CA42C4141DF003F61D0 /* SubmittedWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CA32C4141DF003F61D0 /* SubmittedWordModel.swift */; };
 		81C87CA62C4536C1003F61D0 /* WordleBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CA52C4536C1003F61D0 /* WordleBaseModel.swift */; };
 		81C87CA82C45677B003F61D0 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CA72C45677B003F61D0 /* LoginModel.swift */; };
+		81C87CAC2C4604DB003F61D0 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CAB2C4604DB003F61D0 /* ToastView.swift */; };
 		81FF8BF52C19D3240051774E /* WordleAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF8BF42C19D3240051774E /* WordleAppApp.swift */; };
 		81FF8BF92C19D3260051774E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81FF8BF82C19D3260051774E /* Assets.xcassets */; };
 		81FF8BFC2C19D3260051774E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81FF8BFB2C19D3260051774E /* Preview Assets.xcassets */; };
@@ -84,6 +85,7 @@
 		81C87CA32C4141DF003F61D0 /* SubmittedWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmittedWordModel.swift; sourceTree = "<group>"; };
 		81C87CA52C4536C1003F61D0 /* WordleBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordleBaseModel.swift; sourceTree = "<group>"; };
 		81C87CA72C45677B003F61D0 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		81C87CAB2C4604DB003F61D0 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		81FF8BF12C19D3240051774E /* WordleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81FF8BF42C19D3240051774E /* WordleAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordleAppApp.swift; sourceTree = "<group>"; };
 		81FF8BF82C19D3260051774E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				814F56552C2D86C700395385 /* TeamSelectionView.swift */,
 				814F56572C2D895500395385 /* SponsorView.swift */,
 				81C87C9D2C3FFC58003F61D0 /* Hintsview.swift */,
+				81C87CAB2C4604DB003F61D0 /* ToastView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				81C87C8B2C37FB43003F61D0 /* PathType.swift in Sources */,
 				81C87C982C3FAD2F003F61D0 /* Encodable+Ext.swift in Sources */,
 				81C87CA42C4141DF003F61D0 /* SubmittedWordModel.swift in Sources */,
+				81C87CAC2C4604DB003F61D0 /* ToastView.swift in Sources */,
 				81FF8C1F2C21B66A0051774E /* SplashView.swift in Sources */,
 				81C87C952C37FB43003F61D0 /* BusterHelper.swift in Sources */,
 				81C87C8E2C37FB43003F61D0 /* ServiceConstants.swift in Sources */,
