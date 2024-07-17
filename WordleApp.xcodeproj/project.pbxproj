@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8148BD5C2C2935BE003AA393 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8148BD5B2C2935BE003AA393 /* GameModel.swift */; };
 		8148BD5E2C2942B5003AA393 /* HowToPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8148BD5D2C2942B5003AA393 /* HowToPlay.swift */; };
 		8148BD612C299092003AA393 /* WordleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8148BD602C299092003AA393 /* WordleState.swift */; };
 		814F56542C2AF83900395385 /* CompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F56532C2AF83900395385 /* CompletionView.swift */; };
@@ -54,7 +53,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8148BD5B2C2935BE003AA393 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		8148BD5D2C2942B5003AA393 /* HowToPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlay.swift; sourceTree = "<group>"; };
 		8148BD602C299092003AA393 /* WordleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordleState.swift; sourceTree = "<group>"; };
 		814F56532C2AF83900395385 /* CompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionView.swift; sourceTree = "<group>"; };
@@ -277,7 +275,6 @@
 		81FF8C162C1C4A710051774E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8148BD5B2C2935BE003AA393 /* GameModel.swift */,
 				81C87C9B2C3FF623003F61D0 /* HintsModel.swift */,
 				81C87CA12C412B59003F61D0 /* SubmitWordModel.swift */,
 				81C87CA32C4141DF003F61D0 /* SubmittedWordModel.swift */,
@@ -399,7 +396,6 @@
 				C9C923772C2AE33F000413E9 /* StarterView.swift in Sources */,
 				81FF8C112C1B13230051774E /* WordleGameViewModel.swift in Sources */,
 				81FF8C132C1B28100051774E /* UIScreen.swift in Sources */,
-				8148BD5C2C2935BE003AA393 /* GameModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

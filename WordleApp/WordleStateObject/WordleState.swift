@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct WordleState : Equatable {
+struct WordleState {
     var board: [[String]] = []
     var rowCompleted: [Bool] = []
     var rowColors: [[Color]] = []
@@ -23,14 +23,14 @@ struct WordleState : Equatable {
     var hint: String = ""
     let letters = "QWERTYUIOPASDFGHJKLZXCVBNM"
     
-    let targetWord = "Boundary".uppercased()
+    let targetWord = "Tewatia".uppercased()
     let maxAttempts = 6
     var wordlength: Int = 0
     var currentRow = 0
     var currentGuess = ""
     var correctPosition = 0
     var isGuessCorrect: Bool = false
-    var gdId: Int? 
+    var submittedWordValue: GetSubmittedWordValue? = nil
     var usersubmitflag: [Int] = []
     var attemptsLeft: Int {
         return maxAttempts - currentRow

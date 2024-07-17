@@ -20,19 +20,20 @@ class ServiceManager: NetworkServiceProvider {
         
         let session = URLSession(configuration: sessionConfig)
         
-        do {
+         do {
+            
             let request = try urnType.getURLRequest()
             let (data, response) = try await session.data(for: request)
-           printData(data: data)
-            switch urnType.pathType {
-            case .submitWord :
-                let response1 = try JSONDecoder().decode(CFSDKBaseResponse.self, from: data) as CFSDKBaseResponse
-                if response1.meta?.retVal != 1 {
-                     throw ServiceErrors.message(response1.meta?.message ?? "")
-                 }
-            default:
-                break
-            }
+            printData(data: data)
+//            switch urnType.pathType {
+//            case .submitWord :
+//                let response1 = try JSONDecoder().decode(CFSDKBaseResponse.self, from: data) as CFSDKBaseResponse
+//                if response1.meta?.retVal != 1 {
+//                     throw ServiceErrors.message(response1.meta?.message ?? "")
+//                 }
+//            default:
+//                break
+//            }
             try validateResponse(for: response, data: data)
             let decodedData = try decodeResponse(for: urnType, from: data)
             if request.httpMethod == HTTPMethodType.post.rawValue {
@@ -109,3 +110,9 @@ extension ServiceManager {
 struct NetworkConstantErrors {
     static let badResponse = "Bad Response"
 }
+
+
+
+//struct Response : Codable{
+//    let data
+//}

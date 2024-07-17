@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct ToastView: View {
-    var message: String
+    let message: String
     
     var body: some View {
         Text(message)
-            .foregroundColor(.red)
+            .font(.body)
             .padding()
             .background(Color.black.opacity(0.8))
-            .cornerRadius(10)
+            .foregroundColor(.white)
+            .cornerRadius(8)
             .padding(.horizontal, 20)
+           // .transition(.slide)
+            .animation(.easeInOut)
     }
+}
+#Preview{
+    ToastView(message: "jaideep")
 }

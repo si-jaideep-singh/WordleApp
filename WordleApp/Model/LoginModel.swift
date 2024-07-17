@@ -29,16 +29,6 @@ struct DataClass: Codable {
     }
 }
 
-// MARK: - FeedTime
-//struct FeedTime: Codable {
-//    let utcTime, istTime, cestTime: String?
-//
-//    enum CodingKeys: String, CodingKey {
-//        case utcTime = "UTCTime"
-//        case istTime = "ISTTime"
-//        case cestTime = "CESTTime"
-//    }
-//}
 
 // MARK: - Value
 struct Value: Codable {

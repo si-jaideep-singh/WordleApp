@@ -27,7 +27,7 @@ struct CFSDKBaseResponseData: Codable {
 
 struct CFSDKSDKBaseResponseMeta: Codable {
     let message: String?
-    let retVal: Int?
+    let retVal: Int? 
     let success: Bool?
     let statusCode: Int?
     let maintenance: String?
