@@ -15,7 +15,7 @@ struct HintsView: View {
             VStack {
                 Button(action: {
                     Task {
-                        await getHint(tourGameDayId: 94)
+                        await getHint(tourGameDayId: 93 /*viewModel.state.submittedWordValue?.gdid ?? -1 */)
                     }
                 }, label: {
                     if showHint {

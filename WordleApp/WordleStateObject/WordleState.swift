@@ -23,17 +23,18 @@ struct WordleState {
     var hint: String = ""
     let letters = "QWERTYUIOPASDFGHJKLZXCVBNM"
     
-    let targetWord = "Tewatia".uppercased()
+    var targetWord = "Boundary".uppercased()
     let maxAttempts = 6
     var wordlength: Int = 0
-    var currentRow = 0
+    var currentAttempt : Int?
     var currentGuess = ""
     var correctPosition = 0
     var isGuessCorrect: Bool = false
-    var submittedWordValue: GetSubmittedWordValue? = nil
+    var submittedWordValue: [GetSubmittedWordValue]? 
+    
     var usersubmitflag: [Int] = []
     var attemptsLeft: Int {
-        return maxAttempts - currentRow
+        return maxAttempts - (submittedWordValue?.last?.attemptno ?? 0)
     }
     
      

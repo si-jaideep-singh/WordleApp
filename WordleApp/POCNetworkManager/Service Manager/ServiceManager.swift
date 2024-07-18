@@ -24,16 +24,9 @@ class ServiceManager: NetworkServiceProvider {
             
             let request = try urnType.getURLRequest()
             let (data, response) = try await session.data(for: request)
+            print(request.curlString)
             printData(data: data)
-//            switch urnType.pathType {
-//            case .submitWord :
-//                let response1 = try JSONDecoder().decode(CFSDKBaseResponse.self, from: data) as CFSDKBaseResponse
-//                if response1.meta?.retVal != 1 {
-//                     throw ServiceErrors.message(response1.meta?.message ?? "")
-//                 }
-//            default:
-//                break
-//            }
+             
             try validateResponse(for: response, data: data)
             let decodedData = try decodeResponse(for: urnType, from: data)
             if request.httpMethod == HTTPMethodType.post.rawValue {
@@ -112,7 +105,3 @@ struct NetworkConstantErrors {
 }
 
 
-
-//struct Response : Codable{
-//    let data
-//}

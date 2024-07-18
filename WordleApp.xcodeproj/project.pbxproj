@@ -32,7 +32,7 @@
 		81C87C9E2C3FFC58003F61D0 /* Hintsview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C9D2C3FFC58003F61D0 /* Hintsview.swift */; };
 		81C87CA02C4013AA003F61D0 /* CFSDKUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C9F2C4013AA003F61D0 /* CFSDKUtils.swift */; };
 		81C87CA22C412B59003F61D0 /* SubmitWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CA12C412B59003F61D0 /* SubmitWordModel.swift */; };
-		81C87CA42C4141DF003F61D0 /* SubmittedWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CA32C4141DF003F61D0 /* SubmittedWordModel.swift */; };
+		81C87CA42C4141DF003F61D0 /* GetSubmittedWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CA32C4141DF003F61D0 /* GetSubmittedWordModel.swift */; };
 		81C87CA62C4536C1003F61D0 /* WordleBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CA52C4536C1003F61D0 /* WordleBaseModel.swift */; };
 		81C87CA82C45677B003F61D0 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CA72C45677B003F61D0 /* LoginModel.swift */; };
 		81C87CAC2C4604DB003F61D0 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CAB2C4604DB003F61D0 /* ToastView.swift */; };
@@ -80,7 +80,7 @@
 		81C87C9D2C3FFC58003F61D0 /* Hintsview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hintsview.swift; sourceTree = "<group>"; };
 		81C87C9F2C4013AA003F61D0 /* CFSDKUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFSDKUtils.swift; sourceTree = "<group>"; };
 		81C87CA12C412B59003F61D0 /* SubmitWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitWordModel.swift; sourceTree = "<group>"; };
-		81C87CA32C4141DF003F61D0 /* SubmittedWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmittedWordModel.swift; sourceTree = "<group>"; };
+		81C87CA32C4141DF003F61D0 /* GetSubmittedWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSubmittedWordModel.swift; sourceTree = "<group>"; };
 		81C87CA52C4536C1003F61D0 /* WordleBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordleBaseModel.swift; sourceTree = "<group>"; };
 		81C87CA72C45677B003F61D0 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		81C87CAB2C4604DB003F61D0 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
@@ -277,7 +277,7 @@
 			children = (
 				81C87C9B2C3FF623003F61D0 /* HintsModel.swift */,
 				81C87CA12C412B59003F61D0 /* SubmitWordModel.swift */,
-				81C87CA32C4141DF003F61D0 /* SubmittedWordModel.swift */,
+				81C87CA32C4141DF003F61D0 /* GetSubmittedWordModel.swift */,
 				81C87CA52C4536C1003F61D0 /* WordleBaseModel.swift */,
 				81C87CA72C45677B003F61D0 /* LoginModel.swift */,
 			);
@@ -381,7 +381,7 @@
 				81C87C942C37FB43003F61D0 /* NetworkServiceProvider.swift in Sources */,
 				81C87C8B2C37FB43003F61D0 /* PathType.swift in Sources */,
 				81C87C982C3FAD2F003F61D0 /* Encodable+Ext.swift in Sources */,
-				81C87CA42C4141DF003F61D0 /* SubmittedWordModel.swift in Sources */,
+				81C87CA42C4141DF003F61D0 /* GetSubmittedWordModel.swift in Sources */,
 				81C87CAC2C4604DB003F61D0 /* ToastView.swift in Sources */,
 				81FF8C1F2C21B66A0051774E /* SplashView.swift in Sources */,
 				81C87C952C37FB43003F61D0 /* BusterHelper.swift in Sources */,

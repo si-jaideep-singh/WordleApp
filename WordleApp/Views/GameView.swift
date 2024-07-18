@@ -48,7 +48,7 @@ struct GameView: View {
                             self.viewModelWordle.initCall()
                         }
                     }
-                    .blur(radius: showHowToPlay ? 5 : 0)
+                 .blur(radius: showHowToPlay ? 5 : 0)
                     
                     if viewModelWordle.state.gameEnded {
                         CompletionView()
@@ -70,6 +70,7 @@ struct GameView: View {
             }
             
             if viewModelWordle.state.showToast {
+                
                 ToastView(message: viewModelWordle.state.toastMessage)
                     .padding(.bottom, 50)
                     .animation(.easeInOut, value: viewModelWordle.state.showToast)

@@ -11,7 +11,7 @@ import Foundation
 // MARK: - Hints
 struct Hints: Codable {
     let data: [HintsData]
-    let meta: Meta
+    let meta: CFSDKSDKBaseResponseMeta
 
     enum CodingKeys: String, CodingKey {
         case data = "Data"
@@ -31,28 +31,3 @@ struct HintsData: Codable {
     }
 }
 
-// MARK: - Meta
-struct Meta: Codable {
-    let message: String
-    let retVal: Int
-    let success: Bool
-    let timestamp: Timestamp
-
-    enum CodingKeys: String, CodingKey {
-        case message = "Message"
-        case retVal = "RetVal"
-        case success = "Success"
-        case timestamp = "Timestamp"
-    }
-}
-
-// MARK: - Timestamp
-struct Timestamp: Codable {
-    let utcTime, istTime, cestTime: String
-
-    enum CodingKeys: String, CodingKey {
-        case utcTime = "UTCTime"
-        case istTime = "ISTTime"
-        case cestTime = "CESTTime"
-    }
-}
