@@ -1,8 +1,8 @@
 //
 //  BoardView.swift
 //  WordleApp
-import SwiftUI
 
+import SwiftUI
 struct BoardView: View {
     @EnvironmentObject var viewModelWordle: WordleGameViewModel
     var geometry : GeometryProxy
@@ -10,11 +10,12 @@ struct BoardView: View {
                 VStack(spacing: 5) {
                     ForEach(0..<viewModelWordle.state.maxAttempts, id: \.self) { row in
                         HStack(spacing: 2) {
-                            ForEach(0..<viewModelWordle.state.wordlength, id: \.self) { col in
-                                let cellSize = calculateCellSize(geometry: geometry.size, cols: viewModelWordle.state.wordlength, maxWidth: geometry.size.width, maxHeight: geometry.size.height)
+                            
+                            ForEach(0..<(viewModelWordle.state.submittedWordValue?.wordLength ?? 0), id: \.self) { col in
+                                                   let cellSize = calculateCellSize(geometry: geometry.size, cols: viewModelWordle.state.submittedWordValue?.wordLength ?? 0, maxWidth: geometry.size.width, maxHeight: geometry.size.height)
                                 
                                 LetterView(
-                                    letter: viewModelWordle.state.board[row][col],
+                                    letter: viewModelWordle.state.board[ row][col],
                                     flip: viewModelWordle.state.cellFlipped[row][col],
                                     color: viewModelWordle.state.rowColors[row][col],
                                     borderColor: viewModelWordle.state.borderColors[row][col],
@@ -105,7 +106,7 @@ struct LetterView: View {
 struct BoardView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = WordleGameViewModel()
-        viewModel.initCall() // Ensure your view model is initialized properly
+//        viewModel.initCall() 
         
         return GeometryReader { geometry in
             BoardView(geometry: geometry)
@@ -113,3 +114,4 @@ struct BoardView_Previews: PreviewProvider {
         }
     }
 }
+

@@ -25,18 +25,18 @@ struct WordleState {
     
     var targetWord = "Boundary".uppercased()
     let maxAttempts = 6
-    var wordlength: Int = 0
-    var currentAttempt : Int?
+    var wordlength: Int?
+    var currentAttempt : Int = 0
     var currentGuess = ""
     var correctPosition = 0
     var isGuessCorrect: Bool = false
-    var submittedWordValue: [GetSubmittedWordValue]? 
+    var submittedWordValue: GetSubmittedWordValue?
     
     var usersubmitflag: [Int] = []
-    var attemptsLeft: Int {
-        return maxAttempts - (submittedWordValue?.last?.attemptno ?? 0)
-    }
-    
+//    var attemptsLeft: Int {
+//        return maxAttempts - (submittedWordValue?.attemptNo ?? 0)
+//    }
+//    
      
      var showHint: Bool = false
 }

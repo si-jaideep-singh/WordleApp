@@ -5,32 +5,40 @@
 import SwiftUI
 
 final class WordleGameViewModel: ObservableObject {
-   
     @Published private(set) var state: WordleState = WordleState()
+    private let apiService = ServiceManager()
     
-   private let apiService = ServiceManager()
     var isCurrentWordComplete: Bool {
-        return state.currentGuess.count == state.wordlength
+        return state.currentGuess.count == state.submittedWordValue?.wordLength
     }
-      
+    
     func initCall() {
-         self.state.wordlength = state.targetWord.count
-         self.state.board = Array(repeating: Array(repeating: "", count: state.wordlength), count: state.maxAttempts)
-        self.state.rowCompleted = Array(repeating: false, count: state.maxAttempts)
-        self.state.rowColors = Array(repeating: Array(repeating: .emptyCell, count: state.wordlength), count: state.maxAttempts)
-        self.state.keyColors = Array(repeating: .clear, count: 26)
-        self.state.cellFlipped = Array(repeating: Array(repeating: false, count: state.wordlength), count: state.maxAttempts)
-        self.state.borderColors = Array(repeating: Array(repeating: .clear, count: state.wordlength), count: state.maxAttempts)
-        self.state.borderColors[state.currentAttempt ?? 1][0] = .border
-        
         Task {
             await self.login()
             await self.getSubmittedWord(userguid: "")
-            }
+        }
+    }
+    
+    func setupGame() {
+        let wordLength = state.submittedWordValue?.wordLength ?? 1
+        let maxAttempts = state.maxAttempts
+        let currentAttempt = (state.submittedWordValue?.attemptNo ?? 1) - 1
+
+        self.state.board = Array(repeating: Array(repeating: "", count: wordLength), count: maxAttempts)
+        self.state.rowCompleted = Array(repeating: false, count: maxAttempts)
+        self.state.rowColors = Array(repeating: Array(repeating: .emptyCell, count: wordLength), count: maxAttempts)
+        self.state.keyColors = Array(repeating: .clear, count: 26)
+        self.state.cellFlipped = Array(repeating: Array(repeating: false, count: wordLength), count: maxAttempts)
+        self.state.borderColors = Array(repeating: Array(repeating: .clear, count: wordLength), count: maxAttempts)
+        self.state.currentAttempt = currentAttempt
+        
+        if currentAttempt < maxAttempts {
+            self.state.borderColors[currentAttempt][0] = .border
+        }
     }
     
     func addLetter(_ letter: String) {
-        guard state.currentGuess.count < state.board[state.submittedWordValue?.last?.attemptno ?? 1].count else { return }
+        guard state.currentGuess.count < state.board[state.currentAttempt].count else { return }
         state.currentGuess.append(letter)
         updateBoard(letter)
     }
@@ -38,37 +46,33 @@ final class WordleGameViewModel: ObservableObject {
     func handleSpecialKey(_ specialKey: String) {
         switch specialKey {
         case "Delete":
-            if !state.rowCompleted[state.submittedWordValue?.last?.attemptno ?? 1] {
+            if !state.rowCompleted[state.currentAttempt] {
                 deleteLastLetter()
             }
         case "Enter":
             submitGuess()
-           
         default:
             break
         }
     }
     
     private func submitGuess() {
-        guard state.currentGuess.count == state.board[state.submittedWordValue?.last?.attemptno ?? 1].count else { return }
-        
-      //  let currentAttemptNo = state.submittedWordValue?.last?.attemptno ?? 1 + 1
+        guard state.currentGuess.count == state.board[state.currentAttempt].count else { return }
         
         Task {
             await self.submitWord(
                 userID: 0,
                 tourID: 1,
-                tourGamedayId: self.state.submittedWordValue?.last?.gdId ?? -1,
+                tourGamedayId: self.state.submittedWordValue?.gdId ?? -1,
                 langCode: "en",
                 platformId: 3,
-                attemptNo: (self.state.currentAttempt ?? 1),
+                attemptNo: self.state.currentAttempt + 1,
                 userWord: self.state.currentGuess,
                 userHint: 1
             )
-            await self.getSubmittedWord(userguid: "")
         }
     }
-      
+    
     private func deleteLastLetter() {
         guard !state.currentGuess.isEmpty else { return }
         state.currentGuess.removeLast()
@@ -76,13 +80,13 @@ final class WordleGameViewModel: ObservableObject {
     }
     
     private func updateBoard(_ letter: String) {
-        for col in 0..<state.board[state.submittedWordValue?.last?.attemptno ?? 1].count {
-            if state.board[state.submittedWordValue?.last?.attemptno ?? 1][col].isEmpty {
-                state.board[state.submittedWordValue?.last?.attemptno ?? 1][col] = letter
-                state.borderColors[state.submittedWordValue?.last?.attemptno ?? 1][col] = .clear
+        for col in 0..<state.board[state.currentAttempt].count {
+            if state.board[state.currentAttempt][col].isEmpty {
+                state.board[state.currentAttempt][col] = letter
+                state.borderColors[state.currentAttempt][col] = .clear
                 
-                if col + 1 < state.board[state.submittedWordValue?.last?.attemptno ?? 1].count {
-                    state.borderColors[state.submittedWordValue?.last?.attemptno ?? 1][col + 1] = .border
+                if col + 1 < state.board[state.currentAttempt].count {
+                    state.borderColors[state.currentAttempt][col + 1] = .border
                 }
                 return
             }
@@ -90,48 +94,46 @@ final class WordleGameViewModel: ObservableObject {
     }
     
     private func updateBoardAfterDeletion() {
-        for col in (0..<state.board[state.submittedWordValue?.last?.attemptno ?? 1].count).reversed() {
-            if !state.board[state.submittedWordValue?.last?.attemptno ?? 1][col].isEmpty {
-                state.board[state.submittedWordValue?.last?.attemptno ?? 1][col] = ""
-                state.borderColors[state.submittedWordValue?.last?.attemptno ?? 1][col] = .border
+        for col in (0..<state.board[state.currentAttempt].count).reversed() {
+            if !state.board[state.currentAttempt][col].isEmpty {
+                state.board[state.currentAttempt][col] = ""
+                state.borderColors[state.currentAttempt][col] = .border
                 
-                if col + 1 < state.board[state.submittedWordValue?.last?.attemptno ?? 1].count {
-                    state.borderColors[state.submittedWordValue?.last?.attemptno ?? 1][col + 1] = .clear
+                if col + 1 < state.board[state.currentAttempt].count {
+                    state.borderColors[state.currentAttempt][col + 1] = .clear
                 }
                 return
             }
         }
-        state.borderColors[state.submittedWordValue?.last?.attemptno ?? 1][0] = .border
+        state.borderColors[state.currentAttempt][0] = .border
     }
     
-        private func checkGuess() {
-            let guessResult = evaluateGuess(guess: state.currentGuess)
-    
-            flipCellsInRowSequentially(state.submittedWordValue?.last?.attemptno ?? 1, colors: guessResult.colors) {
-                self.updateKeyColors(guess: self.state.currentGuess, colors: guessResult.colors)
-            }
-        }
-    
- private func evaluateGuess(guess: String) -> (correctPosition: Int, colors: [Color], guessedLetters: [Character]) {
-        var correctPosition = 0
-        var colors: [Color] = Array(repeating: .EmptyCellColor, count: state.board[state.submittedWordValue?.last?.attemptno ?? 1].count)
-        let guessArray = Array(guess)
-        let targetArray = Array(state.targetWord)
-        var guessedLetters = [Character]()
+    private func checkGuess() {
+        guard let submitFlag = state.submittedWordValue?.userSubmitflag else { return }
+        let guessResult = evaluateGuess(submitFlag: submitFlag)
         
-        for i in 0..<state.board[state.submittedWordValue?.last?.attemptno ?? 1].count {
-            guessedLetters.append(guessArray[i])
-            if guessArray[i] == targetArray[i] {
-                correctPosition += 1
-                colors[i] = .correct
-            } else if targetArray.contains(guessArray[i]) {
-                colors[i] = .misplaced
-            } else {
+        flipCellsInRowSequentially(state.currentAttempt, colors: guessResult) {
+            self.updateKeyColors(guess: self.state.currentGuess, colors: guessResult)
+        }
+    }
+
+    private func evaluateGuess(submitFlag: [Int]) -> [Color] {
+        var colors: [Color] = Array(repeating: .emptyCell, count: state.board[state.currentAttempt].count)
+        
+        for i in 0..<submitFlag.count {
+            switch submitFlag[i] {
+            case 0:
                 colors[i] = .wrong
+            case 1:
+                colors[i] = .misplaced
+            case 2:
+                colors[i] = .correct
+            default:
+                colors[i] = .emptyCell
             }
         }
         
-        return (correctPosition, colors, guessedLetters)
+        return colors
     }
     
     private func flipCellsInRowSequentially(_ row: Int, colors: [Color], completion: @escaping () -> Void) {
@@ -147,7 +149,7 @@ final class WordleGameViewModel: ObservableObject {
         
         withAnimation(.easeInOut(duration: 0.8)) {
             self.state.cellFlipped[row][index] = true
-            self.state.rowCompleted[self.state.submittedWordValue?.last?.attemptno ?? 1] = true
+            self.state.rowCompleted[self.state.currentAttempt] = true
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -162,39 +164,13 @@ final class WordleGameViewModel: ObservableObject {
         }
     }
     
-//    private func showCompletionToast() {
-//        let correctPosition = evaluateGuess(guess: state.currentGuess).correctPosition
-//        
-//        if correctPosition == state.targetWord.count {
-//            state.gameEnded = true
-//            state.gameWon = true
-//            state.gameCompleted = true
-//        } else {
-//            state.submittedWordValue?.last?.attemptno ?? 1 += 1
-//            
-//            if state.submittedWordValue?.last?.attemptno ?? 1 >= state.maxAttempts {
-//                state.gameEnded = true
-//                state.gameWon = false
-//                state.gameCompleted = true
-//            } else {
-//                state.borderColors[state.submittedWordValue?.last?.attemptno ?? 1][0] = .border
-//                
-//                let attemptsLeft = state.maxAttempts - (state.submittedWordValue?.last?.attemptno)! ?? 1
-//             // showToast(message: "\(attemptsLeft) attempts left")
-//            }
-//        }
-//        
-//        state.currentGuess = ""
-//    }
-    
     private func showToast(message: String) {
-        DispatchQueue.main.async
-          {
+        DispatchQueue.main.async {
             self.state.showToast = true
             self.state.toastMessage = message
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.state.showToast = false
-         }
+            }
         }
     }
     
@@ -213,78 +189,74 @@ final class WordleGameViewModel: ObservableObject {
         state = WordleState()
         state.gameCompleted = false
         initCall()
-        
     }
     
     func submitWord(userID: Int, tourID: Int, tourGamedayId: Int, langCode: String?, platformId: Int, attemptNo: Int, userWord: String?, userHint: Int) async {
         do {
             let pathType: PathType = .submitWord(userguid: "42dba320-c59f-11ee-9dd4-0a2e0486673f")
             let requestBody = SubmitWordPayload(userId: userID, tourId: tourID, tourGamedayId: tourGamedayId, langCode: langCode, platformId: platformId, attemptNo: attemptNo, userWord: userWord, userHint: userHint)
-            
+
             let jsonData = try requestBody.encodeJSON()
-            
+
             let submitWordURN = SubmitWordURN(pathType: pathType, body: jsonData)
             let submitWordResponse = try await apiService.execute(with: submitWordURN)
-           
+
             if submitWordResponse.meta?.retVal == -90 {
                 showToast(message: "Word not in the list")
             } else if submitWordResponse.meta?.retVal == 1 {
-                 checkGuess()
-                 
-            state.currentAttempt = (state.submittedWordValue?.last?.attemptno ?? 1) + 1
-               
-              if state.submittedWordValue?.last?.attemptno ?? 1 >= state.maxAttempts {
+                checkGuess()
+                state.currentAttempt += 1
+
+                if state.currentAttempt >= state.maxAttempts {
                     state.gameEnded = true
                     state.gameWon = false
                     state.gameCompleted = true
                 } else {
-                   state.borderColors[state.submittedWordValue?.last?.attemptno ?? 1][0] = .border
-                    
-                    
+                    state.borderColors[state.currentAttempt][0] = .border
                     state.currentGuess = ""
                 }
             } else {
-                // Handle other errors
                 showToast(message: "Something went wrong")
             }
         } catch {
             print("Error submitting word:", error)
         }
     }
-
-    func  login() async {
-        
-            do {
-                
-                let pathType: PathType = .login(waf_guid: "")
-                let requestBody = ""
-                
-                let jsonData = try requestBody.encodeJSON()
-                let loginURN = LoginURN(pathType: pathType,body: jsonData)
-                let loginResponse = try await apiService.execute(with: loginURN)
-                // print("Submit Word Response:", loginResponse)
-            } catch
-            {
-                print("Error login:", error)
-            }
+    
+    func login() async {
+        do {
+            let pathType: PathType = .login(waf_guid: "")
+            let requestBody = ""
+            let loginURN = LoginURN(pathType: pathType, body: requestBody.data(using: .utf8))
+            _ = try await apiService.execute(with: loginURN)
+        } catch {
+            print("Error logging in:", error)
         }
+    }
+    
+            func getSubmittedWord(userguid: String) async {
+                do {
+                    let pathType: PathType = .getSummitttedWord(userguid: userguid)
+                    let submittedURN = SubmittedWord(pathType: pathType)
+                    let submittedWordData = try await apiService.execute(with: submittedURN)
     
     
     
-    func getSubmittedWord(userguid: String) async {
-               do {
-                   let pathType: PathType = .getSummitttedWord(userguid: userguid)
-                   let submittedURN = SubmittedWord(pathType: pathType)
-                   let SubmittedWordData = try await apiService.execute(with: submittedURN)
-       
-                   if let value = SubmittedWordData.data?.value{
-                       self.state.submittedWordValue = value
-                   }
+                    if let value = submittedWordData.data?.value {
+                        DispatchQueue.main.async { [weak self] in
+                        self?.state.submittedWordValue = value
+                        self?.setupGame()
+    
+                    }
+                    } else {
+                        print("No value found in the response")
+                    }
+                } catch {
+                    print("Error fetching Word:", error)
                 }
-               catch
-       
-               {
-                   print("Error fetching Word:", error)
-               }
-           }
-   }
+            }
+}
+
+
+
+
