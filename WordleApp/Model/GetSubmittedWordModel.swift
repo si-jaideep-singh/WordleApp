@@ -21,7 +21,7 @@ struct GetSubmittedWordResponse: Codable {
 
 // MARK: - DataClass
 struct GetSubmittedWordData: Codable {
-    var value: GetSubmittedWordValue?
+    let value: [GetSubmittedWordValue]?
     let feedTime: Feedtime?
 
     enum CodingKeys: String, CodingKey {
@@ -31,13 +31,28 @@ struct GetSubmittedWordData: Codable {
 }
 // MARK: - Value
 struct GetSubmittedWordValue: Codable {
-    var attemptNo : Int?
-    let gdId, userPoint, isHintuse: Int?
+    let attemptNo: Int?
+    let gdId: Int?
+    let userPoint: Int?
+    let isHintuse: Int?
     let userSubmitflag: [Int]?
     let wordLength: Int?
     let mastWord: String?
     let userWord: String?
+
+    enum CodingKeys: String, CodingKey {
+        case attemptNo = "attemptno"
+        case gdId = "gdid"
+        case userPoint = "userpoint"
+        case isHintuse = "ishintuse"
+        case userSubmitflag = "usersubmitflag"
+        case wordLength = "wordlength"
+        case mastWord = "mastword"
+        case userWord = "userword"
+    }
 }
+
+
 struct Feedtime: Codable {
     let cestTime: String
     let istTime: String

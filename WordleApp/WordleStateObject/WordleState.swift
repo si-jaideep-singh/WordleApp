@@ -30,9 +30,10 @@ struct WordleState {
     var currentGuess = ""
     var correctPosition = 0
     var isGuessCorrect: Bool = false
-    var submittedWordValue: GetSubmittedWordValue?
-    
-    var usersubmitflag: [Int] = []
+    var submittedWordValue: [GetSubmittedWordValue]? = nil
+    var submitWordValue: SubmitWordResponseValue?
+   
+    var userSubmitflag: [Int] = []
 //    var attemptsLeft: Int {
 //        return maxAttempts - (submittedWordValue?.attemptNo ?? 0)
 //    }

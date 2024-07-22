@@ -27,10 +27,8 @@ struct GameView: View {
                                     TeamSelectionView()
                                     HintsView()
                                 }
-                                
-                                BoardView(geometry: geometry)
-                                
-                                VStack {
+                            BoardView(geometry: geometry)
+                               VStack {
                                     Divider()
                                         .frame(height: 1)
                                         .background(Color.whiteFFFF.opacity(0.1))

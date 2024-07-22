@@ -29,7 +29,7 @@ enum SubmitWordResponseValueEnum: Codable {
         } else {
             throw DecodingError.typeMismatch(SubmitWordResponseValueEnum.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Invalid type for Value")) }
     }
-    // Custom encoding to handle both cases
+    
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
