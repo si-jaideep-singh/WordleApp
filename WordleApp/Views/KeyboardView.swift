@@ -22,6 +22,7 @@ struct KeyboardView: View {
                     HStack(spacing: 2) {
                         ForEach(rows[rowIndex], id: \.self) { key in
                             KeyView(key: key, keyWidth: calculateKeyWidth(geometry: geometry, totalKeys: rows[rowIndex].count, key: key, row: rowIndex))
+                                .environmentObject(viewModelWordle)
                         }
                     }
                 }
@@ -123,11 +124,8 @@ struct KeyboardView: View {
            return
         Button(action: {
             if key == "Delete" {
-                if viewModelWordle.state.isGuessCorrect {
+                 viewModelWordle.handleSpecialKey(key)
                 
-                } else {
-                    viewModelWordle.handleSpecialKey(key)
-                }
             } else {
                 viewModelWordle.addLetter(key)
             }        })

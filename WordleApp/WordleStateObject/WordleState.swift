@@ -23,7 +23,7 @@ struct WordleState {
     var hint: String = ""
     let letters = "QWERTYUIOPASDFGHJKLZXCVBNM"
     
-    var targetWord = "Boundary".uppercased()
+    
     let maxAttempts = 6
     var wordlength: Int?
     var currentAttempt : Int = 0
