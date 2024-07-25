@@ -9,6 +9,7 @@ import SwiftUI
 final class WordleGameViewModel: ObservableObject {
     @Published private(set) var state: WordleState = WordleState()
     private let apiService = ServiceManager()
+    var tokens : String = ""
     
     var isCurrentWordComplete: Bool {
         return state.currentGuess.count == state.submittedWordValue?.last?.wordLength
@@ -76,13 +77,6 @@ final class WordleGameViewModel: ObservableObject {
             )
         }
     }
-    
-    private func deleteLastLetter() {
-        guard !state.currentGuess.isEmpty else { return }
-        state.currentGuess.removeLast()
-        updateBoardAfterDeletion()
-    }
-    
     private func updateBoard(_ letter: String) {
         for col in 0..<state.board[state.currentAttempt].count {
             if state.board[state.currentAttempt][col].isEmpty {
@@ -97,12 +91,19 @@ final class WordleGameViewModel: ObservableObject {
         }
     }
     
+    private func deleteLastLetter() {
+        guard !state.currentGuess.isEmpty else { return }
+        state.currentGuess.removeLast()
+        print("Current guess after deletion: \(state.currentGuess)")
+        updateBoardAfterDeletion()
+    }
+
     private func updateBoardAfterDeletion() {
         for col in (0..<state.board[state.currentAttempt].count).reversed() {
             if !state.board[state.currentAttempt][col].isEmpty {
                 state.board[state.currentAttempt][col] = ""
                 state.borderColors[state.currentAttempt][col] = .border
-                
+               // print("Updated board after deletion: \(state.board)")
                 if col + 1 < state.board[state.currentAttempt].count {
                     state.borderColors[state.currentAttempt][col + 1] = .clear
                 }
@@ -111,25 +112,22 @@ final class WordleGameViewModel: ObservableObject {
         }
         state.borderColors[state.currentAttempt][0] = .border
     }
-    
+
     private func checkGuess() {
         DispatchQueue.main.async { [self] in
             guard let submitFlag = self.state.submitWordValue?.userSubmitflag else {
-                print("No submitFlag found")
+               // print("No submitFlag found")
                 return
             }
-            print("submitFlag: \(submitFlag)")
+           // print("submitFlag: \(submitFlag)")
             let (guessResult, keyColorMap) = self.evaluateGuess(submitFlag: submitFlag)
-            print("guessResult: \(guessResult)")
+           // print("guessResult: \(guessResult)")
             
-            self.flipCellsInRowSequentially((self.state.currentAttempt) - 1, colors: guessResult) {
+            self.flipCellsInRowSequentially(self.state.currentAttempt - 1, colors: guessResult) {
                 self.updateKeyColors(with: keyColorMap)
             }
-//            self.state.borderColors[self.state.currentAttempt][0] = .border
-//            state.currentGuess = ""
         }
     }
-    
     private func evaluateGuess(submitFlag: [Int]) -> ([Color], [Character: Color]) {
         var colors: [Color] = Array(repeating: .emptyCell, count: state.board[state.currentAttempt].count)
         var keyColorMap: [Character: Color] = [:]
@@ -140,15 +138,15 @@ final class WordleGameViewModel: ObservableObject {
             case 0:
                 color = .wrong
             case 1:
-                color = .misplaced
-            case 2:
                 color = .correct
+            case 2:
+                color = .misplaced
             default:
                 color = .emptyCell
             }
             colors[i] = color
             
-            let letter = state.currentGuess[state.currentGuess.index(state.currentGuess.startIndex, offsetBy: i)]
+            let letter = state.currentGuess[state.currentGuess.index(state.currentGuess.startIndex, offsetBy: i)].uppercased().first ?? " " 
             keyColorMap[letter] = color
         }
         
@@ -158,27 +156,34 @@ final class WordleGameViewModel: ObservableObject {
     private func flipCellsInRowSequentially(_ row: Int, colors: [Color], completion: @escaping () -> Void) {
         DispatchQueue.main.async {
             guard row < self.state.board.count else { return }
-            self.flipCellInRow(row, at: 0, colors: colors, completion: completion)
+            self.flipCellInRow(row, at: 0, colors: colors) {
+                
+                if row + 1 < self.state.rowCompleted.count {
+                    self.state.rowCompleted[row + 1] = false
+                    
+                    self.state.borderColors[row + 1][0] = .border
+                }
+                completion()
+            }
         }
     }
-    
+
     private func flipCellInRow(_ row: Int, at index: Int, colors: [Color], completion: @escaping () -> Void) {
         DispatchQueue.main.async {
             guard row < self.state.board.count && index < self.state.board[row].count else {
-                print("Flipping completed for row: \(row)")
+               // print("Flipping completed for row: \(row)")
                 completion()
                 return
             }
-            
+
             withAnimation(.easeInOut(duration: 0.8)) {
                 self.state.cellFlipped[row][index] = true
-                self.state.rowCompleted[self.state.currentAttempt] = true
             }
-            
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.state.rowColors[row][index] = colors[index]
                 self.state.borderColors[row][index] = .clear
-                
+
                 if index + 1 < self.state.board[row].count {
                     self.flipCellInRow(row, at: index + 1, colors: colors, completion: completion)
                 } else {
@@ -187,16 +192,21 @@ final class WordleGameViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func updateKeyColors(with keyColorMap: [Character: Color]) {
         for (letter, color) in keyColorMap {
-            let index = letter.asciiValue ?? 0
-            if index >= 65 && index <= 90 {
-                state.keyColors[Int(index - 65)] = color
+            
+            let uppercaseLetter = letter.uppercased()
+           if let asciiValue = uppercaseLetter.first?.asciiValue, asciiValue >= 65 && asciiValue <= 90 {
+                let colorIndex = Int(asciiValue - 65)
+                if colorIndex < state.keyColors.count {
+                    state.keyColors[colorIndex] = color
+                }
             }
         }
     }
-    
+
+
     private func showToast(message: String) {
         DispatchQueue.main.async {
             self.state.showToast = true
@@ -213,52 +223,53 @@ final class WordleGameViewModel: ObservableObject {
         initCall()
     }
     
-    func submitWord(userID: Int, tourID: Int, tourGamedayId: Int, langCode: String?, platformId: Int, attemptNo: Int, userWord: String?, userHint: Int) async {
-          do {
-              let pathType: PathType = .submitWord(userguid: "42dba320-c59f-11ee-9dd4-0a2e0486673f")
-              let requestBody = SubmitWordPayload(userId: userID, tourId: tourID, tourGamedayId: tourGamedayId, langCode: langCode, platformId: platformId, attemptNo: attemptNo, userWord: userWord, userHint: userHint)
-  
-              let jsonData = try requestBody.encodeJSON()
-  
-              let submitWordURN = SubmitWordURN(pathType: pathType, body: jsonData)
-              let submitWordResponse = try await apiService.execute(with: submitWordURN)
-  
-              if submitWordResponse.meta?.retVal == -90 {
-                  showToast(message: "Word not in the list")
-                  self.state.currentGuess = ""
-              } else if submitWordResponse.meta?.retVal == 1 {
-  
-                  if let responseValue = submitWordResponse.data?.value {
-                      switch responseValue {
-                      case .responseValue(let response):
-                          self.state.submitWordValue = response
-                          self.state.userSubmitflag = response.userSubmitflag ?? []
-                       // print("submitWordValue: \(response)")
-                      case .integerValue(let intValue):
-                          print("Unexpected integer value: \(intValue)")
-                      }
-                  }
-                  checkGuess()
-                  state.currentAttempt += 1
-                  DispatchQueue.main.async {
-                      self.state.currentGuess = ""
-  
-                  }
-  
-                  if state.currentAttempt >= state.maxAttempts {
-                      state.gameEnded = true
-                      state.gameWon = false
-                      state.gameCompleted = true
-                  } else {
-  //
-                  }
-              } else {
-                  showToast(message: "Something went wrong")
-              }
-          } catch {
-              print("Error submitting word:", error)
-          }
-      }
+            func submitWord(userID: Int, tourID: Int, tourGamedayId: Int, langCode: String?, platformId: Int, attemptNo: Int, userWord: String?, userHint: Int) async {
+                     do {
+                         let pathType: PathType = .submitWord(userguid: "42dba320-c59f-11ee-9dd4-0a2e0486673f")
+                         let requestBody = SubmitWordPayload(userId: userID, tourId: tourID, tourGamedayId: tourGamedayId, langCode: langCode, platformId: platformId, attemptNo: attemptNo, userWord: userWord, userHint: userHint)
+             
+                         let jsonData = try requestBody.encodeJSON()
+             
+                         let submitWordURN = SubmitWordURN(pathType: pathType, body: jsonData)
+                         let submitWordResponse = try await apiService.execute(with: submitWordURN)
+             
+                         if submitWordResponse.meta?.retVal == -90 {
+                             showToast(message: "Word not in the list")
+                             self.state.currentGuess = ""
+                         } else if submitWordResponse.meta?.retVal == 1 {
+             
+                             if let responseValue = submitWordResponse.data?.value {
+                                 switch responseValue {
+                                 case .responseValue(let response):
+                                     self.state.submitWordValue = response
+                                     self.state.userSubmitflag = response.userSubmitflag ?? []
+                                  // print("submitWordValue: \(response)")
+                                 case .integerValue(let intValue):
+                                     print("Unexpected integer value: \(intValue)")
+                                 }
+                             }
+                             checkGuess()
+                             state.currentAttempt += 1
+                             DispatchQueue.main.async {
+                                 self.state.currentGuess = ""
+             
+                             }
+             
+                             if state.currentAttempt >= state.maxAttempts {
+                                 state.gameEnded = true
+                                 state.gameWon = false
+                                 state.gameCompleted = true
+                                 showToast(message: "Game over")
+                             } else {
+             //
+                             }
+                         } else {
+                             showToast(message: "Something went wrong")
+                         }
+                     } catch {
+                         print("Error submitting word:", error)
+                     }
+                 }
   
       func login() async {
           do {

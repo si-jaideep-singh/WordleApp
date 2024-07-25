@@ -48,10 +48,10 @@ struct GameView: View {
                     }
                  .blur(radius: showHowToPlay ? 5 : 0)
                     
-                    if viewModelWordle.state.gameEnded {
-                        CompletionView()
-                            .environmentObject(viewModelWordle)
-                    }
+//                    if viewModelWordle.state.gameEnded {
+//                        CompletionView()
+//                            .environmentObject(viewModelWordle)
+//                    }
                 }
             }
             .navigationTitle("Wordle")
@@ -84,4 +84,8 @@ struct GameView: View {
                 .environmentObject(WordleGameViewModel())
         }
     }
+}
+#Preview{
+    GameView()
+    
 }

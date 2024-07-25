@@ -31,7 +31,7 @@ struct GetSubmittedWordData: Codable {
 }
 // MARK: - Value
 struct GetSubmittedWordValue: Codable {
-    let attemptNo: Int?
+    var attemptNo: Int?
     let gdId: Int?
     let userPoint: Int?
     let isHintuse: Int?

@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-
 @main
-struct WordleAppApp: App {
+struct WordleApp: App {
     var body: some Scene {
         WindowGroup {
-            StarterView()
+            LoginView()
+                    .environmentObject(WordleGameViewModel())
             
         }
     }

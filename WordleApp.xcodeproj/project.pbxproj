@@ -12,6 +12,7 @@
 		814F56542C2AF83900395385 /* CompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F56532C2AF83900395385 /* CompletionView.swift */; };
 		814F56562C2D86C700395385 /* TeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F56552C2D86C700395385 /* TeamSelectionView.swift */; };
 		814F56582C2D895500395385 /* SponsorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F56572C2D895500395385 /* SponsorView.swift */; };
+		816983522C527D480033E036 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816983512C527D480033E036 /* LoginView.swift */; };
 		81B3005D2C22BB1600131621 /* OrientationSensitiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B3005C2C22BB1600131621 /* OrientationSensitiveView.swift */; };
 		81C87C882C37FB43003F61D0 /* EmployeeDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C712C37FB43003F61D0 /* EmployeeDataView.swift */; };
 		81C87C892C37FB43003F61D0 /* ExtendedURNs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C822C37FB43003F61D0 /* ExtendedURNs.swift */; };
@@ -58,6 +59,7 @@
 		814F56532C2AF83900395385 /* CompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionView.swift; sourceTree = "<group>"; };
 		814F56552C2D86C700395385 /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
 		814F56572C2D895500395385 /* SponsorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SponsorView.swift; sourceTree = "<group>"; };
+		816983512C527D480033E036 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		81B3005C2C22BB1600131621 /* OrientationSensitiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationSensitiveView.swift; sourceTree = "<group>"; };
 		81C87C712C37FB43003F61D0 /* EmployeeDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDataView.swift; sourceTree = "<group>"; };
 		81C87C732C37FB43003F61D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				814F56572C2D895500395385 /* SponsorView.swift */,
 				81C87C9D2C3FFC58003F61D0 /* Hintsview.swift */,
 				81C87CAB2C4604DB003F61D0 /* ToastView.swift */,
+				816983512C527D480033E036 /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				81C87CA42C4141DF003F61D0 /* GetSubmittedWordModel.swift in Sources */,
 				81C87CAC2C4604DB003F61D0 /* ToastView.swift in Sources */,
 				81FF8C1F2C21B66A0051774E /* SplashView.swift in Sources */,
+				816983522C527D480033E036 /* LoginView.swift in Sources */,
 				81C87C952C37FB43003F61D0 /* BusterHelper.swift in Sources */,
 				81C87C8E2C37FB43003F61D0 /* ServiceConstants.swift in Sources */,
 				81FF8C042C1AC7040051774E /* GameView.swift in Sources */,
