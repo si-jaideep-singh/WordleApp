@@ -22,6 +22,9 @@ struct LoginView: View {
                 Button(action: {
                     if !combinedToken.isEmpty {
                         viewModel.tokens = combinedToken
+                        Task {
+                            await viewModel.login()
+                        }
                         navigateToStarterView = true
                     }
                 }) {

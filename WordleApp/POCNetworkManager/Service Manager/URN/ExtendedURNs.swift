@@ -8,6 +8,8 @@
 import Foundation
 
 struct ConfigURN: CommonGetURN {
+    var cookie: String?
+    
     var headers: ServiceHeaderType?
     
     typealias Derived = String
@@ -22,6 +24,8 @@ struct ConfigURN: CommonGetURN {
 }
 
 struct TranslationURN: CommonGetURN {
+    var cookie: String?
+    
     var headers: ServiceHeaderType?
     
     typealias Derived = [String:String]
@@ -35,6 +39,8 @@ struct TranslationURN: CommonGetURN {
     }
 }
 struct Employees : CommonGetURN {
+    var cookie: String?
+    
     var headers: ServiceHeaderType?
     
     typealias Derived = Employee
@@ -48,6 +54,8 @@ struct Employees : CommonGetURN {
      
 }
 struct Hint : CommonGetURN{
+    var cookie: String?
+    
 //    var headers: ServiceHeaderType?
     
     typealias Derived = Hints
@@ -65,6 +73,8 @@ struct Hint : CommonGetURN{
  }
 
 struct SubmittedWord: CommonGetURN{
+    var cookie: String?
+    
 //    var headers: ServiceHeaderType?
     
     typealias Derived = GetSubmittedWordResponse
@@ -83,6 +93,8 @@ struct SubmittedWord: CommonGetURN{
 
 // MARK: - POST URN
 struct AddEmployeeURN: CommonPostURN {
+    var cookie: String?
+    
     var headers: ServiceHeaderType?
     
     typealias Derived = AddEmployeeResponse
@@ -100,6 +112,8 @@ struct AddEmployeeURN: CommonPostURN {
     }
 
 struct SubmitWordURN: CommonPostURN {
+    var cookie: String?
+    
     var headers: ServiceHeaderType?{
         .submitWord
     }
@@ -117,6 +131,8 @@ struct SubmitWordURN: CommonPostURN {
    }
 
 struct LoginURN: CommonPostURN {
+    var cookie: String?
+    
     var headers: ServiceHeaderType?{
         .login
     }
@@ -129,6 +145,9 @@ struct LoginURN: CommonPostURN {
      
     
     var body: Data?
+    
+    
+   
     
    }
 

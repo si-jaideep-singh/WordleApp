@@ -11,20 +11,24 @@ struct BoardView: View {
                     ForEach(0..<viewModelWordle.state.maxAttempts, id: \.self) { row in
                         HStack(spacing: 2) {
                             
-                            ForEach(0..<(viewModelWordle.state.submittedWordValue?.last?.wordLength ?? 0), id: \.self) { col in
-                                let cellSize = calculateCellSize(geometry: geometry.size, cols: viewModelWordle.state.submittedWordValue?.last?.wordLength ?? 0, maxWidth: geometry.size.width, maxHeight: geometry.size.height)
+                            ForEach(0..<(viewModelWordle.state.submittedWordValue?.wordLength ?? 1), id: \.self) { col in
+                                let cellSize = calculateCellSize(geometry: geometry.size, cols: viewModelWordle.state.submittedWordValue?.wordLength ?? 1, maxWidth: geometry.size.width, maxHeight: geometry.size.height)
+                                
+                                let letter = viewModelWordle.state.board[safe: row]?[safe: col] ?? ""
+                                let flip = viewModelWordle.state.cellFlipped[safe: row]?[safe: col] ?? false
+                                let color = viewModelWordle.state.rowColors[safe: row]?[safe: col] ?? .clear
+                                let borderColor = viewModelWordle.state.borderColors[safe: row]?[safe: col] ?? .clear
                                 
                                 LetterView(
-                                    letter: viewModelWordle.state.board[row][col],
-                                    flip: viewModelWordle.state.cellFlipped[row][col],
-                                    color: viewModelWordle.state.rowColors[row][col],
-                                    borderColor: viewModelWordle.state.borderColors[row][col],
+                                    letter: letter,
+                                    flip: flip,
+                                    color: color,
+                                    borderColor: borderColor,
                                     cellSize: cellSize,
                                     viewModel: viewModelWordle
                                 )
                                 .frame(width: cellSize, height: cellSize)
                                 .padding(2)
-                                
                             }
                         }
                     

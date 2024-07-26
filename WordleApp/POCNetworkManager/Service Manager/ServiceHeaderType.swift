@@ -16,7 +16,7 @@ enum ServiceHeaderType: String {
     case submittedWord
     case login
     
-    func getServiceHeader(url: String) -> [String: String] {
+    func getServiceHeader(url: String,cookie: String) -> [String: String] {
         switch self {
         case .NONE:
             return [:]
@@ -32,7 +32,7 @@ enum ServiceHeaderType: String {
             return SubmittedWordHeaders()
             
         case .login:
-            return Login()
+            return Login(cookie: cookie)
             
         }
         
@@ -61,14 +61,16 @@ enum ServiceHeaderType: String {
             
         ]
     }
-    private func Login() -> [String:String] {
-        let viewModel = WordleGameViewModel()
+    private func Login(cookie: String) -> [String:String] {
+        
         return [
             "Accept":"application/json, text/plain, */*",
             "content-type": "application/json",
             "entity": "$@nt0rYu",
-            "Cookie": viewModel.tokens,
-           "Referer" : "https://stg-gujarat-titans.sportz.io/wordle/gameplay"
+            "Cookie":  cookie,
+            "Referer" : "https://stg-gujarat-titans.sportz.io/wordle/gameplay"
+            
+        
         ]
     }
     

@@ -17,6 +17,7 @@ protocol URN {
     var urlQueryItems: [URLQueryItem]? { get }
     var pathExtension: String? { get }
     var headers: ServiceHeaderType? { get }
+    var cookie: String? { get }
     func getURLRequest() throws -> URLRequest
 }
 
@@ -32,6 +33,7 @@ extension CommonURN {
     }
     
     func getURLRequest() throws -> URLRequest {
+        
         let urlComponents = URLComponents(string: baseURLType.baseUrlString
                                           + pathType.rawValue)
         guard let url = urlComponents?.url,
@@ -40,13 +42,12 @@ extension CommonURN {
         }
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = httpMethodType.rawValue
-        urlRequest.allHTTPHeaderFields = headers?.getServiceHeader(url: url.absoluteString)
+        urlRequest.allHTTPHeaderFields = headers?.getServiceHeader(url: url.absoluteString, cookie: cookie ?? "")
+        
         urlRequest.httpBody = body
         return urlRequest
     }
-//    var headers: ServiceHeaderType? {
-//        .DEFAULT
-//    }
+
 }
 
 protocol CommonPostURN: CommonURN {}
