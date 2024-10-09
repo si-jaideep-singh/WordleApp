@@ -13,7 +13,7 @@ struct CompletionView: View {
     
     var body: some View {
         VStack {
-            Text(viewModelWordle.state.gameWon ? "Congratulations! You've guessed the word 👏" : "Game Over! The correct word was \(viewModelWordle.state.targetWord).")
+            Text(viewModelWordle.state.gameWon ? "Congratulations! You've guessed the word 👏" : "Game Over! You have used all the attempts ")
                 .font(.title)
                 .padding()
             
@@ -31,7 +31,7 @@ struct CompletionView: View {
                 }
                 
                 Button(action: {
-                    viewModelWordle.resetGame()
+                 //   viewModelWordle.resetGame()
                 }) {
                     Text("Play Again")
                         .font(.title3)

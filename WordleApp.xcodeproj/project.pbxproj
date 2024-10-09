@@ -7,13 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8148BD5C2C2935BE003AA393 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8148BD5B2C2935BE003AA393 /* GameModel.swift */; };
 		8148BD5E2C2942B5003AA393 /* HowToPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8148BD5D2C2942B5003AA393 /* HowToPlay.swift */; };
 		8148BD612C299092003AA393 /* WordleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8148BD602C299092003AA393 /* WordleState.swift */; };
 		814F56542C2AF83900395385 /* CompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F56532C2AF83900395385 /* CompletionView.swift */; };
 		814F56562C2D86C700395385 /* TeamSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F56552C2D86C700395385 /* TeamSelectionView.swift */; };
 		814F56582C2D895500395385 /* SponsorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814F56572C2D895500395385 /* SponsorView.swift */; };
+		816983522C527D480033E036 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816983512C527D480033E036 /* LoginView.swift */; };
 		81B3005D2C22BB1600131621 /* OrientationSensitiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B3005C2C22BB1600131621 /* OrientationSensitiveView.swift */; };
+		81C87C882C37FB43003F61D0 /* EmployeeDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C712C37FB43003F61D0 /* EmployeeDataView.swift */; };
+		81C87C892C37FB43003F61D0 /* ExtendedURNs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C822C37FB43003F61D0 /* ExtendedURNs.swift */; };
+		81C87C8A2C37FB43003F61D0 /* EmployeeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C7B2C37FB43003F61D0 /* EmployeeModel.swift */; };
+		81C87C8B2C37FB43003F61D0 /* PathType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C842C37FB43003F61D0 /* PathType.swift */; };
+		81C87C8C2C37FB43003F61D0 /* BasrURLType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C872C37FB43003F61D0 /* BasrURLType.swift */; };
+		81C87C8D2C37FB43003F61D0 /* URN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C812C37FB43003F61D0 /* URN.swift */; };
+		81C87C8E2C37FB43003F61D0 /* ServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C762C37FB43003F61D0 /* ServiceConstants.swift */; };
+		81C87C8F2C37FB43003F61D0 /* EmployeeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C7D2C37FB43003F61D0 /* EmployeeViewModel.swift */; };
+		81C87C902C37FB43003F61D0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C742C37FB43003F61D0 /* ContentView.swift */; };
+		81C87C912C37FB43003F61D0 /* HTTPMethodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C852C37FB43003F61D0 /* HTTPMethodType.swift */; };
+		81C87C922C37FB43003F61D0 /* ServiceHeaderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C782C37FB43003F61D0 /* ServiceHeaderType.swift */; };
+		81C87C942C37FB43003F61D0 /* NetworkServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C862C37FB43003F61D0 /* NetworkServiceProvider.swift */; };
+		81C87C952C37FB43003F61D0 /* BusterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C772C37FB43003F61D0 /* BusterHelper.swift */; };
+		81C87C962C37FB43003F61D0 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C792C37FB43003F61D0 /* ServiceManager.swift */; };
+		81C87C982C3FAD2F003F61D0 /* Encodable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C972C3FAD2F003F61D0 /* Encodable+Ext.swift */; };
+		81C87C9C2C3FF623003F61D0 /* HintsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C9B2C3FF623003F61D0 /* HintsModel.swift */; };
+		81C87C9E2C3FFC58003F61D0 /* Hintsview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C9D2C3FFC58003F61D0 /* Hintsview.swift */; };
+		81C87CA02C4013AA003F61D0 /* CFSDKUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87C9F2C4013AA003F61D0 /* CFSDKUtils.swift */; };
+		81C87CA22C412B59003F61D0 /* SubmitWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CA12C412B59003F61D0 /* SubmitWordModel.swift */; };
+		81C87CA42C4141DF003F61D0 /* GetSubmittedWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CA32C4141DF003F61D0 /* GetSubmittedWordModel.swift */; };
+		81C87CA62C4536C1003F61D0 /* WordleBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CA52C4536C1003F61D0 /* WordleBaseModel.swift */; };
+		81C87CA82C45677B003F61D0 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CA72C45677B003F61D0 /* LoginModel.swift */; };
+		81C87CAC2C4604DB003F61D0 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C87CAB2C4604DB003F61D0 /* ToastView.swift */; };
 		81FF8BF52C19D3240051774E /* WordleAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF8BF42C19D3240051774E /* WordleAppApp.swift */; };
 		81FF8BF92C19D3260051774E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81FF8BF82C19D3260051774E /* Assets.xcassets */; };
 		81FF8BFC2C19D3260051774E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81FF8BFB2C19D3260051774E /* Preview Assets.xcassets */; };
@@ -31,13 +54,38 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8148BD5B2C2935BE003AA393 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		8148BD5D2C2942B5003AA393 /* HowToPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlay.swift; sourceTree = "<group>"; };
 		8148BD602C299092003AA393 /* WordleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordleState.swift; sourceTree = "<group>"; };
 		814F56532C2AF83900395385 /* CompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionView.swift; sourceTree = "<group>"; };
 		814F56552C2D86C700395385 /* TeamSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectionView.swift; sourceTree = "<group>"; };
 		814F56572C2D895500395385 /* SponsorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SponsorView.swift; sourceTree = "<group>"; };
+		816983512C527D480033E036 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		81B3005C2C22BB1600131621 /* OrientationSensitiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationSensitiveView.swift; sourceTree = "<group>"; };
+		81C87C712C37FB43003F61D0 /* EmployeeDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDataView.swift; sourceTree = "<group>"; };
+		81C87C732C37FB43003F61D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		81C87C742C37FB43003F61D0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		81C87C762C37FB43003F61D0 /* ServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceConstants.swift; sourceTree = "<group>"; };
+		81C87C772C37FB43003F61D0 /* BusterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusterHelper.swift; sourceTree = "<group>"; };
+		81C87C782C37FB43003F61D0 /* ServiceHeaderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHeaderType.swift; sourceTree = "<group>"; };
+		81C87C792C37FB43003F61D0 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
+		81C87C7B2C37FB43003F61D0 /* EmployeeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeModel.swift; sourceTree = "<group>"; };
+		81C87C7D2C37FB43003F61D0 /* EmployeeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewModel.swift; sourceTree = "<group>"; };
+		81C87C7F2C37FB43003F61D0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		81C87C812C37FB43003F61D0 /* URN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URN.swift; sourceTree = "<group>"; };
+		81C87C822C37FB43003F61D0 /* ExtendedURNs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedURNs.swift; sourceTree = "<group>"; };
+		81C87C842C37FB43003F61D0 /* PathType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathType.swift; sourceTree = "<group>"; };
+		81C87C852C37FB43003F61D0 /* HTTPMethodType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethodType.swift; sourceTree = "<group>"; };
+		81C87C862C37FB43003F61D0 /* NetworkServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProvider.swift; sourceTree = "<group>"; };
+		81C87C872C37FB43003F61D0 /* BasrURLType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasrURLType.swift; sourceTree = "<group>"; };
+		81C87C972C3FAD2F003F61D0 /* Encodable+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Ext.swift"; sourceTree = "<group>"; };
+		81C87C9B2C3FF623003F61D0 /* HintsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsModel.swift; sourceTree = "<group>"; };
+		81C87C9D2C3FFC58003F61D0 /* Hintsview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hintsview.swift; sourceTree = "<group>"; };
+		81C87C9F2C4013AA003F61D0 /* CFSDKUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFSDKUtils.swift; sourceTree = "<group>"; };
+		81C87CA12C412B59003F61D0 /* SubmitWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitWordModel.swift; sourceTree = "<group>"; };
+		81C87CA32C4141DF003F61D0 /* GetSubmittedWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSubmittedWordModel.swift; sourceTree = "<group>"; };
+		81C87CA52C4536C1003F61D0 /* WordleBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordleBaseModel.swift; sourceTree = "<group>"; };
+		81C87CA72C45677B003F61D0 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		81C87CAB2C4604DB003F61D0 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		81FF8BF12C19D3240051774E /* WordleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81FF8BF42C19D3240051774E /* WordleAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordleAppApp.swift; sourceTree = "<group>"; };
 		81FF8BF82C19D3260051774E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,9 +122,81 @@
 			path = WordleStateObject;
 			sourceTree = "<group>";
 		};
+		81C87C702C37FB43003F61D0 /* POCNetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				81C87C7A2C37FB43003F61D0 /* Model */,
+				81C87C7E2C37FB43003F61D0 /* Preview Content */,
+				81C87C752C37FB43003F61D0 /* Service Manager */,
+				81C87C7C2C37FB43003F61D0 /* ViewModel */,
+				81C87C732C37FB43003F61D0 /* Assets.xcassets */,
+				81C87C742C37FB43003F61D0 /* ContentView.swift */,
+				81C87C712C37FB43003F61D0 /* EmployeeDataView.swift */,
+			);
+			path = POCNetworkManager;
+			sourceTree = "<group>";
+		};
+		81C87C752C37FB43003F61D0 /* Service Manager */ = {
+			isa = PBXGroup;
+			children = (
+				81C87C802C37FB43003F61D0 /* URN */,
+				81C87C772C37FB43003F61D0 /* BusterHelper.swift */,
+				81C87C762C37FB43003F61D0 /* ServiceConstants.swift */,
+				81C87C782C37FB43003F61D0 /* ServiceHeaderType.swift */,
+				81C87C792C37FB43003F61D0 /* ServiceManager.swift */,
+			);
+			path = "Service Manager";
+			sourceTree = "<group>";
+		};
+		81C87C7A2C37FB43003F61D0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				81C87C7B2C37FB43003F61D0 /* EmployeeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		81C87C7C2C37FB43003F61D0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				81C87C7D2C37FB43003F61D0 /* EmployeeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		81C87C7E2C37FB43003F61D0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				81C87C7F2C37FB43003F61D0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		81C87C802C37FB43003F61D0 /* URN */ = {
+			isa = PBXGroup;
+			children = (
+				81C87C832C37FB43003F61D0 /* NetworkUtilities */,
+				81C87C822C37FB43003F61D0 /* ExtendedURNs.swift */,
+				81C87C812C37FB43003F61D0 /* URN.swift */,
+			);
+			path = URN;
+			sourceTree = "<group>";
+		};
+		81C87C832C37FB43003F61D0 /* NetworkUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				81C87C872C37FB43003F61D0 /* BasrURLType.swift */,
+				81C87C852C37FB43003F61D0 /* HTTPMethodType.swift */,
+				81C87C862C37FB43003F61D0 /* NetworkServiceProvider.swift */,
+				81C87C842C37FB43003F61D0 /* PathType.swift */,
+			);
+			path = NetworkUtilities;
+			sourceTree = "<group>";
+		};
 		81FF8BE82C19D3240051774E = {
 			isa = PBXGroup;
 			children = (
+				81C87C9F2C4013AA003F61D0 /* CFSDKUtils.swift */,
 				81FF8BF32C19D3240051774E /* WordleApp */,
 				81FF8BF22C19D3240051774E /* Products */,
 			);
@@ -95,6 +215,7 @@
 			children = (
 				81FF8C052C1ACDCF0051774E /* Extension */,
 				81FF8BF42C19D3240051774E /* WordleAppApp.swift */,
+				81C87C702C37FB43003F61D0 /* POCNetworkManager */,
 				8148BD5F2C29906A003AA393 /* WordleStateObject */,
 				81FF8C022C1AC6F20051774E /* Views */,
 				81FF8C0D2C1B12EF0051774E /* ViewModel */,
@@ -128,6 +249,9 @@
 				814F56532C2AF83900395385 /* CompletionView.swift */,
 				814F56552C2D86C700395385 /* TeamSelectionView.swift */,
 				814F56572C2D895500395385 /* SponsorView.swift */,
+				81C87C9D2C3FFC58003F61D0 /* Hintsview.swift */,
+				81C87CAB2C4604DB003F61D0 /* ToastView.swift */,
+				816983512C527D480033E036 /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -138,6 +262,7 @@
 				81FF8C062C1ACDE60051774E /* ColorsExt.swift */,
 				81FF8C122C1B28100051774E /* UIScreen.swift */,
 				81FF8C142C1C13BE0051774E /* BorderExtension.swift */,
+				81C87C972C3FAD2F003F61D0 /* Encodable+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -153,7 +278,11 @@
 		81FF8C162C1C4A710051774E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8148BD5B2C2935BE003AA393 /* GameModel.swift */,
+				81C87C9B2C3FF623003F61D0 /* HintsModel.swift */,
+				81C87CA12C412B59003F61D0 /* SubmitWordModel.swift */,
+				81C87CA32C4141DF003F61D0 /* GetSubmittedWordModel.swift */,
+				81C87CA52C4536C1003F61D0 /* WordleBaseModel.swift */,
+				81C87CA72C45677B003F61D0 /* LoginModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -229,25 +358,48 @@
 			buildActionMask = 2147483647;
 			files = (
 				814F56562C2D86C700395385 /* TeamSelectionView.swift in Sources */,
+				81C87CA82C45677B003F61D0 /* LoginModel.swift in Sources */,
 				814F56542C2AF83900395385 /* CompletionView.swift in Sources */,
+				81C87C8D2C37FB43003F61D0 /* URN.swift in Sources */,
 				81FF8C152C1C13BE0051774E /* BorderExtension.swift in Sources */,
+				81C87C9C2C3FF623003F61D0 /* HintsModel.swift in Sources */,
 				814F56582C2D895500395385 /* SponsorView.swift in Sources */,
+				81C87C8A2C37FB43003F61D0 /* EmployeeModel.swift in Sources */,
+				81C87C8F2C37FB43003F61D0 /* EmployeeViewModel.swift in Sources */,
+				81C87C922C37FB43003F61D0 /* ServiceHeaderType.swift in Sources */,
+				81C87CA22C412B59003F61D0 /* SubmitWordModel.swift in Sources */,
+				81C87CA62C4536C1003F61D0 /* WordleBaseModel.swift in Sources */,
+				81C87C8C2C37FB43003F61D0 /* BasrURLType.swift in Sources */,
+				81C87C912C37FB43003F61D0 /* HTTPMethodType.swift in Sources */,
 				C9C923732C2ACFDF000413E9 /* AdsPresentedbyView.swift in Sources */,
 				8148BD5E2C2942B5003AA393 /* HowToPlay.swift in Sources */,
+				81C87C882C37FB43003F61D0 /* EmployeeDataView.swift in Sources */,
 				8148BD5E2C2942B5003AA393 /* HowToPlay.swift in Sources */,
 				81FF8C072C1ACDE60051774E /* ColorsExt.swift in Sources */,
 				81FF8C092C1ACF2F0051774E /* BoardView.swift in Sources */,
+				81C87C892C37FB43003F61D0 /* ExtendedURNs.swift in Sources */,
 				C9C923752C2AD58F000413E9 /* HomeViewList.swift in Sources */,
 				81B3005D2C22BB1600131621 /* OrientationSensitiveView.swift in Sources */,
 				81FF8C0B2C1AD6CE0051774E /* KeyboardView.swift in Sources */,
+				81C87C942C37FB43003F61D0 /* NetworkServiceProvider.swift in Sources */,
+				81C87C8B2C37FB43003F61D0 /* PathType.swift in Sources */,
+				81C87C982C3FAD2F003F61D0 /* Encodable+Ext.swift in Sources */,
+				81C87CA42C4141DF003F61D0 /* GetSubmittedWordModel.swift in Sources */,
+				81C87CAC2C4604DB003F61D0 /* ToastView.swift in Sources */,
 				81FF8C1F2C21B66A0051774E /* SplashView.swift in Sources */,
+				816983522C527D480033E036 /* LoginView.swift in Sources */,
+				81C87C952C37FB43003F61D0 /* BusterHelper.swift in Sources */,
+				81C87C8E2C37FB43003F61D0 /* ServiceConstants.swift in Sources */,
 				81FF8C042C1AC7040051774E /* GameView.swift in Sources */,
+				81C87C962C37FB43003F61D0 /* ServiceManager.swift in Sources */,
+				81C87C902C37FB43003F61D0 /* ContentView.swift in Sources */,
 				8148BD612C299092003AA393 /* WordleState.swift in Sources */,
+				81C87C9E2C3FFC58003F61D0 /* Hintsview.swift in Sources */,
+				81C87CA02C4013AA003F61D0 /* CFSDKUtils.swift in Sources */,
 				81FF8BF52C19D3240051774E /* WordleAppApp.swift in Sources */,
 				C9C923772C2AE33F000413E9 /* StarterView.swift in Sources */,
 				81FF8C112C1B13230051774E /* WordleGameViewModel.swift in Sources */,
 				81FF8C132C1B28100051774E /* UIScreen.swift in Sources */,
-				8148BD5C2C2935BE003AA393 /* GameModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

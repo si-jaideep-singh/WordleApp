@@ -22,6 +22,7 @@ struct KeyboardView: View {
                     HStack(spacing: 2) {
                         ForEach(rows[rowIndex], id: \.self) { key in
                             KeyView(key: key, keyWidth: calculateKeyWidth(geometry: geometry, totalKeys: rows[rowIndex].count, key: key, row: rowIndex))
+                                .environmentObject(viewModelWordle)
                         }
                     }
                 }
@@ -123,11 +124,8 @@ struct KeyboardView: View {
            return
         Button(action: {
             if key == "Delete" {
-                if viewModelWordle.state.isGuessCorrect {
+                 viewModelWordle.handleSpecialKey(key)
                 
-                } else {
-                    viewModelWordle.handleSpecialKey(key)
-                }
             } else {
                 viewModelWordle.addLetter(key)
             }        })
@@ -156,17 +154,18 @@ struct KeyboardView: View {
             .padding(.all, 1.5)
     }
     
-    private func keyBackgroundColor(for key: String) -> Color {
-        if key == "Delete"  {
-            return .clear
-        } else {
-            guard let letter = key.first, let index = viewModelWordle.state.letters.firstIndex(of: letter) else {
-                return .gray
-            }
-            let colorIndex = viewModelWordle.state.letters.distance(from: viewModelWordle.state.letters.startIndex, to: index)
-            return viewModelWordle.state.keyColors.count != 0 ?  viewModelWordle.state.keyColors[colorIndex] : .clear
-        }
-    }
+ private func keyBackgroundColor(for key: String) -> Color {
+           if key == "Delete" {
+               return .clear
+           } else {
+               guard let letter = key.first,
+                     let index = letter.asciiValue.flatMap({ Int($0 - 65) }),
+                     index >= 0 && index < viewModelWordle.state.keyColors.count else {
+                   return .gray
+               }
+               return viewModelWordle.state.keyColors[index]
+           }
+       }
 }
 
 struct KeyboardView_Previews: PreviewProvider {
